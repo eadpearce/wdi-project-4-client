@@ -1,0 +1,8 @@
+<h1>All Prompts</h1>
+<ul>
+  <li class="list" ng-repeat="prompt in prompts.all">
+    <h3>{{prompt.title}}</h3>
+    <p>{{prompt.body}}</p>
+    <p>Posted by: <a href="">{{prompt.user.username}}</a></p>
+  </li>
+</ul>

@@ -1,0 +1,8 @@
+<h1>All Fills</h1>
+<ul>
+  <li class="list" ng-repeat="fill in fills.all">
+    <h3>{{fill.prompt.title}}</h3>
+    <p>{{fill.body}}</p>
+    <p>Filled by: <a href="">{{fill.user.username}}</a></p>
+  </li>
+</ul>

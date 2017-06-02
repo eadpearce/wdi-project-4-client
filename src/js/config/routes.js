@@ -27,7 +27,43 @@ function Router($stateProvider, $urlRouterProvider, $locationProvider) {
       templateUrl: '/js/views/login.html',
       controller: 'LoginCtrl',
       controllerAs: 'login'
+    })
+    .state('promptsIndex', {
+      url: '/prompts',
+      templateUrl: '/js/views/prompts/index.html',
+      controller: 'PromptsIndexCtrl',
+      controllerAs: 'prompts'
+    })
+    .state('promptsShow', {
+      url: '/prompts/:id',
+      templateUrl: '/js/views/prompts/show.html',
+      controller: 'PromptsShowCtrl',
+      controllerAs: 'prompts'
+    })
+    .state('promptsNew', {
+      url: '/prompts/new',
+      templateUrl: '/js/views/prompts/new.html',
+      controller: 'PromptsNewCtrl',
+      controllerAs: 'prompts'
+    })
+    .state('fillsIndex', {
+      url: '/fills',
+      templateUrl: '/js/views/fills/index.html',
+      controller: 'FillsIndexCtrl',
+      controllerAs: 'fills'
+    })
+    .state('fillsShow', {
+      url: '/fills/:id',
+      templateUrl: '/js/views/fills/show.html',
+      controller: 'FillsShowCtrl',
+      controllerAs: 'fills'
+    })
+    .state('fillsNew', {
+      url: '/fills/new',
+      templateUrl: '/js/views/fills/new.html',
+      controller: 'FillsNewCtrl',
+      controllerAs: 'fills'
     });
-    
+
   $urlRouterProvider.otherwise('/');
 }

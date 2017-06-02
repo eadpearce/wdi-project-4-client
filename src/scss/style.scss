@@ -1,1 +1,17 @@
 // Import all of your scss files here
+@import 'helpers/tachyons';
+
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+// .bg-dark-green { background-color: #066d0b; }
+// .bg-green { background-color: #1bba23; }
+// .bg-light-green { background-color: #b2ffb6; }
+// .bg-lightest-green { background-color: #e2ffe4; }
+.triangle {
+  width: 0;
+  height: 0;
+  border-bottom: 200px solid #b2ffb6;
+  border-left: 1024px solid transparent;
+}

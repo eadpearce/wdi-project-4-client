@@ -2,21 +2,48 @@
 <html ng-app="collabApp">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Angular Stack Setup</title>
   <base href="/">
+  <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/images/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+  <link rel="manifest" href="/images/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
   <!-- inject:js -->
   <!-- endinject -->
   <!-- inject:css -->
   <!-- endinject -->
 </head>
-<body ng-controller="MainCtrl as main">
-  <header>
-    <nav>
-      <a href="" ui-sref="login">Login</a>
-      <a href="" ng-click="main.logout()">Logout</a>
-    </nav>
+<body ng-controller="MainCtrl as main" class="bg-lightest-green very-dark-green">
+  <div class="absolute bottom-0 right-0 triangle">
+
+  </div>
+  <header class="dt fixed bottom-0 h3 top-0-ns w-100 fl bg-white">
+    <div class="dtc v-mid pl3">
+      <a ui-sref="home" href=""><logosmall></logosmall></a>
+    </div>
+    <div class="db fr h-100 pr3">
+      <div class="dt ttu tracked f6 h-100">
+        <div class="dtc v-mid">
+          <a href="" ng-hide="main.user" class="link dark-green hover-light-green" ui-sref="login">Login</a>
+          <a href="" ng-show="main.user" class="link dark-green hover-light-green" ng-click="main.logout()">Logout</a>
+        </div>
+      </div>
+    </div>
   </header>
-  <logo width="100" height="auto"></logo>
-  <main ui-view></main>
+  <main class="mt4 pv5 ph5" ui-view></main>
 </body>
 </html>

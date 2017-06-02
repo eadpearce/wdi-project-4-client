@@ -1,12 +1,12 @@
 angular
   .module('collabApp')
-  .directive('logo', logo);
+  .directive('logosmall', logosmall);
 
-logo.$inject = [];
-function logo() {
+logosmall.$inject = [];
+function logosmall() {
   const directive = {};
   directive.restrict = 'E';
   directive.replace = true; // replace the directive when called with the template
-  directive.templateUrl ='/js/views/templates/logo.html';
+  directive.templateUrl ='/js/views/templates/logo_small.html';
   return directive;
 }
