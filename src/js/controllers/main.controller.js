@@ -5,13 +5,13 @@ angular
 MainCtrl.$inject = ['$http', 'API', '$rootScope', 'CurrentUserService', '$state'];
 function MainCtrl($http, API, $rootScope, CurrentUserService, $state) {
   const vm = this;
-  if (vm.user) {
-    $http
-    .get(`${API}/users`)
-    .then(response => {
-      vm.all = response.data;
-    });
-  }
+  // if (vm.user) {
+  //   $http
+  //   .get(`${API}/users`)
+  //   .then(response => {
+  //     vm.all = response.data;
+  //   });
+  // }
 
   $rootScope.$on('loggedIn', () => {
     vm.user = CurrentUserService.currentUser;
@@ -20,7 +20,7 @@ function MainCtrl($http, API, $rootScope, CurrentUserService, $state) {
 
   $rootScope.$on('loggedOut', () => {
     vm.user = null;
-    console.log('logged out')
+    // console.log('logged out')
     $state.go('home');
   });
 
