@@ -40,6 +40,12 @@ function Router($stateProvider, $urlRouterProvider, $locationProvider) {
       controller: 'PromptsIndexCtrl',
       controllerAs: 'prompts'
     })
+    .state('promptsIndexTag', {
+      url: '/tags/:tag/prompts',
+      templateUrl: '/js/views/prompts/index.html',
+      controller: 'PromptsIndexTagCtrl',
+      controllerAs: 'prompts'
+    })
     .state('promptsIndexUser', {
       url: '/users/:user/prompts',
       templateUrl: '/js/views/prompts/index.html',
@@ -81,6 +87,12 @@ function Router($stateProvider, $urlRouterProvider, $locationProvider) {
       templateUrl: '/js/views/fills/new.html',
       controller: 'FillsNewCtrl',
       controllerAs: 'fills'
+    })
+    .state('tagsIndex', {
+      url: '/tags',
+      templateUrl: '/js/views/tags/index.html',
+      controller: 'TagsIndexCtrl',
+      controllerAs: 'tags'
     });
 
   $urlRouterProvider.otherwise('/');

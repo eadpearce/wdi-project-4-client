@@ -3,6 +3,7 @@ angular
   .controller('PromptsIndexCtrl', PromptsIndexCtrl)
   .controller('PromptsShowCtrl', PromptsShowCtrl)
   .controller('PromptsNewCtrl', PromptsNewCtrl)
+  .controller('PromptsIndexTagCtrl', PromptsIndexTagCtrl)
   .controller('PromptsIndexUserCtrl', PromptsIndexUserCtrl);
 
 PromptsIndexCtrl.$inject = ['Prompt'];
@@ -38,4 +39,14 @@ PromptsIndexUserCtrl.$inject = ['Prompt', '$stateParams'];
 function PromptsIndexUserCtrl(Prompt, $stateParams) {
   const vm = this;
   vm.all = Prompt.query({ user_id: $stateParams.userId });
+}
+
+PromptsIndexTagCtrl.$inject = ['Prompt', '$stateParams', '$http', 'API'];
+function PromptsIndexTagCtrl(Prompt, $stateParams, $http, API) {
+  const vm = this;
+  $http
+    .get(`${API}/tags/${$stateParams.tag}/prompts`)
+    .then(response => {
+      vm.all = response.data;
+    });
 }

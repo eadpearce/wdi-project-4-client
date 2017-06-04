@@ -30,7 +30,7 @@ function FillsNewCtrl(Fill, $state, $stateParams, $http, API) {
     });
   vm.fill = {};
   function fillsCreate() {
-    vm.fill.prompt_id = vm.prompt.id; 
+    vm.fill.prompt_id = vm.prompt.id;
     Fill
       .save(vm.fill)
       .$promise

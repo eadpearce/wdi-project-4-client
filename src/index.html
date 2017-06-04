@@ -46,8 +46,8 @@
     <div class="db fr h-100 pr3">
       <div class="dt ttu tracked f6 h-100">
         <div class="dtc v-mid">
-          <!-- <a href="" ng-hide="main.user" class="link dark-green hover-light-green" ui-sref="login">Login</a> -->
-          <a href="" class="link dark-green hover-light-green" ng-click="main.logout()">Logout</a>
+          <a href="" ng-hide="loggedIn" class="link dark-green hover-light-green" ui-sref="login">Login</a>
+          <a href="" ng-show="loggedIn" class="link dark-green hover-light-green" ng-click="main.logout()">Logout</a>
         </div>
       </div>
     </div>

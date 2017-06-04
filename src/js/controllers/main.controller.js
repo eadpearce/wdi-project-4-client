@@ -5,10 +5,16 @@ angular
 MainCtrl.$inject = ['$http', 'API', '$rootScope', 'CurrentUserService', '$state', '$stateParams'];
 function MainCtrl($http, API, $rootScope, CurrentUserService, $state, $stateParams) {
   const vm = this;
-  $rootScope.user = CurrentUserService.currentUser;
 
   $rootScope.$on('loggedOut', () => {
     vm.user = null;
+    $rootScope.loggedIn = false;
+    // console.log('logged out')
+    $state.go('home');
+  });
+  $rootScope.$on('loggedIn', () => {
+    $rootScope.user = CurrentUserService.currentUser;
+    $rootScope.loggedIn = true;
     // console.log('logged out')
     $state.go('home');
   });

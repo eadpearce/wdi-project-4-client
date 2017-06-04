@@ -1,0 +1,10 @@
+<h1>All Tags</h1>
+<a class="pr3"
+  ng-repeat="tag in tags.all" href=""
+  ng-class="{
+    'f4': tag.prompts.length >= 5,
+    'f3': tag.prompts.length >= 10,
+    'f2': tag.prompts.length >= 20,
+    'f1': tag.prompts.length >= 50,
+  }"
+  ui-sref="promptsIndexTag({ tag: tag.id })">{{tag.name}}</a>
