@@ -1,8 +1,10 @@
 <h1>All Prompts</h1>
-<ul>
-  <li class="list" ng-repeat="prompt in prompts.all">
-    <h3><a ui-sref="promptsShow({ id: prompt.id })" href="">{{prompt.title}}</a></h3>
-    <p>{{prompt.body}}</p>
-    <p>Posted by: <a href="">{{prompt.user.username}}</a></p>
-  </li>
-</ul>
+<div class="list" ng-repeat="prompt in prompts.all">
+  <h3><a ui-sref="promptsShow({ id: prompt.id })" href="">{{prompt.title}}</a>
+    <span ng-if="prompt.fills[0]">
+      <span ng-if="prompt.fills.length === 1">(1 fill)</span>
+      <span ng-if="prompt.fills.length !== 1">({{prompt.fills.length}} fills)</span>
+    </span>
+  </h3>
+  <p>Posted by: <a href="">{{prompt.user.username}}</a></p>
+</div>

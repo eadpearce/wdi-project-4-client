@@ -17,11 +17,20 @@ function FillsShowCtrl(Fill, $stateParams) {
   vm.fill = Fill.get({ id: $stateParams.id });
 }
 
-FillsNewCtrl.$inject = ['Fill', '$state'];
-function FillsNewCtrl(Fill, $state) {
+FillsNewCtrl.$inject = ['Fill', '$state', '$stateParams', '$http', 'API'];
+function FillsNewCtrl(Fill, $state, $stateParams, $http, API) {
   const vm = this;
   vm.create = fillsCreate;
+  console.log($stateParams.prompt);
+  $http
+    .get(`${API}/prompts/${$stateParams.prompt}`)
+    .then(response => {
+      vm.prompt = response.data;
+      // console.log('FILLS: ', vm.all);
+    });
+  vm.fill = {};
   function fillsCreate() {
+    vm.fill.prompt_id = vm.prompt.id; 
     Fill
       .save(vm.fill)
       .$promise
@@ -37,7 +46,19 @@ function FillsIndexUserCtrl(Fill, $stateParams, $http, API) {
   const vm = this;
   // console.log('FILL PARAMS: ',$stateParams.author);
   $http
-    .get(`${API}/users/${$stateParams.author}/fills`)
+    .get(`${API}/users/${$stateParams.user}/fills`)
+    .then(fills => {
+      vm.all = fills.data;
+      // console.log('FILLS: ', vm.all);
+    });
+}
+
+FillsIndexPromptCtrl.$inject = ['Fill', '$stateParams', '$http', 'API'];
+function FillsIndexPromptCtrl(Fill, $stateParams, $http, API) {
+  const vm = this;
+  // console.log('FILL PARAMS: ',$stateParams.author);
+  $http
+    .get(`${API}/prompts/${$stateParams.prompt}/fills`)
     .then(fills => {
       vm.all = fills.data;
       // console.log('FILLS: ', vm.all);

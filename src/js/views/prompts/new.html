@@ -1,0 +1,13 @@
+<h1>New Prompt</h1>
+<form class="" ng-submit="prompts.create()" method="post">
+  <label for="title">Title: </label>
+  <input class="db" type="text"
+    ng-model="prompts.prompt.title" name="title" value="">
+  <label for="body">Description: </label>
+  <textarea rows="20" cols="60" class="db" type="text"
+    ng-model="prompts.prompt.body" name="body"></textarea>
+  <label for="tagged_as">Tags: </label>
+  <input class="db" type="text"
+    ng-model="prompts.prompt.tagged_as" name="tagged_as" value="">
+  <input type="submit" name="" value="Submit">
+</form>
