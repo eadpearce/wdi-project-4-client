@@ -2,21 +2,10 @@ angular
 .module('collabApp')
 .controller('MainCtrl', MainCtrl);
 
-MainCtrl.$inject = ['$http', 'API', '$rootScope', 'CurrentUserService', '$state'];
-function MainCtrl($http, API, $rootScope, CurrentUserService, $state) {
+MainCtrl.$inject = ['$http', 'API', '$rootScope', 'CurrentUserService', '$state', '$stateParams'];
+function MainCtrl($http, API, $rootScope, CurrentUserService, $state, $stateParams) {
   const vm = this;
-  // if (vm.user) {
-  //   $http
-  //   .get(`${API}/users`)
-  //   .then(response => {
-  //     vm.all = response.data;
-  //   });
-  // }
-
-  $rootScope.$on('loggedIn', () => {
-    vm.user = CurrentUserService.currentUser;
-    // $state.go('home');
-  });
+  $rootScope.user = CurrentUserService.currentUser;
 
   $rootScope.$on('loggedOut', () => {
     vm.user = null;
@@ -27,4 +16,6 @@ function MainCtrl($http, API, $rootScope, CurrentUserService, $state) {
   vm.logout = () => {
     CurrentUserService.removeUser();
   };
+
+  if ($stateParams === { id: 'new' }) console.log($stateParams);// $state.go('home');
 }

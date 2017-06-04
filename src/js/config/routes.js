@@ -28,14 +28,26 @@ function Router($stateProvider, $urlRouterProvider, $locationProvider) {
       controller: 'LoginCtrl',
       controllerAs: 'login'
     })
+    .state('usersShow', {
+      url: '/users/:id',
+      templateUrl: '/js/views/users/show.html',
+      controller: 'UsersShowCtrl',
+      controllerAs: 'users'
+    })
     .state('promptsIndex', {
       url: '/prompts',
       templateUrl: '/js/views/prompts/index.html',
       controller: 'PromptsIndexCtrl',
       controllerAs: 'prompts'
     })
+    .state('promptsIndexUser', {
+      url: '/users/:userId/prompts',
+      templateUrl: '/js/views/prompts/index.html',
+      controller: 'PromptsIndexUserCtrl',
+      controllerAs: 'prompts'
+    })
     .state('promptsShow', {
-      url: '/prompts/:id',
+      url: '/prompts/{id:int}',
       templateUrl: '/js/views/prompts/show.html',
       controller: 'PromptsShowCtrl',
       controllerAs: 'prompts'
@@ -46,6 +58,12 @@ function Router($stateProvider, $urlRouterProvider, $locationProvider) {
       controller: 'PromptsNewCtrl',
       controllerAs: 'prompts'
     })
+    .state('fillsIndexUser', {
+      url: '/users/:author/fills',
+      templateUrl: '/js/views/fills/index.html',
+      controller: 'FillsIndexUserCtrl',
+      controllerAs: 'fills'
+    })
     .state('fillsIndex', {
       url: '/fills',
       templateUrl: '/js/views/fills/index.html',
@@ -53,7 +71,7 @@ function Router($stateProvider, $urlRouterProvider, $locationProvider) {
       controllerAs: 'fills'
     })
     .state('fillsShow', {
-      url: '/fills/:id',
+      url: '/fills/{id:int}',
       templateUrl: '/js/views/fills/show.html',
       controller: 'FillsShowCtrl',
       controllerAs: 'fills'

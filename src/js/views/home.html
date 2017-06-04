@@ -1,1 +1,5 @@
-<h1>Home</h1>
+<h1>Hello, {{user.username}}</h1>
+<p class="lh-copy">
+<a class="f3 link db hover-green very-dark-green" href="" ui-sref="promptsIndexUser({ userId: user.username })">View My Prompts</a>
+<a class="f3 link db hover-green very-dark-green" href="" ui-sref="fillsIndexUser({ author: user.username })">View My Fills</a>
+</p>
