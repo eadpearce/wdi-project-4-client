@@ -32,21 +32,22 @@
 
   </div>
   <header class="dt fixed bottom-0 h3 top-0-ns w-100 fl bg-white">
-    <div class="dtc v-mid pl3 w3">
-      <a ui-sref="home" href=""><logosmall></logosmall></a>
+    <div class="dtc v-mid pl3 w4">
+      <a ui-sref="home" href=""><logo></logo></a>
     </div>
     <div class="db fl h-100 pr3">
       <div class="dt ttu tracked f6 h-100">
         <div class="dtc v-mid">
-          <a href="" class="link dark-green hover-light-green" ui-sref="promptsIndex">View all prompts</a>
+          <a href="" class="pr2 link dark-green hover-light-green" ui-sref="promptsIndex">View prompts</a>
+          <a href="" class="link dark-green hover-light-green" ui-sref="tagsIndex">View tags</a>
         </div>
       </div>
     </div>
     <div class="db fr h-100 pr3">
       <div class="dt ttu tracked f6 h-100">
         <div class="dtc v-mid">
-          <a href="" ng-hide="main.user" class="link dark-green hover-light-green" ui-sref="login">Login</a>
-          <a href="" ng-show="main.user" class="link dark-green hover-light-green" ng-click="main.logout()">Logout</a>
+          <!-- <a href="" ng-hide="main.user" class="link dark-green hover-light-green" ui-sref="login">Login</a> -->
+          <a href="" class="link dark-green hover-light-green" ng-click="main.logout()">Logout</a>
         </div>
       </div>
     </div>

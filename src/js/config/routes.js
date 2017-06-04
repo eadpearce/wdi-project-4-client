@@ -41,7 +41,7 @@ function Router($stateProvider, $urlRouterProvider, $locationProvider) {
       controllerAs: 'prompts'
     })
     .state('promptsIndexUser', {
-      url: '/users/{userId:int}/prompts',
+      url: '/users/:user/prompts',
       templateUrl: '/js/views/prompts/index.html',
       controller: 'PromptsIndexUserCtrl',
       controllerAs: 'prompts'

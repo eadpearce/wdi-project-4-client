@@ -6,7 +6,7 @@
 
 <h4><b>Fills: </b></h4>
 <p ng-if="!prompts.prompt.fills[0]">No fills yet. <a ui-sref="fillsNew({ prompt: prompts.prompt.id })" href="">Add one.</a></p>
-<ul ng-if="prompts.prompt.fills[0]">
+<ul class="list pl0" ng-if="prompts.prompt.fills[0]">
   <li ng-repeat="fill in prompts.prompt.fills">
     <a href="" ui-sref="fillsShow({ id: fill.id })">{{fill.title}}</a></p>
   </li>

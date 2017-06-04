@@ -1,8 +1,6 @@
 <h1>Fills</h1>
-<ul>
-  <li class="list" ng-repeat="fill in fills.all">
-    <h3><a href="" ui-sref="fillsShow({ id: fill.id })">{{fill.prompt.title}}</a></h3>
-    <p><a href="" ui-sref="promptsShow({ id: fill.prompt.id })">Original prompt</a></p>
-    <p>Filled by: <a href="">{{fill.user.username}}</a></p>
-  </li>
-</ul>
+<div ng-repeat="fill in fills.all">
+  <h3><a href="" ui-sref="fillsShow({ id: fill.id })">{{fill.prompt.title}}</a></h3>
+  <p><a href="" ui-sref="promptsShow({ id: fill.prompt.id })">Original prompt</a></p>
+  <p>Filled by: <a href="">{{fill.user.username}}</a></p>
+</div>

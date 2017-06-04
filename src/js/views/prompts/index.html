@@ -6,5 +6,8 @@
       <span ng-if="prompt.fills.length !== 1">({{prompt.fills.length}} fills)</span>
     </span>
   </h3>
+  <p>Tags:
+    <a class="pr2" ng-repeat="tag in prompt.tags" ui-sref="tagsShow({ id: tag.id })" href="">{{tag.name}}</a>
+  </p>
   <p>Posted by: <a href="">{{prompt.user.username}}</a></p>
 </div>

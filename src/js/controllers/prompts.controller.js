@@ -37,6 +37,5 @@ function PromptsShowCtrl(Prompt, $stateParams) {
 PromptsIndexUserCtrl.$inject = ['Prompt', '$stateParams'];
 function PromptsIndexUserCtrl(Prompt, $stateParams) {
   const vm = this;
-  console.log('PARAMS: ', $stateParams);
   vm.all = Prompt.query({ user_id: $stateParams.userId });
 }
