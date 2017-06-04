@@ -1,14 +1,43 @@
-<h1>Prompts</h1>
-<div class="list" ng-repeat="prompt in (filteredItems = (prompts.all | orderBy: 'created_at':true | limitTo: 10))">
-  <h3><a ui-sref="promptsShow({ id: prompt.id })" href="">{{prompt.title}}</a>
-    <span ng-if="prompt.fills[0]">
-      <span ng-if="prompt.fills.length === 1">(1 fill)</span>
-      <span ng-if="prompt.fills.length !== 1">({{prompt.fills.length}} fills)</span>
-    </span>
-  </h3>
-  <p>{{prompt.date_created}}</p>
-  <p>Tags:
-    <a class="pr2" ng-repeat="tag in prompt.tags" ui-sref="promptsIndexTag({ tag: tag.id })" href="">{{tag.name}}</a>
-  </p>
-  <p>Posted by: <a href="">{{prompt.user.username}}</a></p>
+<div class="mb5 mb0-ns bg-white w-100 ph2 ph4-ns pt2 pb2 fixed">
+  <div class="dt">
+    <h1 class="dib mv0 pv2">Prompts</h1>
+    <div class="dtc v-mid pl3">
+      <button class="dib-ns bd ml3-ns bg-white ba b--black br-pill ph2" type="button" ng-click="prompts.searchOptions()" name="button">Search options</button>
+    </div>
+  </div>
+  <div ng-show="prompts.showSearchOpts" class="mt3">
+    <label class="db mb2" for="filterByFilled">Show only filled prompts:
+      <input type="checkbox" id="filterByFilled" ng-false-value="''" ng-model="prompts.isFilterByFilled"></label>
+    <label class="db mb2" for="filterByUnfilled">Show only unfilled prompts:
+      <input type="checkbox" id="filterByUnfilled" ng-false-value="''" ng-model="prompts.isFilterByUnfilled"></label>
+    <div class="dib mb2">
+      <label for="">Limit: <input class="w3 ba b--black br-pill ph2" type="number" step="5" name="limit" ng-model="prompts.limit" ng-disabled="prompts.showAll"></label>
+    </div>
+    <div class="dib mb2" >
+      <label class="w3" for="search">Search: <input class="ba b--black br-pill ph2" type="text" name="search" ng-model="prompts.q"></label>
+    </div>
+  </div>
 </div>
+<div class="mt5 pt4 pt2-ns ph2 ph4-ns mb0-ns">
+  <div ng-repeat="prompt in
+    (filteredItems = (prompts.all |
+    filter: prompts.q |
+    filter: { filled: prompts.isFilterByFilled } |
+    filter: { unfilled: prompts.isFilterByUnfilled } |
+    orderBy: 'created_at':true |
+    limitTo: prompts.limit ))">
+    <h3><a ui-sref="promptsShow({ id: prompt.id })" href="">{{prompt.title}}</a>
+      <span ng-if="prompt.fills[0]">
+        <span ng-if="prompt.fills.length === 1">(1 fill)</span>
+        <span ng-if="prompt.fills.length !== 1">({{prompt.fills.length}} fills)</span>
+      </span>
+    </h3>
+    <p>{{prompt.date_created}}</p>
+    <p>Tags:
+      <a class="pr2" ng-repeat="tag in prompt.tags" ui-sref="promptsIndexTag({ tag: tag.id })" href="">{{tag.name}}</a>
+    </p>
+    <p>Posted by: <a href="">{{prompt.user.username}}</a></p>
+  </div>
+</div>
+
+<!-- filterByTags:prompts.tagSearch | -->
