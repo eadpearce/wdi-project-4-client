@@ -1,12 +1,12 @@
-<div class="ph2 ph4-ns mb0-ns">
+<div ng-class="main.container">
   <h1>All Tags</h1>
   <a class="link hover-green dark-green pr2 underline"
   ng-repeat="tag in tags.all" href=""
   ng-class="{
-    'f4': tag.prompts.length >= 5,
-    'f3': tag.prompts.length >= 10,
+    'f4': tag.prompts.length < 5,
+    'f3': tag.prompts.length >= 5,
     'f2': tag.prompts.length >= 20,
-    'f1': tag.prompts.length >= 50,
+    'f1': tag.prompts.length >= 50
   }"
   ui-sref="promptsIndexTag({ tag: tag.id })">{{tag.name}}</a>
 </div>

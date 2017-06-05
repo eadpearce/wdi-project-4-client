@@ -6,6 +6,8 @@ MainCtrl.$inject = ['$http', 'API', '$rootScope', 'CurrentUserService', '$state'
 function MainCtrl($http, API, $rootScope, CurrentUserService, $state, $stateParams) {
   const vm = this;
 
+  vm.container = 'ph2 ph4-ns mb0-ns';
+
   $rootScope.$on('loggedOut', () => {
     $rootScope.user = null;
     $rootScope.loggedIn = false;
@@ -15,7 +17,6 @@ function MainCtrl($http, API, $rootScope, CurrentUserService, $state, $statePara
     $rootScope.user = CurrentUserService.currentUser;
     $rootScope.loggedIn = true;
     // console.log('logged out')
-    $state.go('home');
   });
 
   vm.menuIsHidden = true;

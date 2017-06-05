@@ -4,12 +4,7 @@
   <p class="lh-copy">
     {{users.user.about}}
   </p>
-  <div class="">
-    <h3>Prompts</h3>
-    <grid type="prompt" content="users.user.prompts" width="full"></grid>
-  </div>
-
-  <h3>Fills</h3>
-  <grid type="fill" width="full" content="users.user.fills"></grid>
+  <grid type="prompt" content="users.user.prompts" width="half" page="user" limit="5"></grid>
+  <grid type="fill" width="half" content="users.user.fills" page="user" limit="5"></grid>
 
 </div>

@@ -1,4 +1,4 @@
-<div class="mb5 mb0-ns bt b--moon-gray bg-white bb w-100 ph2 ph4-ns pt2 pb2">
+<div class="mb0 bt b--moon-gray bg-white bb w-100 ph2 ph4-ns pt2 pb2 h-100">
   <div class="dt">
     <div class="dtc v-mid">
       <h1 class="dib mv0 pv2">Prompts</h1>
@@ -21,5 +21,6 @@
         </div>
       </div>
     </div>
-
-<grid type="prompt" content="prompts.all"></grid>
+<div ng-class="main.container">
+<grid type="prompt" content="prompts.all" width="grid" search="prompts.q" filled="prompts.isFilterByFilled" unfilled="prompts.isFilterByUnfilled" limit="prompts.limit"></grid>
+</div>

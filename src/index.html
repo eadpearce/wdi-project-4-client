@@ -32,9 +32,11 @@
 
   </div>
   <header class="h3">
-    <div class="menu overflow-hidden w-100 w5-ns db fixed pr2 pt2 pt0-ns pb2-ns bg-white ttu tr tracked f6" ng-hide="main.menuIsHidden">
+    <div class="menu overflow-hidden w-100 w5-ns db fixed pr2 pr3-ns pt2 pb3-ns pt0-ns f5-ns f6 bg-white ttu tr tracked" ng-hide="main.menuIsHidden">
       <a href="" ng-click="main.showMenu()"
-        class="db link dark-green hover-light-green" ui-sref="promptsNew">new prompt</a>
+        class="db link pt2 dark-green hover-light-green" ng-show="loggedIn" ui-sref="promptsNew">new prompt</a>
+      <a href="" ng-click="main.showMenu()"
+        class="db link pt2 dark-green hover-light-green" ng-show="loggedIn" ui-sref="usersShow({ id: user.username })">my profile</a>
       <a href="" ng-click="main.showMenu()"
         class="db pt2 link dark-green hover-light-green" ui-sref="promptsIndex">all prompts</a>
       <a href="" ng-click="main.showMenu()"
@@ -46,33 +48,15 @@
     </div>
 
     <nav class="h3 dt fixed bottom-0 top-0-ns w-100 fl bg-white">
-      <div class="h-100 pl2 dtc v-mid w4">
+      <div class="h-100 pl2 pl3-ns dtc v-mid w4">
         <a ui-sref="home" href=""><logo></logo></a>
       </div>
-      <div class="dtc v-mid pr2">
+      <div class="dtc v-mid pr2 pr3-ns">
         <button class="db fr ttu tr tracked f6 bd ml3-ns bg-white ba b--black br-pill ph2" type="button" ng-click="main.showMenu()" name="button">menu</button>
       </div>
+    </nav>
+  </header>
 
-      <!-- <div class="db fl h-100 pr3">
-      <div class="dt ttu tracked f6 h-100">
-      <div class="dtc v-mid">
-      <a href="" class="pr2 link dark-green hover-light-green" ui-sref="promptsIndex">prompts</a>
-      <a href="" class="link dark-green hover-light-green" ui-sref="tagsIndex">tags</a>
-    </div>
-  </div>
-</div>
-
-<div class="db fr h-100 pr3">
-<div class="dt ttu tracked f6 h-100">
-<div class="dtc v-mid">
-<a href="" ng-hide="loggedIn" class="link dark-green hover-light-green" ui-sref="login">Login</a>
-<a href="" ng-show="loggedIn" class="link dark-green hover-light-green" ng-click="main.logout()">Logout</a>
-</div>
-</div>
-</div> -->
-
-</nav>
-</header>
 <main class="mt0-ns nt5 mb4 mb0-ns pb5" ui-view></main>
 </body>
 </html>

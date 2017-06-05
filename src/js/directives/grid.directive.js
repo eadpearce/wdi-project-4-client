@@ -10,8 +10,13 @@ function grid() {
   directive.templateUrl ='/js/views/templates/grid.html';
   directive.scope = {
     type: '@',
-    width: '@', 
-    content: '='
+    page: '@',
+    width: '@',
+    content: '=',
+    search: '=',
+    filled: '=',
+    unfilled: '=',
+    limit: '='
   };
   return directive;
 }
