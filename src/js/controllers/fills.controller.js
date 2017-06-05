@@ -41,10 +41,11 @@ function FillsNewCtrl(Fill, $state, $stateParams, $http, API) {
   }
 }
 
-FillsIndexUserCtrl.$inject = ['Fill', '$stateParams', '$http', 'API'];
-function FillsIndexUserCtrl(Fill, $stateParams, $http, API) {
+FillsIndexUserCtrl.$inject = ['Fill', '$stateParams', '$http', 'API', 'User'];
+function FillsIndexUserCtrl(Fill, $stateParams, $http, API, User) {
   const vm = this;
   // console.log('FILL PARAMS: ',$stateParams.author);
+  vm.user = User.get({ id: $stateParams.user });
   $http
     .get(`${API}/users/${$stateParams.user}/fills`)
     .then(fills => {

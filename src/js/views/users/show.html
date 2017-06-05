@@ -1,19 +1,15 @@
-<h1>{{users.user.username}}'s profile</h1>
-<h3>About:</h3>
-<p class="lh-copy">
-  {{users.user.about}}
-</p>
-<h3>Prompts</h3>
-<p ng-if="!users.user.prompts[0]">Nothing here yet</p>
-<ul class="list pl0" ng-if="users.user.prompts[0]">
-  <li ng-repeat="prompt in users.user.prompts">
-    <h4><a ui-sref="promptsShow({ id: prompt.id })" href="">{{prompt.title}}</a></h4>
-  </li>
-</ul>
-<h3>Fills</h3>
-<p ng-if="!users.user.fills[0]">Nothing here yet</p>
-<ul class="list pl0" ng-if="users.user.fills[0]">
-  <li ng-repeat="fill in users.user.fills">
-    <h4><a ui-sref="fillsShow({ id: fill.id })" href="">{{fill.title}}</a></h4>
-  </li>
-</ul>
+<div class="ph2 ph4-ns mb0-ns">
+  <h1>{{users.user.username}}'s profile</h1>
+  <h3>About:</h3>
+  <p class="lh-copy">
+    {{users.user.about}}
+  </p>
+  <div class="">
+    <h3>Prompts</h3>
+    <grid type="prompt" content="users.user.prompts" width="full"></grid>
+  </div>
+
+  <h3>Fills</h3>
+  <grid type="fill" width="full" content="users.user.fills"></grid>
+
+</div>

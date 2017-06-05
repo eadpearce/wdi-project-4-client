@@ -1,0 +1,29 @@
+<div class="w-100 mt0-ns nt5 pv2 ph2 ph4-ns mb0-ns">
+    <div class="db fl"
+      ng-class="{
+        'w-third-l w-50-m w-100': width === 'grid',
+        'w-100': width === 'full'
+      }"
+      ng-repeat="item in content">
+    <div class="pa2 ma2 bg-white">
+    <h3 class="f4 mt0 mb2">
+      <a ng-if="type === 'fill'" ui-sref="fillsShow({ id: item.id })" href="">
+        <span ng-if="item.title" ng-bind="item.title | limitTo: 30"></span> <span ng-if="item.title.length > 30">...</span><span ng-if="!item.title">[Untitled]</span></a>
+      <a ng-if="type === 'prompt'" ui-sref="fillsShow({ id: item.id })" href="">
+        <span ng-if="item.title" ng-bind="item.title | limitTo: 30"></span> <span ng-if="item.title.length > 30">...</span><span ng-if="!item.title">[Untitled]</span></a>
+    </h3>
+    <p class="mt0 mb1">{{item.date_created}}</p>
+    <div class="mb1">
+      Tags: {{item.tags}}<span class="pr2" ng-repeat="tag in item.tags | limitTo: 4">
+        <a ng-if="type === 'fill'"
+          ui-sref="fillsIndexTag({ tag: tag.id })"
+          href="">{{tag.name}}</a><span ng-if="$index === 3"> ...</span></span>
+        <a ng-if="type === 'prompt'"
+          ui-sref="promptsIndexTag({ tag: tag.id })"
+          href="">{{tag.name}}</a><span ng-if="$index === 3"> ...</span></span>
+      </div>
+      <div class="">
+        Posted by: <a href="">{{item.user.username}}</a></div>
+    </div>
+  </div>
+</div>

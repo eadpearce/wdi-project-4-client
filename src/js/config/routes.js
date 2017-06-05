@@ -42,13 +42,13 @@ function Router($stateProvider, $urlRouterProvider, $locationProvider) {
     })
     .state('promptsIndexTag', {
       url: '/tags/:tag/prompts',
-      templateUrl: '/js/views/prompts/indexby.html',
+      templateUrl: '/js/views/prompts/indexbytag.html',
       controller: 'PromptsIndexTagCtrl',
       controllerAs: 'prompts'
     })
     .state('promptsIndexUser', {
       url: '/users/:user/prompts',
-      templateUrl: '/js/views/prompts/indexby.html',
+      templateUrl: '/js/views/prompts/indexbyuser.html',
       controller: 'PromptsIndexUserCtrl',
       controllerAs: 'prompts'
     })
@@ -66,7 +66,7 @@ function Router($stateProvider, $urlRouterProvider, $locationProvider) {
     })
     .state('fillsIndexUser', {
       url: '/users/:user/fills',
-      templateUrl: '/js/views/fills/index.html',
+      templateUrl: '/js/views/fills/indexbyuser.html',
       controller: 'FillsIndexUserCtrl',
       controllerAs: 'fills'
     })
