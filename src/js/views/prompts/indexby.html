@@ -3,23 +3,8 @@
     <div class="dtc v-mid">
       <h1 class="dib mv0 pv2">Prompts</h1>
     </div>
-    <div class="dtc tr w-100 v-mid pl4">
-      <button class="dib-ns bd ml3-ns bg-white ba b--black br-pill ph2" type="button" ng-click="prompts.searchOptions()" name="button">Search options</button>
-    </div>
   </div>
 
-  <div ng-hide="prompts.searchIsHidden" class="cf search-box mt3 tr">
-    <label class="db mb2" for="filterByFilled">Show only filled prompts:
-      <input type="checkbox" id="filterByFilled" ng-false-value="''" ng-model="prompts.isFilterByFilled"></label>
-      <label class="db mb2" for="filterByUnfilled">Show only unfilled prompts:
-        <input type="checkbox" id="filterByUnfilled" ng-false-value="''" ng-model="prompts.isFilterByUnfilled"></label>
-        <div class="dib mb2">
-          <label for="">Limit: <input class="w3 ba b--black br-pill ph2" type="number" step="5" name="limit" ng-model="prompts.limit" ng-disabled="prompts.showAll"></label>
-        </div>
-        <div class="dib mb2" >
-          <label class="w3" for="search">Search: <input class="ba b--black br-pill ph2" type="text" name="search" ng-model="prompts.q"></label>
-        </div>
-      </div>
     </div>
     <div class="mt0-ns nt5 pv2 ph2 ph4-ns mb0-ns">
       <div ng-repeat="prompt in

@@ -3,5 +3,6 @@ angular
   .module('collabApp', [
     'ui.router',
     'ngResource',
-    'angular-jwt'
+    'angular-jwt',
+    'ngAnimate'
   ]);

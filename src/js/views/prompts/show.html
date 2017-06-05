@@ -1,13 +1,15 @@
-<h1>{{prompts.prompt.title}}</h1>
-<h3>By <a href="" ui-sref="usersShow({ id: prompts.prompt.user.username })">{{prompts.prompt.user.username}}</a></h3>
-<p>{{prompts.prompt.body}}</p>
-<p><b>Tagged as: </b><a class="pr2" ng-repeat="tag in prompts.prompt.tags" href="" ui-sref="tagsShow({ id: tag.id })">{{tag.name}}</a>
-</p>
+<div class="ph2 ph4-ns mb0-ns">
+  <h1>{{prompts.prompt.title}}</h1>
+  <h3>By <a href="" ui-sref="usersShow({ id: prompts.prompt.user.username })">{{prompts.prompt.user.username}}</a></h3>
+  <p>{{prompts.prompt.body}}</p>
+  <p><b>Tagged as: </b><a class="pr2" ng-repeat="tag in prompts.prompt.tags" href="" ui-sref="tagsShow({ id: tag.id })">{{tag.name}}</a>
+  </p>
 
-<h4><b>Fills: </b></h4>
-<p ng-if="!prompts.prompt.fills[0]">No fills yet. <a ui-sref="fillsNew({ prompt: prompts.prompt.id })" href="">Add one.</a></p>
-<ul class="list pl0" ng-if="prompts.prompt.fills[0]">
-  <li ng-repeat="fill in prompts.prompt.fills">
-    <a href="" ui-sref="fillsShow({ id: fill.id })">{{fill.title}}</a></p>
-  </li>
-</ul>
+  <h4><b>Fills: </b></h4>
+  <p ng-if="!prompts.prompt.fills[0]">No fills yet. <a ui-sref="fillsNew({ prompt: prompts.prompt.id })" href="">Add one.</a></p>
+  <ul class="list pl0" ng-if="prompts.prompt.fills[0]">
+    <li ng-repeat="fill in prompts.prompt.fills">
+      <a href="" ui-sref="fillsShow({ id: fill.id })">{{fill.title}}</a></p>
+    </li>
+  </ul>
+</div>

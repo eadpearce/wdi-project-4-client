@@ -33,10 +33,10 @@ function PromptsIndexCtrl(Prompt, filterFilter, $scope) {
   vm.isFilteredByFilled = false;
   vm.isFilteredByUnfilled = false;
   vm.all = Prompt.query();
-  vm.showSearchOpts = false;
+  vm.searchIsHidden = true;
   vm.searchOptions = function searchOptions() {
-    if (vm.showSearchOpts) vm.showSearchOpts = false;
-    else vm.showSearchOpts = true;
+    if (vm.searchIsHidden) vm.searchIsHidden = false;
+    else vm.searchIsHidden = true;
   };
 
   function filterPrompts() {

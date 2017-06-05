@@ -19,6 +19,11 @@ function MainCtrl($http, API, $rootScope, CurrentUserService, $state, $statePara
     // $state.go('home');
   });
 
+  vm.menuIsHidden = true;
+  vm.showMenu = function showMenu() {
+    if (vm.menuIsHidden) vm.menuIsHidden = false;
+    else vm.menuIsHidden = true;
+  };
   vm.logout = () => {
     CurrentUserService.removeUser();
   };

@@ -1,14 +1,17 @@
-<h1>New Fill</h1>
-<h2>In response to: {{ fills.prompt.title }}</h2>
-<form class="" ng-submit="fills.create()" method="post">
-  <label for="title">Title: </label>
-  <input class="db" type="text"
+<div class="ph2 ph4-ns mb0-ns">
+  <h1>New Fill</h1>
+  <h2>In response to: {{ fills.prompt.title }}</h2>
+  <form class="" ng-submit="fills.create()" method="post">
+    <label for="title">Title: </label>
+    <input class="db" type="text"
     ng-model="fills.fill.title" name="title" value="">
-  <label for="body">Description: </label>
-  <textarea rows="20" cols="60" class="db" type="text"
+    <label for="body">Description: </label>
+    <textarea rows="20" cols="60" class="db" type="text"
     ng-model="fills.fill.body" name="body"></textarea>
-  <label for="tagged_as">Tags: </label>
-  <input class="db" type="text"
+    <label for="tagged_as">Tags: </label>
+    <input class="db" type="text"
     ng-model="fills.fill.tagged_as" name="tagged_as" value="">
-  <input type="submit" name="" value="Submit">
-</form>
+    <input type="submit" name="" value="Submit">
+  </form>
+
+</div>

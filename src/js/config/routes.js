@@ -42,13 +42,13 @@ function Router($stateProvider, $urlRouterProvider, $locationProvider) {
     })
     .state('promptsIndexTag', {
       url: '/tags/:tag/prompts',
-      templateUrl: '/js/views/prompts/index.html',
+      templateUrl: '/js/views/prompts/indexby.html',
       controller: 'PromptsIndexTagCtrl',
       controllerAs: 'prompts'
     })
     .state('promptsIndexUser', {
       url: '/users/:user/prompts',
-      templateUrl: '/js/views/prompts/index.html',
+      templateUrl: '/js/views/prompts/indexby.html',
       controller: 'PromptsIndexUserCtrl',
       controllerAs: 'prompts'
     })
