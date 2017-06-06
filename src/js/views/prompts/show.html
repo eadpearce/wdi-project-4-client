@@ -1,15 +1,26 @@
-<div ng-class="main.container">
+<error ng-if="prompts.error.status" style="main.container" status="prompts.error.status"></error>
+
+<div ng-hide="!prompts.hidden || prompts.error.status" class="pv5 tc w-100">
+  <spinner name="spinner" img-src="/images/icons/loading.gif" on-loaded="prompts.loadPrompts()"></spinner>
+</div>
+
+<div ng-show="!prompts.hidden" ng-class="main.container">
   <h1>{{prompts.prompt.title}}</h1>
   <h3>By <a href="" ui-sref="usersShow({ id: prompts.prompt.user.username })">{{prompts.prompt.user.username}}</a></h3>
   <p>{{prompts.prompt.body}}</p>
-  <p><b>Tagged as: </b><a class="pr2" ng-repeat="tag in prompts.prompt.tags" href="" ui-sref="tagsShow({ id: tag.id })">{{tag.name}}</a>
+  <p><b>Tagged as: </b><a class="pr2" ng-repeat="tag in prompts.prompt.tags" href="" ui-sref="promptsIndexTag({ tag: tag.id })">{{tag.name}}</a>
   </p>
 
-  <h4><b>Fills: </b></h4>
+  <h4>Fills: </h4>
   <p ng-if="!prompts.prompt.fills[0]">No fills yet. <a ui-sref="fillsNew({ prompt: prompts.prompt.id })" href="">Add one.</a></p>
   <ul class="list pl0" ng-if="prompts.prompt.fills[0]">
     <li ng-repeat="fill in prompts.prompt.fills">
-      <a href="" ui-sref="fillsShow({ id: fill.id })">{{fill.title}}</a></p>
+      <a href="" ui-sref="fillsShow({ id: fill.id })">{{fill.title}}</a>
     </li>
   </ul>
+
+  <h4>Comments: </h4>
+  <p ng-if="!prompts.prompt.comments[0]">No comments yet. <a ui-sref="commentsNewPrompt({ prompt: prompts.prompt.id })" href="">Add one.</a></p>
+  <comments ng-if="prompts.prompt.comments[0]" content="prompts.prompt.comments"></comments>
+
 </div>

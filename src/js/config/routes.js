@@ -93,6 +93,24 @@ function Router($stateProvider, $urlRouterProvider, $locationProvider) {
       templateUrl: '/js/views/tags/index.html',
       controller: 'TagsIndexCtrl',
       controllerAs: 'tags'
+    })
+    .state('commentsShow', {
+      url: '/comments/{id:int}',
+      templateUrl: '/js/views/comments/show.html',
+      controller: 'CommentsShowCtrl',
+      controllerAs: 'comments'
+    })
+    .state('commentsNewFill', {
+      url: '/fills/{fill:int}/comments/new',
+      templateUrl: '/js/views/comments/new.html',
+      controller: 'CommentsNewFillCtrl',
+      controllerAs: 'comments'
+    })
+    .state('commentsNewPrompt', {
+      url: '/prompts/{prompt:int}/comments/new',
+      templateUrl: '/js/views/comments/new.html',
+      controller: 'CommentsNewPromptCtrl',
+      controllerAs: 'comments'
     });
 
   $urlRouterProvider.otherwise('/');

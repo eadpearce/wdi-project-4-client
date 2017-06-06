@@ -1,4 +1,10 @@
-<div class="ph2 ph4-ns mb0-ns">
+
+<div ng-hide="!users.hidden" class="pv3 tc w-100">
+  <spinner name="spinner" img-src="/images/icons/loading.gif" on-loaded="users.loadUser()"></spinner>
+</div>
+
+<div ng-show="!users.hidden" ng-class="main.container">
+
   <h1>{{users.user.username}}'s profile</h1>
   <h3>About:</h3>
   <p class="lh-copy">

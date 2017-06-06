@@ -1,0 +1,6 @@
+<ul class="list pl0">
+  <li class="bg-white mb3" ng-repeat="comment in content">
+    <p class="mt0 mb0 bg-dark-green white pa2">Posted by <a class="link light-green hover-white" href="" ui-sref="usersShow({ id: comment.user.username })">{{comment.user.username}}</a> at <a class="link light-green hover-white" href="" ui-sref="commentsShow({ id: comment.id })">{{comment.date_created}}</a></p>
+    <p class="pa2 mt0 mb0">{{comment.body}}</p>
+  </li>
+</ul>

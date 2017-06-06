@@ -1,0 +1,7 @@
+<div ng-hide="!comments.hidden" class="pv3 tc w-100">
+  <spinner name="spinner" img-src="/images/icons/loading.gif" on-loaded="comments.load()"></spinner>
+</div>
+<div ng-show="!comments.hidden" ng-class="main.container">
+    <p>Posted by <a class="" href="" ui-sref="usersShow({ id: comments.comment.user.username })">{{comments.comment.user.username}}</a> at <a class="b" href="" ui-sref="commentsShow({ id: comments.comment.id })">{{comments.comment.date_created}}</a></p>
+    <p>{{comments.comment.body}}</p>
+</div>

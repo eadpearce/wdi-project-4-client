@@ -27,6 +27,7 @@
         'ma2': width === 'grid',
         'mr2 mb2': width === 'half'
       }">
+
     <h3 class="f4 mt0 mb2">
       <a ng-if="type === 'fill'" ui-sref="fillsShow({ id: item.id })" href="">
         <span ng-if="item.title" ng-bind="item.title | limitTo: 30"></span> <span ng-if="item.title.length > 30">...</span><span ng-if="!item.title">[Untitled]</span></a>

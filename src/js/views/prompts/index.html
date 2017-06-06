@@ -21,6 +21,14 @@
         </div>
       </div>
     </div>
+
 <div ng-class="main.container">
-<grid type="prompt" content="prompts.all" width="grid" search="prompts.q" filled="prompts.isFilterByFilled" unfilled="prompts.isFilterByUnfilled" limit="prompts.limit"></grid>
+
+<div ng-hide="!prompts.hidden" class="pv5 tc w-100">
+  <spinner name="spinner" img-src="/images/icons/loading.gif" on-loaded="prompts.loadPrompts()"></spinner>
+</div>
+
+<div ng-show="!prompts.hidden">
+  <grid type="prompt" content="prompts.all" width="grid" search="prompts.q" filled="prompts.isFilterByFilled" unfilled="prompts.isFilterByUnfilled" limit="prompts.limit"></grid>
+</div>
 </div>

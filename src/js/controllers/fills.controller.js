@@ -11,16 +11,33 @@ function FillsIndexCtrl(Fill) {
   vm.all = Fill.query();
 }
 
-FillsShowCtrl.$inject = ['Fill', '$stateParams'];
-function FillsShowCtrl(Fill, $stateParams) {
+FillsShowCtrl.$inject = ['Fill', '$stateParams', 'spinnerService', '$timeout', '$rootScope'];
+function FillsShowCtrl(Fill, $stateParams, spinnerService, $timeout, $rootScope) {
   const vm = this;
-  vm.fill = Fill.get({ id: $stateParams.id });
+  // vm.fill = Fill.get({ id: $stateParams.id });
+  vm.hidden = true;
+  vm.load = function () {
+    spinnerService.show('spinner');
+    Fill
+      .get({id: $stateParams.id})
+      .$promise
+      .then(data => {
+        $timeout(() => {
+          vm.hidden = false;
+          vm.fill = data;
+          spinnerService.hide('spinner');
+        }, 200);
+      })
+      .catch(err => {
+        console.log(err);
+        $rootScope.pageerror = err;
+      });
+  };
 }
 
 FillsNewCtrl.$inject = ['Fill', '$state', '$stateParams', '$http', 'API'];
 function FillsNewCtrl(Fill, $state, $stateParams, $http, API) {
   const vm = this;
-  vm.create = fillsCreate;
   console.log($stateParams.prompt);
   $http
     .get(`${API}/prompts/${$stateParams.prompt}`)
@@ -29,7 +46,7 @@ function FillsNewCtrl(Fill, $state, $stateParams, $http, API) {
       // console.log('FILLS: ', vm.all);
     });
   vm.fill = {};
-  function fillsCreate() {
+  vm.create = function() {
     vm.fill.prompt_id = vm.prompt.id;
     Fill
       .save(vm.fill)
@@ -38,7 +55,7 @@ function FillsNewCtrl(Fill, $state, $stateParams, $http, API) {
         console.log(fill);
         $state.go('fillsShow', { id: fill.id });
       });
-  }
+  };
 }
 
 FillsIndexUserCtrl.$inject = ['Fill', '$stateParams', '$http', 'API', 'User'];

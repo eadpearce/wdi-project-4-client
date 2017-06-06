@@ -22,38 +22,45 @@ function filterByTags() {
   };
 }
 
-PromptsIndexCtrl.$inject = ['Prompt', 'filterFilter', '$scope'];
-function PromptsIndexCtrl(Prompt, filterFilter, $scope) {
+PromptsIndexCtrl.$inject = ['Prompt', 'filterFilter', '$scope', 'spinnerService', '$timeout'];
+function PromptsIndexCtrl(Prompt, filterFilter, $scope, spinnerService, $timeout) {
   const vm = this;
+  // hide stuff until everything has loaded
+  vm.hidden = true;
+  vm.loadPrompts = function () {
+    spinnerService.show('spinner');
+    Prompt
+      .query()
+      .$promise
+      .then(data => {
+        $timeout(() => {
+          vm.hidden = false;
+          vm.all = data;
+          spinnerService.hide('spinner');
+        }, 200);
+      })
+      .catch(err => console.log(err));
+  };
+
+  // SEARCH OPTIONS
   vm.limit = 100;
+  vm.isFilteredByFilled = false;
+  vm.isFilteredByUnfilled = false;
+  vm.searchIsHidden = true;
   vm.clearSearch = function clearSearch() {
     if (!vm.clearedSearch) vm.clearedSearch = true;
     else vm.clearedSearch = false;
   };
-  vm.isFilteredByFilled = false;
-  vm.isFilteredByUnfilled = false;
-  vm.all = Prompt.query();
-  vm.searchIsHidden = true;
   vm.searchOptions = function searchOptions() {
     if (vm.searchIsHidden) vm.searchIsHidden = false;
     else vm.searchIsHidden = true;
   };
-
   function filterPrompts() {
     const params = { title: vm.q };
-    // if (vm.useStrength) params.strength = vm.strength;
-    // if (vm.useRoast) params.roast = vm.roast;
     vm.filtered = filterFilter(vm.all, params);
   }
-
-  // filterCoffee();
-  // watch multiple different values
   $scope.$watchGroup([
     () => vm.q
-    // () => vm.strength,
-    // () => vm.useStrength,
-    // () => vm.roast,
-    // () => vm.useRoast
   ], filterPrompts);
 }
 
@@ -74,26 +81,67 @@ function PromptsNewCtrl(Prompt, $state) {
   }
 }
 
-PromptsShowCtrl.$inject = ['Prompt', '$stateParams'];
-function PromptsShowCtrl(Prompt, $stateParams) {
+PromptsShowCtrl.$inject = ['Prompt', '$stateParams', 'spinnerService', '$http', '$timeout'];
+function PromptsShowCtrl(Prompt, $stateParams, spinnerService, $http, $timeout) {
   const vm = this;
-  vm.prompt = Prompt.get({ id: $stateParams.id });
+  // vm.prompt = Prompt.get({ id: $stateParams.id });
+  vm.hidden = true;
+  vm.loadPrompts = function () {
+    spinnerService.show('spinner');
+    Prompt
+      .get({id: $stateParams.id})
+      .$promise
+      .then(data => {
+        $timeout(() => {
+          vm.hidden = false;
+          vm.prompt = data;
+          spinnerService.hide('spinner');
+        }, 200);
+      })
+      .catch(err => {
+        console.log(err);
+        vm.error = err;
+      });
+  };
 }
 
-PromptsIndexUserCtrl.$inject = ['Prompt', '$stateParams', 'User'];
-function PromptsIndexUserCtrl(Prompt, $stateParams, User) {
+PromptsIndexUserCtrl.$inject = ['Prompt', '$stateParams', 'User', 'API', 'spinnerService', '$http', '$timeout'];
+function PromptsIndexUserCtrl(Prompt, $stateParams, User, API, spinnerService, $http, $timeout) {
   const vm = this;
   vm.user = User.get({ id: $stateParams.user });
-  vm.all = Prompt.query({ user_id: $stateParams.userId });
+  // vm.all = Prompt.query({ user_id: $stateParams.userId });
+  vm.hidden = true;
+  vm.loadPrompts = function () {
+    spinnerService.show('spinner');
+    $http
+      .get(`${API}/users/${$stateParams.user}/prompts`)
+      .then(response => {
+        $timeout(() => {
+          vm.hidden = false;
+          vm.all = response.data;
+          spinnerService.hide('spinner');
+        }, 200);
+      })
+      .catch(err => console.log(err));
+  };
 }
 
-PromptsIndexTagCtrl.$inject = ['Prompt', '$stateParams', '$http', 'API', 'Tag'];
-function PromptsIndexTagCtrl(Prompt, $stateParams, $http, API, Tag) {
+PromptsIndexTagCtrl.$inject = ['Prompt', '$stateParams', '$http', 'API', 'Tag', 'spinnerService', '$timeout'];
+function PromptsIndexTagCtrl(Prompt, $stateParams, $http, API, Tag, spinnerService, $timeout) {
   const vm = this;
   vm.tag = Tag.get({ id: $stateParams.tag });
-  $http
-    .get(`${API}/tags/${$stateParams.tag}/prompts`)
-    .then(response => {
-      vm.all = response.data;
-    });
+  vm.hidden = true;
+  vm.loadPrompts = function () {
+    spinnerService.show('spinner');
+    $http
+      .get(`${API}/tags/${$stateParams.tag}/prompts`)
+      .then(response => {
+        $timeout(() => {
+          vm.hidden = false;
+          vm.all = response.data;
+          spinnerService.hide('spinner');
+        }, 200);
+      })
+      .catch(err => console.log(err));
+  };
 }

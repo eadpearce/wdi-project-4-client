@@ -6,8 +6,7 @@ LoginCtrl.$inject = ['User', 'CurrentUserService', '$state'];
 function LoginCtrl(User, CurrentUserService, $state) {
   const vm = this;
 
-  vm.login = login;
-  function login() {
+  vm.login = function () {
     User
       .login(vm.user)
       .$promise
@@ -18,5 +17,5 @@ function LoginCtrl(User, CurrentUserService, $state) {
       }, err => {
         console.log('ERROR: ',err);
       });
-  }
+  };
 }
