@@ -1,4 +1,6 @@
-<div ng-hide="!fills.hidden" class="pv3 tc w-100">
+<error ng-if="fills.error.status" style="main.container" status="fills.error.status"></error>
+
+<div ng-hide="!fills.hidden || fills.error.status" class="pv3 tc w-100">
   <spinner name="spinner" img-src="/images/icons/loading.gif" on-loaded="fills.load()"></spinner>
 </div>
 

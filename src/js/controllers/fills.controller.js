@@ -11,8 +11,8 @@ function FillsIndexCtrl(Fill) {
   vm.all = Fill.query();
 }
 
-FillsShowCtrl.$inject = ['Fill', '$stateParams', 'spinnerService', '$timeout', '$rootScope'];
-function FillsShowCtrl(Fill, $stateParams, spinnerService, $timeout, $rootScope) {
+FillsShowCtrl.$inject = ['Fill', '$stateParams', 'spinnerService', '$timeout'];
+function FillsShowCtrl(Fill, $stateParams, spinnerService, $timeout) {
   const vm = this;
   // vm.fill = Fill.get({ id: $stateParams.id });
   vm.hidden = true;
@@ -30,21 +30,32 @@ function FillsShowCtrl(Fill, $stateParams, spinnerService, $timeout, $rootScope)
       })
       .catch(err => {
         console.log(err);
-        $rootScope.pageerror = err;
+        vm.error = err;
       });
   };
 }
 
-FillsNewCtrl.$inject = ['Fill', '$state', '$stateParams', '$http', 'API'];
-function FillsNewCtrl(Fill, $state, $stateParams, $http, API) {
+FillsNewCtrl.$inject = ['Fill', 'Prompt', '$state', '$stateParams', 'spinnerService', '$timeout'];
+function FillsNewCtrl(Fill, Prompt, $state, $stateParams, spinnerService, $timeout) {
   const vm = this;
-  console.log($stateParams.prompt);
-  $http
-    .get(`${API}/prompts/${$stateParams.prompt}`)
-    .then(response => {
-      vm.prompt = response.data;
-      // console.log('FILLS: ', vm.all);
+  vm.hidden = true;
+  vm.load = function() {
+    spinnerService.show('spinner');
+    Prompt
+    .get({id: $stateParams.prompt})
+    .$promise
+    .then(data => {
+      $timeout(() => {
+        vm.hidden = false;
+        vm.prompt = data;
+        spinnerService.hide('spinner');
+      }, 200);
+    })
+    .catch(err => {
+      console.log(err);
+      vm.error = err;
     });
+  };
   vm.fill = {};
   vm.create = function() {
     vm.fill.prompt_id = vm.prompt.id;
@@ -54,6 +65,10 @@ function FillsNewCtrl(Fill, $state, $stateParams, $http, API) {
       .then(fill => {
         console.log(fill);
         $state.go('fillsShow', { id: fill.id });
+      })
+      .catch(err => {
+        console.log(err);
+        vm.error = err;
       });
   };
 }

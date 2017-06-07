@@ -1,4 +1,6 @@
-<div class="ph2 ph4-ns mb0-ns">
+<error ng-if="prompts.error.status" style="main.container" status="prompts.error.status"></error>
+
+<div ng-if="!prompts.hidden" class="ph2 ph4-ns mb0-ns">
   <h1>New Prompt</h1>
   <form class="" ng-submit="prompts.create()" method="post">
     <label for="title">Title: </label>

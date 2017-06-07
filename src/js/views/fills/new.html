@@ -1,4 +1,10 @@
-<div class="ph2 ph4-ns mb0-ns">
+<error ng-if="fills.error.status" style="main.container" status="fills.error.status"></error>
+
+<div ng-hide="!fills.hidden || fills.error.status" class="pv5 tc w-100">
+  <spinner name="spinner" img-src="/images/icons/loading.gif" on-loaded="fills.load()"></spinner>
+</div>
+
+<div ng-if="!fills.hidden" class="ph2 ph4-ns mb0-ns">
   <h1>New Fill</h1>
   <h2>In response to: {{ fills.prompt.title }}</h2>
   <form class="" ng-submit="fills.create()" method="post">

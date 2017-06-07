@@ -25,7 +25,7 @@
 <div ng-class="main.container">
 
 <div ng-hide="!prompts.hidden" class="pv5 tc w-100">
-  <spinner name="spinner" img-src="/images/icons/loading.gif" on-loaded="prompts.loadPrompts()"></spinner>
+  <spinner name="spinner" img-src="/images/icons/loading.gif" on-loaded="prompts.load()"></spinner>
 </div>
 
 <div ng-show="!prompts.hidden">

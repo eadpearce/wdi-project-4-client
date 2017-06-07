@@ -1,7 +1,7 @@
 <error ng-if="prompts.error.status" style="main.container" status="prompts.error.status"></error>
 
 <div ng-hide="!prompts.hidden || prompts.error.status" class="pv5 tc w-100">
-  <spinner name="spinner" img-src="/images/icons/loading.gif" on-loaded="prompts.loadPrompts()"></spinner>
+  <spinner name="spinner" img-src="/images/icons/loading.gif" on-loaded="prompts.load()"></spinner>
 </div>
 
 <div ng-show="!prompts.hidden" ng-class="main.container">
