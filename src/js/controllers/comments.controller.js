@@ -1,8 +1,7 @@
 angular
   .module('collabApp')
   .controller('CommentsShowCtrl', CommentsShowCtrl)
-  .controller('CommentsNewPromptCtrl', CommentsNewPromptCtrl)
-  .controller('CommentsNewFillCtrl', CommentsNewFillCtrl);
+  .controller('CommentsNewPromptCtrl', CommentsNewPromptCtrl);
 
 CommentsShowCtrl.$inject = ['spinnerService', '$stateParams', '$timeout', 'Comment'];
 function CommentsShowCtrl(spinnerService, $stateParams, $timeout, Comment) {
@@ -50,35 +49,6 @@ function CommentsNewPromptCtrl(Prompt, Comment, $state, $stateParams) {
       .then(comment => {
         console.log(comment);
         $state.go('promptsShow', { id: vm.comment.prompt_id });
-      })
-      .catch(err => {
-        console.log(err);
-        vm.error = err;
-      });
-  };
-}
-CommentsNewFillCtrl.$inject = ['Fill', 'Comment', '$state', '$stateParams'];
-function CommentsNewFillCtrl(Fill, Comment, $state, $stateParams) {
-  const vm = this;
-  Fill
-    .get({id: $stateParams.fill})
-    .$promise
-    .then(data => {
-      vm.parent = data;
-    })
-    .catch(err => {
-      console.log(err);
-      vm.error = err;
-    });
-  vm.comment = {};
-  vm.create = function() {
-    vm.comment.fill_id = vm.parent.id;
-    Comment
-      .save(vm.comment)
-      .$promise
-      .then(comment => {
-        console.log(comment);
-        $state.go('fillsShow', { id: vm.comment.fill_id });
       })
       .catch(err => {
         console.log(err);

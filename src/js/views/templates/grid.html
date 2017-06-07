@@ -3,6 +3,8 @@
     'w-50-ns w-100 fl ph0': width === 'half',
     'mb5': type === 'fill'
   }">
+
+  <!-- USER PAGE -->
   <h3 ng-if="page === 'user'">
     <span ng-if="type === 'prompt'">Recent prompts.
       <a href="" class="link underline dark-green hover-green"
@@ -13,6 +15,8 @@
       ui-sref="fillsIndexUser({user: user.username})">View all</a>
     </span>
   </h3>
+    <!-- GRID STARTS HERE -->
+    <p ng-if="!content[0]">No {{type}}s yet.</p>
     <div ng-class="{
         'db fl w-third-l w-50-m w-100': width === 'grid',
         'db fl w-100': width === 'full',
@@ -52,7 +56,7 @@
     <div class="mb1">
       <!-- <span ng-repeat="tag in item.tags">{{tag.name}}</span> -->
       Tags: <span ng-if="type === 'fill'" class="pr2" ng-repeat="tag in item.tags | limitTo: 4">
-        <a href="" class="link underline dark-green hover-green" 
+        <a href="" class="link underline dark-green hover-green"
         ui-sref="fillsIndexTag({ tag: tag.id })">{{tag.name}}</a><span ng-if="$index === 3"> ...</span></span>
 
         <span ng-if="type === 'prompt'" class="pr2" ng-repeat="tag in item.tags | limitTo: 4">

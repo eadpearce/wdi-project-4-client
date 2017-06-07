@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="language" content="en">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Angular Stack Setup</title>
+  <title>colLAB</title>
   <base href="/">
   <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/apple-icon-60x60.png">
@@ -32,7 +32,8 @@
   <div class="absolute bottom-0 right-0 triangle">
   </div>
   <header class="h3">
-    <div class="menu overflow-hidden w5 db fixed pr2 pr3-ns pt2 pb3-ns pt0-ns f5 bg-white ttu tr tracked" ng-hide="main.menuIsHidden">
+    <div class="menu overflow-hidden w5 db fixed pr2 pr3-ns pt2 pb3-ns pt0-ns f5 bg-white ttu tr tracked"
+    ng-hide="main.menuIsHidden">
       <a href="" ng-click="main.showMenu()"
         class="db link pt2 dark-green hover-light-green" ng-show="loggedIn" ui-sref="promptsNew">new prompt</a>
       <a href="" ng-click="main.showMenu()"
@@ -54,7 +55,7 @@
         <a ui-sref="home" href=""><logo></logo></a>
       </div>
       <div class="dtc v-mid pr2 pr3-ns">
-        <button class="db fr ttu tr tracked f6 bd ml3-ns bg-white ba b--black br-pill ph2 h2" type="button" ng-click="main.showMenu()" name="button">menu</button>
+        <button class="db fr ttu tr tracked f6 ml3-ns h2" ng-class="main.button" type="button" ng-click="main.showMenu()" name="button">menu</button>
           <div ng-if="!user.username" class="db fr ttu tr tracked f5 pr2 pv2 h2">Not logged in</div>
           <div ng-if="user.username" class="db fr ttu tr tracked f5 pr2 pv2 h2">Hello
             <a class="link dark-green hover-light-green" href="" ui-sref="usersShow({id: user.username})">{{user.username}}</a></div>

@@ -2,7 +2,7 @@
   <spinner name="spinner" img-src="/images/icons/loading.gif" on-loaded="fills.load()"></spinner>
 </div>
 
-<div ng-if="!fills.hidden" class="ph2 ph4-ns mb0-ns">
+<div ng-if="!fills.hidden" ng-class="main.form">
   <h1>New Fill</h1>
   <h2>In response to: {{ fills.prompt.title }}</h2>
 
@@ -10,14 +10,14 @@
 
     <label class="db b f5 pv2" for="title">Title: </label>
     <input type="text"
-    class="db br-pill ph2"
+    class="db br-pill ph2 w-100 br3"
     ng-model="fills.fill.title"
     required
     name="title" value="">
 
     <label class="db b f5 pv2" for="body">Body: </label>
     <textarea rows="20" cols="60" type="text"
-    class="db br3"
+    class="db br3 w-100 br3"
     ng-model="fills.fill.body"
     required
     name="body"></textarea>
@@ -28,7 +28,7 @@
 
     <label class="db b f5 pv2" for="tagged_as">Tags: </label>
     <input type="text"
-    class="db br-pill ph2"
+    class="db br-pill ph2 w-100 br3"
     ng-model="fills.fill.tagged_as" name="tagged_as" value="">
 
     <input class="db b ba b--black bg-white f5 mt3 pv2 ph3 br-pill" type="submit" name="" value="Submit">

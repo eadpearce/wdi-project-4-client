@@ -65,6 +65,14 @@ button:disabled:hover { color: #aaa }
   height: 5rem;
   opacity: 1;
 }
+.comment-box.ng-hide {
+  animation: 0.1s expandOutBig linear;
+}
+.comment-box.ng-hide-remove {
+  animation: 0.1s expandInBig linear;
+  height: auto;
+  opacity: 1;
+}
 
 // PROMPTS SEARCH BOX
 .search-box {
@@ -97,6 +105,28 @@ button:disabled:hover { color: #aaa }
     opacity: 0;
   }
   25% { height: 2rem; }
+  100% {
+    height: auto;
+    opacity: 1;
+  }
+}
+@keyframes expandOutBig {
+  0% {
+    height: auto;
+    opacity: 1;
+  }
+  75% { height: 5rem; }
+  100% {
+    height: 0;
+    opacity: 0;
+  }
+}
+@keyframes expandInBig {
+  0% {
+    height: 0;
+    opacity: 0;
+  }
+  25% { height: 5rem; }
   100% {
     height: auto;
     opacity: 1;

@@ -12,8 +12,8 @@ function FillsIndexCtrl(Fill) {
   vm.all = Fill.query();
 }
 
-FillsShowCtrl.$inject = ['Fill', '$stateParams', 'spinnerService'];
-function FillsShowCtrl(Fill, $stateParams, spinnerService) {
+FillsShowCtrl.$inject = ['Fill', '$stateParams', 'spinnerService', 'Comment'];
+function FillsShowCtrl(Fill, $stateParams, spinnerService, Comment) {
   const vm = this;
   vm.hidden = true;
   vm.load = function () {
@@ -25,6 +25,31 @@ function FillsShowCtrl(Fill, $stateParams, spinnerService) {
         vm.hidden = false;
         vm.fill = data;
         spinnerService.hide('spinner');
+      })
+      .catch(err => {
+        console.log(err);
+        vm.error = err;
+      });
+  };
+  vm.showCommentForm = false;
+  vm.newComment = function() {
+    if (!vm.showCommentForm) vm.showCommentForm = true;
+    else vm.showCommentForm = false;
+  };
+
+  vm.comment = {};
+  vm.createComment = function() {
+    console.log('hi');
+    vm.comment.fill_id = vm.fill.id;
+    Comment
+      .save(vm.comment)
+      .$promise
+      .then(comment => {
+        vm.fill.comments.push(comment);
+        vm.showCommentForm = false;
+        vm.comment = {};
+        console.log(comment);
+        // $state.go('fillsShow', { id: vm.comment.fill_id });
       })
       .catch(err => {
         console.log(err);

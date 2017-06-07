@@ -8,13 +8,36 @@
   <h1>{{fills.fill.title}}</h1>
   <h3>By <a href="" ng-class="main.link" ui-sref="usersShow({ id: fills.fill.user.username })">{{fills.fill.user.username}}</a></h3>
   <p><b>Original prompt: </b><a href="" ng-class="main.link" ui-sref="promptsShow({ id: fills.fill.prompt.id })">{{fills.fill.prompt.title}}</a></p>
-  <p>{{fills.fill.body}}</p>
+  <p class="bg-white ph2 pv3 lh-copy br3 b--moon-gray ba">{{fills.fill.body}}</p>
   <p><b>Tagged as: </b><a class="pr2" ng-repeat="tag in fills.fill.tags" href="" ui-sref="promptsIndexTag({ tag: tag.id })">{{tag.name}}</a>
   </p>
 
-  <h4 class="db mv2 fl">Comments </h4>
-  <a class="db mv2 fr" ng-class="main.link" ui-sref="commentsNewFill({ fill: fills.fill.id })" href="">Add a comment</a>
-  <div class="fl w-100" ng-if="!fills.fill.comments[0]">No comments yet.</div>
+  <h4 class="mt2 mb3 fl w-50">Comments </h4>
+  <div class="mt2 mb3 fr w-50 tr" ng-show="!fills.showCommentForm">
+    <a class="link dark-green hover-green"
+    ng-click="fills.newComment()" href="">Add a comment</a>
+  </div>
+
+  <div class="mt2 mb3 fr w-50 tr" ng-show="fills.showCommentForm">
+    <a class="link red hover-hot-pink"
+    ng-click="fills.newComment()" href="">Cancel</a>
+  </div>
+
+  <div ng-show="fills.showCommentForm" class="comment-box cf w-100 mb3">
+    <h3 class="mt0 mb0">New Comment</h3>
+    <h4>In response to: {{ content.title }}</h4>
+    <form name="newCommentForm" class="" ng-submit="fills.createComment()" method="post" novalidate>
+      <textarea rows="10" cols="60" type="text"
+      class="db w-100 br3"
+      ng-model="fills.comment.body"
+      required
+      name="body"></textarea>
+      <input ng-class="main.button" class="mt3" type="submit" name="" value="Submit">
+    </form>
+    <p ng-if="fills.error.status" class="red">Please check all fields and try again.</p>
+  </div>
+
+  <div class="fl w-100" ng-if="!fills.fill.comments[0] && !fills.showCommentForm">No comments yet.</div>
   <comments ng-if="fills.fill.comments[0]" content="fills.fill.comments"></comments>
 
 </div>

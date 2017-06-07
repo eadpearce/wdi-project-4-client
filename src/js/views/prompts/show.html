@@ -19,8 +19,9 @@
     </li>
   </ul>
 
-  <h4>Comments: </h4>
-  <p ng-if="!prompts.prompt.comments[0]">No comments yet. <a ui-sref="commentsNewPrompt({ prompt: prompts.prompt.id })" href="">Add one.</a></p>
+  <h4 class="db mv2 fl">Comments </h4>
+  <a class="db mv2 fr" ng-class="main.link" ui-sref="commentsNewPrompt({ prompt: prompts.prompt.id })" href="">Add a comment</a>
+  <div class="fl w-100" ng-if="!prompts.prompt.comments[0]">No comments yet.</div>
   <comments ng-if="prompts.prompt.comments[0]" content="prompts.prompt.comments"></comments>
 
 </div>
