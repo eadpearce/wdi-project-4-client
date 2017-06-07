@@ -16,7 +16,8 @@ function grid() {
     search: '=',
     filled: '=',
     unfilled: '=',
-    limit: '='
+    limit: '=',
+    user: '='
   };
   return directive;
 }

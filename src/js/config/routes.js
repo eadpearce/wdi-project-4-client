@@ -70,6 +70,12 @@ function Router($stateProvider, $urlRouterProvider, $locationProvider) {
       controller: 'FillsIndexUserCtrl',
       controllerAs: 'fills'
     })
+    .state('fillsIndexTag', {
+      url: '/tags/:tag/fills',
+      templateUrl: '/js/views/fills/indexbytag.html',
+      controller: 'FillsIndexTagCtrl',
+      controllerAs: 'fills'
+    })
     .state('fillsIndex', {
       url: '/fills',
       templateUrl: '/js/views/fills/index.html',

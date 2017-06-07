@@ -2,6 +2,7 @@ angular
   .module('collabApp')
   .controller('FillsIndexCtrl', FillsIndexCtrl)
   .controller('FillsIndexUserCtrl', FillsIndexUserCtrl)
+  .controller('FillsIndexTagCtrl', FillsIndexTagCtrl)
   .controller('FillsNewCtrl', FillsNewCtrl)
   .controller('FillsShowCtrl', FillsShowCtrl);
 
@@ -11,10 +12,9 @@ function FillsIndexCtrl(Fill) {
   vm.all = Fill.query();
 }
 
-FillsShowCtrl.$inject = ['Fill', '$stateParams', 'spinnerService', '$timeout'];
-function FillsShowCtrl(Fill, $stateParams, spinnerService, $timeout) {
+FillsShowCtrl.$inject = ['Fill', '$stateParams', 'spinnerService'];
+function FillsShowCtrl(Fill, $stateParams, spinnerService) {
   const vm = this;
-  // vm.fill = Fill.get({ id: $stateParams.id });
   vm.hidden = true;
   vm.load = function () {
     spinnerService.show('spinner');
@@ -22,11 +22,9 @@ function FillsShowCtrl(Fill, $stateParams, spinnerService, $timeout) {
       .get({id: $stateParams.id})
       .$promise
       .then(data => {
-        $timeout(() => {
-          vm.hidden = false;
-          vm.fill = data;
-          spinnerService.hide('spinner');
-        }, 200);
+        vm.hidden = false;
+        vm.fill = data;
+        spinnerService.hide('spinner');
       })
       .catch(err => {
         console.log(err);
@@ -35,8 +33,8 @@ function FillsShowCtrl(Fill, $stateParams, spinnerService, $timeout) {
   };
 }
 
-FillsNewCtrl.$inject = ['Fill', 'Prompt', '$state', '$stateParams', 'spinnerService', '$timeout'];
-function FillsNewCtrl(Fill, Prompt, $state, $stateParams, spinnerService, $timeout) {
+FillsNewCtrl.$inject = ['Fill', 'Prompt', '$state', '$stateParams', 'spinnerService'];
+function FillsNewCtrl(Fill, Prompt, $state, $stateParams, spinnerService) {
   const vm = this;
   vm.hidden = true;
   vm.load = function() {
@@ -45,11 +43,9 @@ function FillsNewCtrl(Fill, Prompt, $state, $stateParams, spinnerService, $timeo
     .get({id: $stateParams.prompt})
     .$promise
     .then(data => {
-      $timeout(() => {
-        vm.hidden = false;
-        vm.prompt = data;
-        spinnerService.hide('spinner');
-      }, 200);
+      vm.hidden = false;
+      vm.prompt = data;
+      spinnerService.hide('spinner');
     })
     .catch(err => {
       console.log(err);
@@ -63,7 +59,6 @@ function FillsNewCtrl(Fill, Prompt, $state, $stateParams, spinnerService, $timeo
       .save(vm.fill)
       .$promise
       .then(fill => {
-        console.log(fill);
         $state.go('fillsShow', { id: fill.id });
       })
       .catch(err => {
@@ -73,27 +68,61 @@ function FillsNewCtrl(Fill, Prompt, $state, $stateParams, spinnerService, $timeo
   };
 }
 
-FillsIndexUserCtrl.$inject = ['Fill', '$stateParams', '$http', 'API', 'User'];
-function FillsIndexUserCtrl(Fill, $stateParams, $http, API, User) {
+FillsIndexUserCtrl.$inject = ['Fill', '$stateParams', 'User', 'spinnerService'];
+function FillsIndexUserCtrl(Fill, $stateParams, User, spinnerService) {
   const vm = this;
-  // console.log('FILL PARAMS: ',$stateParams.author);
-  vm.user = User.get({ id: $stateParams.user });
-  $http
-    .get(`${API}/users/${$stateParams.user}/fills`)
-    .then(fills => {
-      vm.all = fills.data;
-      // console.log('FILLS: ', vm.all);
+  vm.hidden = true;
+  vm.load = function() {
+    spinnerService.show('spinner');
+    User.get({ id: $stateParams.user }).$promise
+    .then(user => {
+      vm.user = user;
+    })
+    .catch(err => {
+      console.log(err);
+      vm.error = err;
     });
+    Fill
+      .query({ user_id: $stateParams.user })
+      .$promise
+      .then(fills => {
+        spinnerService.hide('spinner');
+        vm.hidden = false;
+        vm.all = fills;
+      })
+      .catch(err => {
+        console.log(err);
+        vm.error = err;
+      });
+  };
+
 }
 
-FillsIndexPromptCtrl.$inject = ['Fill', '$stateParams', '$http', 'API'];
-function FillsIndexPromptCtrl(Fill, $stateParams, $http, API) {
+FillsIndexTagCtrl.$inject = ['Fill', 'Tag', '$stateParams', 'spinnerService', '$http', 'API'];
+function FillsIndexTagCtrl(Fill, Tag, $stateParams, spinnerService, $http, API) {
   const vm = this;
-  // console.log('FILL PARAMS: ',$stateParams.author);
-  $http
-    .get(`${API}/prompts/${$stateParams.prompt}/fills`)
-    .then(fills => {
-      vm.all = fills.data;
-      // console.log('FILLS: ', vm.all);
-    });
+  vm.hidden = true;
+  vm.load = function() {
+    spinnerService.show('spinner');
+    Tag
+      .get({id: $stateParams.tag})
+      .$promise
+      .then(tag => vm.tag = tag)
+      .catch(err => {
+        console.log(err);
+        vm.error = err;
+      });
+    $http
+      .get(`${API}/tags/${$stateParams.tag}/fills`)
+      .then(response => {
+        vm.hidden = false;
+        vm.all = response.data;
+        spinnerService.hide('spinner');
+      })
+      .catch(err => {
+        console.log(err);
+        vm.error = err;
+      });
+  };
+
 }

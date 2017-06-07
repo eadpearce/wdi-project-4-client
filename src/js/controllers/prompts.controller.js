@@ -6,22 +6,20 @@ angular
   .controller('PromptsIndexTagCtrl', PromptsIndexTagCtrl)
   .controller('PromptsIndexUserCtrl', PromptsIndexUserCtrl);
 
-PromptsIndexCtrl.$inject = ['Prompt', 'filterFilter', '$scope', 'spinnerService', '$timeout'];
-function PromptsIndexCtrl(Prompt, filterFilter, $scope, spinnerService, $timeout) {
+PromptsIndexCtrl.$inject = ['Prompt', 'filterFilter', '$scope', 'spinnerService'];
+function PromptsIndexCtrl(Prompt, filterFilter, $scope, spinnerService) {
   const vm = this;
   // hide stuff until everything has loaded
   vm.hidden = true;
-  vm.loadPrompts = function () {
+  vm.load = function () {
     spinnerService.show('spinner');
     Prompt
       .query()
       .$promise
       .then(data => {
-        $timeout(() => {
-          vm.hidden = false;
-          vm.all = data;
-          spinnerService.hide('spinner');
-        }, 200);
+        vm.hidden = false;
+        vm.all = data;
+        spinnerService.hide('spinner');
       })
       .catch(err => console.log(err));
   };
@@ -59,12 +57,16 @@ function PromptsNewCtrl(Prompt, $state) {
       .$promise
       .then(prompt => {
         $state.go('promptsShow', { id: prompt.id });
+      })
+      .catch(err => {
+        console.log(err);
+        vm.error = err;
       });
   }
 }
 
-PromptsShowCtrl.$inject = ['Prompt', '$stateParams', 'spinnerService', '$http', '$timeout'];
-function PromptsShowCtrl(Prompt, $stateParams, spinnerService, $http, $timeout) {
+PromptsShowCtrl.$inject = ['Prompt', '$stateParams', 'spinnerService'];
+function PromptsShowCtrl(Prompt, $stateParams, spinnerService) {
   const vm = this;
   // vm.prompt = Prompt.get({ id: $stateParams.id });
   vm.hidden = true;
@@ -74,11 +76,9 @@ function PromptsShowCtrl(Prompt, $stateParams, spinnerService, $http, $timeout) 
       .get({id: $stateParams.id})
       .$promise
       .then(data => {
-        $timeout(() => {
-          vm.hidden = false;
-          vm.prompt = data;
-          spinnerService.hide('spinner');
-        }, 200);
+        vm.hidden = false;
+        vm.prompt = data;
+        spinnerService.hide('spinner');
       })
       .catch(err => {
         console.log(err);
@@ -87,8 +87,8 @@ function PromptsShowCtrl(Prompt, $stateParams, spinnerService, $http, $timeout) 
   };
 }
 
-PromptsIndexUserCtrl.$inject = ['Prompt', '$stateParams', 'User', 'API', 'spinnerService', '$timeout'];
-function PromptsIndexUserCtrl(Prompt, $stateParams, User, API, spinnerService, $timeout) {
+PromptsIndexUserCtrl.$inject = ['Prompt', '$stateParams', 'User', 'API', 'spinnerService'];
+function PromptsIndexUserCtrl(Prompt, $stateParams, User, API, spinnerService) {
   const vm = this;
   vm.user = User.get({ id: $stateParams.user });
   // vm.all = Prompt.query({ user_id: $stateParams.userId });
@@ -96,14 +96,12 @@ function PromptsIndexUserCtrl(Prompt, $stateParams, User, API, spinnerService, $
   vm.load = function () {
     spinnerService.show('spinner');
     Prompt
-      .get({user_id: $stateParams.user})
+      .query({user_id: $stateParams.user})
       .$promise
-      .then(response => {
-        $timeout(() => {
-          vm.hidden = false;
-          vm.all = response.data;
-          spinnerService.hide('spinner');
-        }, 200);
+      .then(data => {
+        vm.hidden = false;
+        vm.all = data;
+        spinnerService.hide('spinner');
       })
       .catch(err => {
         console.log(err);
@@ -112,21 +110,28 @@ function PromptsIndexUserCtrl(Prompt, $stateParams, User, API, spinnerService, $
   };
 }
 
-PromptsIndexTagCtrl.$inject = ['Prompt', '$stateParams', '$http', 'API', 'Tag', 'spinnerService', '$timeout'];
-function PromptsIndexTagCtrl(Prompt, $stateParams, $http, API, Tag, spinnerService, $timeout) {
+PromptsIndexTagCtrl.$inject = ['Prompt', '$stateParams', 'Tag', 'spinnerService', '$http', 'API'];
+function PromptsIndexTagCtrl(Prompt, $stateParams, Tag, spinnerService, $http, API) {
   const vm = this;
-  vm.tag = Tag.get({ id: $stateParams.tag });
   vm.hidden = true;
   vm.load = function () {
     spinnerService.show('spinner');
-    Prompt
-      .get({tag_id: $stateParams.tag})
+    Tag
+      .get({ id: $stateParams.tag })
+      .$promise
+      .then(tag => {
+        vm.tag = tag;
+      })
+      .catch(err => {
+        console.log(err);
+        vm.error = err;
+      });
+    $http
+      .get(`${API}/tags/${$stateParams.tag}/prompts`)
       .then(response => {
-        $timeout(() => {
-          vm.hidden = false;
-          vm.all = response.data;
-          spinnerService.hide('spinner');
-        }, 200);
+        vm.hidden = false;
+        vm.all = response.data;
+        spinnerService.hide('spinner');
       })
       .catch(err => {
         console.log(err);

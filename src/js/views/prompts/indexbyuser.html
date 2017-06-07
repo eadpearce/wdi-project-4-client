@@ -1,3 +1,5 @@
+<error ng-if="prompts.error.status" style="main.container" status="prompts.error.status"></error>
+
 <div class="mb5 mb0-ns bt b--moon-gray bg-white bb w-100 ph2 ph4-ns pt2 pb2">
   <div class="dt w-100">
     <div class="dtc v-mid">
@@ -10,7 +12,6 @@
       </div>
     </div>
   </div>
-
 <div ng-hide="!prompts.hidden" class="pv3 tc w-100">
   <spinner name="spinner" img-src="/images/icons/loading.gif" on-loaded="prompts.load()"></spinner>
 </div>

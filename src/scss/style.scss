@@ -5,10 +5,21 @@ body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-// .bg-dark-green { background-color: #066d0b; }
-// .bg-green { background-color: #1bba23; }
-// .bg-light-green { background-color: #b2ffb6; }
-// .bg-lightest-green { background-color: #e2ffe4; }
+// FORM VALIDATION
+input.ng-valid { border: 1px solid #1bba23 }
+input.ng-invalid.ng-touched { border: 1px solid red }
+input.ng-pristine { border: 1px solid black }
+textarea.ng-valid { border: 1px solid #1bba23 }
+textarea.ng-invalid.ng-touched { border: 1px solid red }
+textarea.ng-pristine { border: 1px solid black }
+
+// COLOURS
+// dark-green     #066d0b
+// greeen         #1bba23
+// light-green    #b2ffb6
+// lightest-green #e2ffe4
+
+// PAGE BACKGROUND
 .triangle {
   width: 0;
   height: 0;
@@ -17,6 +28,8 @@ body {
   position: fixed;
   z-index: -1
 }
+
+// RESPONSIVE MENU
 // not phone
 @media screen and (min-width: 480px) {
   .menu {
@@ -39,9 +52,17 @@ body {
     border-top: 1px solid lightgray;
   }
 }
+.menu.ng-hide {
+  animation: 0.1s expandOut linear;
+}
+.menu.ng-hide-remove {
+  animation: 0.1s expandIn linear;
+  height: 5rem;
+  opacity: 1;
+}
 
+// PROMPTS SEARCH BOX
 .search-box {
-  // height: 5rem;
   overflow: hidden;
 }
 .search-box.ng-hide {
@@ -52,14 +73,8 @@ body {
   height: 5rem;
   opacity: 1;
 }
-.menu.ng-hide {
-  animation: 0.1s expandOut linear;
-}
-.menu.ng-hide-remove {
-  animation: 0.1s expandIn linear;
-  height: 5rem;
-  opacity: 1;
-}
+
+// ANIMATIONS
 @keyframes expandOut {
   0% {
     height: auto;

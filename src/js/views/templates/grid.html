@@ -4,8 +4,12 @@
     'mb5': type === 'fill'
   }">
   <h3 ng-if="page === 'user'">
-    <span ng-if="type === 'prompt'">Recent prompts</span>
-    <span ng-if="type === 'fill'">Recent fills</span>
+    <span ng-if="type === 'prompt'">Recent prompts.
+      <a href="" ui-sref="promptsIndexUser({user: user.username})">View all</a>
+    </span>
+    <span ng-if="type === 'fill'">Recent fills.
+      <a href="" ui-sref="fillsIndexUser({user: user.username})">View all</a>
+    </span>
   </h3>
     <div ng-class="{
         'db fl w-third-l w-50-m w-100': width === 'grid',

@@ -1,5 +1,3 @@
-<error ng-if="fills.error.status" style="main.container" status="fills.error.status"></error>
-
 <div ng-hide="!fills.hidden || fills.error.status" class="pv5 tc w-100">
   <spinner name="spinner" img-src="/images/icons/loading.gif" on-loaded="fills.load()"></spinner>
 </div>
@@ -7,17 +5,30 @@
 <div ng-if="!fills.hidden" class="ph2 ph4-ns mb0-ns">
   <h1>New Fill</h1>
   <h2>In response to: {{ fills.prompt.title }}</h2>
-  <form class="" ng-submit="fills.create()" method="post">
-    <label for="title">Title: </label>
-    <input class="db" type="text"
-    ng-model="fills.fill.title" name="title" value="">
-    <label for="body">Description: </label>
-    <textarea rows="20" cols="60" class="db" type="text"
-    ng-model="fills.fill.body" name="body"></textarea>
-    <label for="tagged_as">Tags: </label>
-    <input class="db" type="text"
+
+  <form name="newFillForm" ng-submit="fills.create()" method="post" novalidate>
+
+    <label class="db b f5 pv2" for="title">Title: </label>
+    <input type="text"
+    class="db br-pill ph2"
+    ng-model="fills.fill.title"
+    required
+    name="title" value="">
+
+    <label class="db b f5 pv2" for="body">Body: </label>
+    <textarea rows="20" cols="60" type="text"
+    class="db br3"
+    ng-model="fills.fill.body"
+    required
+    name="body"></textarea>
+
+    <label class="db b f5 pv2" for="tagged_as">Tags: </label>
+    <input type="text"
+    class="db br-pill ph2"
     ng-model="fills.fill.tagged_as" name="tagged_as" value="">
-    <input type="submit" name="" value="Submit">
+
+    <input class="db b ba b--black bg-white f5 mt3 pv2 ph3 br-pill" type="submit" name="" value="Submit">
   </form>
+  <p ng-if="fills.error.status" class="red">Please check all fields and try again.</p>
 
 </div>
