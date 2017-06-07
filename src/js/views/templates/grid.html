@@ -5,10 +5,12 @@
   }">
   <h3 ng-if="page === 'user'">
     <span ng-if="type === 'prompt'">Recent prompts.
-      <a href="" ui-sref="promptsIndexUser({user: user.username})">View all</a>
+      <a href="" class="link underline dark-green hover-green"
+      ui-sref="promptsIndexUser({user: user.username})">View all</a>
     </span>
     <span ng-if="type === 'fill'">Recent fills.
-      <a href="" ui-sref="fillsIndexUser({user: user.username})">View all</a>
+      <a href="" class="link underline dark-green hover-green"
+      ui-sref="fillsIndexUser({user: user.username})">View all</a>
     </span>
   </h3>
     <div ng-class="{
@@ -23,7 +25,7 @@
       filter: { filled: filled } |
       filter: { unfilled: unfilled } |
       orderBy: 'created_at': true |
-      limitTo: limit ))">
+      limitTo: limit : pagination )) track by $index">
 
     <div class="pa2 bg-white"
       ng-class="{
@@ -33,27 +35,36 @@
       }">
 
     <h3 class="f4 mt0 mb2">
-      <a ng-if="type === 'fill'" ui-sref="fillsShow({ id: item.id })" href="">
+      <a ng-if="type === 'fill'" class="link underline dark-green hover-green"
+      ui-sref="fillsShow({ id: item.id })" href="">
         <span ng-if="item.title" ng-bind="item.title | limitTo: 30"></span> <span ng-if="item.title.length > 30">...</span><span ng-if="!item.title">[Untitled]</span></a>
-      <a ng-if="type === 'prompt'" ui-sref="promptsShow({ id: item.id })" href="">
+
+      <a ng-if="type === 'prompt'" class="link underline dark-green hover-green"
+      ui-sref="promptsShow({ id: item.id })" href="">
         <span ng-if="item.title" ng-bind="item.title | limitTo: 30"></span><span ng-if="item.title.length > 30">...</span><span ng-if="!item.title">[Untitled]</span></a>
+
         <span ng-if="item.fills.length === 1">(1 fill)</span>
         <span ng-if="item.fills.length > 1">({{item.fills.length}} fills)</span>
     </h3>
+
     <p class="mt0 mb1">{{item.date_created}}</p>
+
     <div class="mb1">
       <!-- <span ng-repeat="tag in item.tags">{{tag.name}}</span> -->
-
       Tags: <span ng-if="type === 'fill'" class="pr2" ng-repeat="tag in item.tags | limitTo: 4">
-        <a ui-sref="fillsIndexTag({ tag: tag.id })"
-          href="">{{tag.name}}</a><span ng-if="$index === 3"> ...</span></span>
+        <a href="" class="link underline dark-green hover-green" 
+        ui-sref="fillsIndexTag({ tag: tag.id })">{{tag.name}}</a><span ng-if="$index === 3"> ...</span></span>
+
         <span ng-if="type === 'prompt'" class="pr2" ng-repeat="tag in item.tags | limitTo: 4">
-        <a ui-sref="promptsIndexTag({ tag: tag.id })"
-          href="">{{tag.name}}</a><span ng-if="$index === 3"> ...</span></span>
+        <a href="" class="link underline dark-green hover-green"
+        ui-sref="promptsIndexTag({ tag: tag.id })">{{tag.name}}</a><span ng-if="$index === 3"> ...</span></span>
 
           <div ng-if="page !== 'user'" class="">
-            Posted by: <a href="" ui-sref="usersShow({ id: item.user.username })">{{item.user.username}}</a></div>
+            Posted by: <a href="" class="link underline dark-green hover-green"
+            ui-sref="usersShow({ id: item.user.username })">{{item.user.username}}</a>
           </div>
-      </div>
+
+    </div>
+    </div>
   </div>
 </div>

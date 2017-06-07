@@ -1,9 +1,9 @@
-<div class="center w-50">
-
+<div ng-class="main.loginform">
+  <h1>Login</h1>
   <form ng-submit="login.login()">
-    <input type="email" name="email" ng-model="login.user.email" placeholder="Email">
-    <input type="password" name="password" ng-model="login.user.password" placeholder="Password">
-    <input type="submit" value="Submit">
+    <input class="w-100 db mb2 br-pill ba b--black ph2 pv1" required type="email" name="email" ng-model="login.user.email" placeholder="Email">
+    <input class="w-100 db mb2 br-pill ba b--black ph2 pv1" required type="password" name="password" ng-model="login.user.password" placeholder="Password">
+    <input class="w-100 db mb2 br-pill ba b--black bg-white ph2 pv1" required type="submit" value="Submit">
   </form>
 
 </div>

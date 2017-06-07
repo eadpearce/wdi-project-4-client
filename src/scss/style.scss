@@ -12,6 +12,8 @@ input.ng-pristine { border: 1px solid black }
 textarea.ng-valid { border: 1px solid #1bba23 }
 textarea.ng-invalid.ng-touched { border: 1px solid red }
 textarea.ng-pristine { border: 1px solid black }
+button:disabled { background-color: #eee; color: #aaa }
+button:disabled:hover { color: #aaa }
 
 // COLOURS
 // dark-green     #066d0b
@@ -40,6 +42,7 @@ textarea.ng-pristine { border: 1px solid black }
     bottom: auto;
     border-left: 1px solid lightgray;
     border-bottom: 1px solid lightgray;
+    border-bottom-left-radius: 15px;
   }
 }
 // phone
@@ -50,6 +53,8 @@ textarea.ng-pristine { border: 1px solid black }
     top: auto;
     margin-bottom: 4rem;
     border-top: 1px solid lightgray;
+    border-left: 1px solid lightgray;
+    border-top-left-radius: 15px;
   }
 }
 .menu.ng-hide {

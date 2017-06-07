@@ -22,6 +22,10 @@
     required
     name="body"></textarea>
 
+    <p class="db b f5" for="tagged_as">Tags inherited from parent prompt:
+      <span class="normal dark-green" ng-repeat="tag in fills.prompt.tags">{{tag.name}}<span ng-if="!$last">, </span></span>
+    </p>
+
     <label class="db b f5 pv2" for="tagged_as">Tags: </label>
     <input type="text"
     class="db br-pill ph2"

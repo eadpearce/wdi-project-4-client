@@ -30,16 +30,17 @@
 </head>
 <body ng-controller="MainCtrl as main" class="bg-lightest-green very-dark-green">
   <div class="absolute bottom-0 right-0 triangle">
-
   </div>
   <header class="h3">
-    <div class="menu overflow-hidden w-100 w5-ns db fixed pr2 pr3-ns pt2 pb3-ns pt0-ns f5-ns f6 bg-white ttu tr tracked" ng-hide="main.menuIsHidden">
+    <div class="menu overflow-hidden w5 db fixed pr2 pr3-ns pt2 pb3-ns pt0-ns f5 bg-white ttu tr tracked" ng-hide="main.menuIsHidden">
       <a href="" ng-click="main.showMenu()"
         class="db link pt2 dark-green hover-light-green" ng-show="loggedIn" ui-sref="promptsNew">new prompt</a>
       <a href="" ng-click="main.showMenu()"
         class="db link pt2 dark-green hover-light-green" ng-show="loggedIn" ui-sref="usersShow({ id: user.username })">my profile</a>
       <a href="" ng-click="main.showMenu()"
         class="db pt2 link dark-green hover-light-green" ui-sref="promptsIndex">all prompts</a>
+      <a href="" ng-click="main.showMenu()"
+        class="db pt2 link dark-green hover-light-green" ui-sref="fillsIndex">all fills</a>
       <a href="" ng-click="main.showMenu()"
         class="db pt2 link dark-green hover-light-green" ui-sref="tagsIndex">tags</a>
       <a href="" ng-click="main.showMenu()"
@@ -53,11 +54,14 @@
         <a ui-sref="home" href=""><logo></logo></a>
       </div>
       <div class="dtc v-mid pr2 pr3-ns">
-        <button class="db fr ttu tr tracked f6 bd ml3-ns bg-white ba b--black br-pill ph2" type="button" ng-click="main.showMenu()" name="button">menu</button>
+        <button class="db fr ttu tr tracked f6 bd ml3-ns bg-white ba b--black br-pill ph2 h2" type="button" ng-click="main.showMenu()" name="button">menu</button>
+          <div ng-if="!user.username" class="db fr ttu tr tracked f5 pr2 pv2 h2">Not logged in</div>
+          <div ng-if="user.username" class="db fr ttu tr tracked f5 pr2 pv2 h2">Hello
+            <a class="link dark-green hover-light-green" href="" ui-sref="usersShow({id: user.username})">{{user.username}}</a></div>
       </div>
     </nav>
   </header>
 
-<main class="mt0-ns nt5 mb4 mb0-ns pb5" ui-view></main>
+<main class="mt0-ns nt6 mb0 mb0-ns pb0" ui-view></main>
 </body>
 </html>

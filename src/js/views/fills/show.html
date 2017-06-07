@@ -6,14 +6,15 @@
 
 <div ng-show="!fills.hidden" ng-class="main.container">
   <h1>{{fills.fill.title}}</h1>
-  <h3>By <a href="" ui-sref="usersShow({ id: fills.fill.user.username })">{{fills.fill.user.username}}</a></h3>
-  <p><b>Original prompt: </b><a href="" ui-sref="promptsShow({ id: fills.fill.prompt.id })">{{fills.fill.prompt.title}}</a></p>
+  <h3>By <a href="" ng-class="main.link" ui-sref="usersShow({ id: fills.fill.user.username })">{{fills.fill.user.username}}</a></h3>
+  <p><b>Original prompt: </b><a href="" ng-class="main.link" ui-sref="promptsShow({ id: fills.fill.prompt.id })">{{fills.fill.prompt.title}}</a></p>
   <p>{{fills.fill.body}}</p>
   <p><b>Tagged as: </b><a class="pr2" ng-repeat="tag in fills.fill.tags" href="" ui-sref="promptsIndexTag({ tag: tag.id })">{{tag.name}}</a>
   </p>
 
-  <h4><b>Comments: </b></h4>
-  <p ng-if="!fills.fill.comments[0]">No comments yet. <a ui-sref="commentsNewFill({ fill: fills.fill.id })" href="">Add one.</a></p>
+  <h4 class="db mv2 fl">Comments </h4>
+  <a class="db mv2 fr" ng-class="main.link" ui-sref="commentsNewFill({ fill: fills.fill.id })" href="">Add a comment</a>
+  <div class="fl w-100" ng-if="!fills.fill.comments[0]">No comments yet.</div>
   <comments ng-if="fills.fill.comments[0]" content="fills.fill.comments"></comments>
 
 </div>

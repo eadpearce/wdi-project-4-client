@@ -1,17 +1,53 @@
-<div class="ph2 ph4-ns mb0-ns">
+<div ng-hide="main.loaded" class="pv5 tc w-100">
+  <spinner name="spinner" img-src="/images/icons/loading.gif" on-loaded="main.load()"></spinner>
+</div>
+
+<div ng-if="user.username && main.loaded" class="ph2 ph4-ns mb0-ns">
   <h1>Hello, {{user.username}}</h1>
   <p class="lh-copy">
-    <h3 class="normal">
-      <a class="f3 link hover-green very-dark-green" href="" ui-sref="usersShow({ id: user.username })">
-        My Profile</a>
-    </h3>
-    <h3 class="normal">
-      <a class="f3 link hover-green very-dark-green" href="" ui-sref="promptsIndexUser({ user: user.username })">
-        View My Prompts</a>
-    </h3>
-    <h3 class="normal">
-      <a class="f3 link hover-green very-dark-green" href="" ui-sref="fillsIndexUser({ user: user.username })">
-        View My Fills</a>
-    </h3>
+    <a class="db f3 link hover-green very-dark-green" href="" ui-sref="usersShow({ id: user.username })">
+      My Profile</a>
+    <a class="db f3 link hover-green very-dark-green" href="" ui-sref="promptsNew">
+      Make a new prompt</a>
+    <a class="db f3 link hover-green very-dark-green" href="" ui-sref="promptsIndexUser({ user: user.username })">
+      View my prompts</a>
+    <a class="db f3 link hover-green very-dark-green" href="" ui-sref="fillsIndexUser({ user: user.username })">
+      View my fills</a>
   </p>
+</div>
+<div ng-if="!user.username && main.loaded">
+  <section class="vh-100 dt nt5 ph2 ph4-ns">
+    <div class="dtc v-mid-ns v-top pt5 pt0-ns">
+      <h1 class="mb3 f-subheadline-ns f1">Welcome to colLAB!</h1>
+      <p class="mt0 f1-ns f2 dark-green">Stuck for ideas? <i>Too many</i> ideas? You're in the right place </p>
+    </div>
+  </section>
+
+  <section class="vh-100 w-100 bg-white dt ph2 ph4-ns">
+    <div class="dtc v-mid-ns v-top pt5 pt0-ns">
+      <h1 class="mb3 f-subheadline-ns f1">What is colLAB?</h1>
+      <p class="mt0 f1-ns f2 dark-green">ColLAB is where you can request fic for any fandom with a prompt and someone else can fill that prompt. Like an anon meme but <i>more.</i></p>
+    </div>
+  </section>
+
+  <section class="vh-100 w-100 dt ph2 ph4-ns">
+    <div class="dtc v-mid-ns v-top pt5 pt0-ns">
+      <h1 class="mb3 f-subheadline-ns f1">Searchable tags</h1>
+      <p class="mt0 f1-ns f2 dark-green">Search for fills or prompts by tags. Easily filter by filled or unfilled prompts.</p>
+    </div>
+  </section>
+
+  <section class="vh-100 w-100 bg-white dt ph2 ph4-ns">
+    <div class="dtc v-mid-ns v-top pt5 pt0-ns">
+      <h1 class="mb3 f-subheadline-ns f1">Comments</h1>
+      <p class="mt0 f1-ns f2 dark-green">Unlike anon memes, comments here are separate from prompts and fills. No more confusion!</p>
+    </div>
+  </section>
+
+  <section class="vh-100 w-100 dt ph2 ph4-ns">
+    <div class="dtc v-mid-ns v-top pt5 pt0-ns">
+      <h1 class="mb3 f-subheadline-ns f1">Sound good?</h1>
+      <p class="mt0 f1-ns f2 dark-green"><a class="link green hover-light-green" href="" ui-sref="register">Sign me up!</a></p>
+    </div>
+  </section>
 </div>

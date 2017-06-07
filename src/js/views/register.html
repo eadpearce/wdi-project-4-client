@@ -1,15 +1,21 @@
-<form ng-submit="register.register()">
-  <div>
-    <input type="text" name="username" ng-model="register.user.username" placeholder="Username">
-  </div>
-  <div>
-    <input type="email" name="email" ng-model="register.user.email" placeholder="Email">
-  </div>
-  <div>
-    <input type="password" name="password" ng-model="register.user.password" placeholder="Password">
-  </div>
-  <div>
-    <input type="password" name="passwordConfirmation" ng-model="register.user.passwordConfirmation" placeholder="Password confirmation">
-  </div>
-  <input type="submit" value="Submit" />
+
+<div ng-class="main.loginform">
+  <h1>Register</h1>
+  <form ng-submit="register.register()">
+  <input class="w-100 db mb2 br-pill ba b--black ph2 pv1" type="text" name="username" ng-model="register.user.username" placeholder="Pick a username. Make it memorable!">
+  <input class="w-100 db mb2 br-pill ba b--black ph2 pv1" type="email" name="email" ng-model="register.user.email" placeholder="Your email">
+  <input class="w-100 db mb2 br-pill ba b--black ph2 pv1" type="password" name="password" ng-model="register.user.password" placeholder="Choose a strong password">
+  <input class="w-100 db mb2 br-pill ba b--black ph2 pv1" type="password" name="passwordConfirmation" ng-model="register.user.passwordConfirmation" placeholder="Confirm your password">
+
+  <input class="w-100 db mb2 br-pill ba b--black bg-white ph2 pv1" type="submit" value="Submit" />
 </form>
+</div>
+<!-- <div class="w-25-ns w-50-m w-100 ph2 ph0-ns center mv5">
+  <h1>Login</h1>
+  <form ng-submit="login.login()">
+    <input class="w-100 db mb2 br-pill ba b--black ph2 pv1" required type="email" name="email" ng-model="login.user.email" placeholder="Email">
+    <input class="w-100 db mb2 br-pill ba b--black ph2 pv1" required type="password" name="password" ng-model="login.user.password" placeholder="Password">
+    <input class="w-100 db mb2 br-pill ba b--black bg-white ph2 pv1" required type="submit" value="Submit">
+  </form>
+
+</div> -->

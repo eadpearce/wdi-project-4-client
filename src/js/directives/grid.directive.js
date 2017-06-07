@@ -17,7 +17,8 @@ function grid() {
     filled: '=',
     unfilled: '=',
     limit: '=',
-    user: '='
+    user: '=',
+    pagination: '='
   };
   return directive;
 }

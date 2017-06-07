@@ -21,11 +21,27 @@ function PromptsIndexCtrl(Prompt, filterFilter, $scope, spinnerService) {
         vm.all = data;
         spinnerService.hide('spinner');
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        vm.error = err;
+      });
   };
 
   // SEARCH OPTIONS
-  vm.limit = 100;
+  vm.limit = 10;
+  vm.pagination = 0;
+  // if (vm.limit + vm.pagination > vm.all.length) vm.maxpage = vm.all.length;
+  vm.maxpage = vm.limit + vm.pagination;
+  if (vm.pagination + vm.limit === vm.limit) vm.max = vm.limit;
+  else vm.max = vm.all.length;
+  vm.next = function() {
+    vm.pagination = vm.pagination + vm.limit;
+    // console.log(vm.pagination);
+  };
+  vm.back = function() {
+    if (vm.pagination !== 0) vm.pagination = vm.pagination - vm.limit;
+    // console.log(vm.pagination);
+  };
   vm.isFilteredByFilled = false;
   vm.isFilteredByUnfilled = false;
   vm.searchIsHidden = true;
