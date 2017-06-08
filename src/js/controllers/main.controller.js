@@ -2,8 +2,27 @@ angular
 .module('collabApp')
 .controller('MainCtrl', MainCtrl);
 
-MainCtrl.$inject = ['$rootScope', 'CurrentUserService', '$state', '$stateParams', '$timeout', '$http', 'API', 'spinnerService'];
-function MainCtrl($rootScope, CurrentUserService, $state, $stateParams, $timeout, $http, API, spinnerService) {
+MainCtrl.$inject = [
+  '$rootScope',
+  'CurrentUserService',
+  '$state',
+  '$stateParams',
+  '$timeout',
+  '$http',
+  'API',
+  'spinnerService',
+  'User'];
+function MainCtrl(
+  $rootScope,
+  CurrentUserService,
+  $state,
+  $stateParams,
+  $timeout,
+  $http,
+  API,
+  spinnerService,
+  User
+) {
   const vm = this;
   // save the tachyons classes in one place
   vm.container = 'ph2 ph4-ns mb0-ns mt0-ns mt5 pt2';
@@ -17,8 +36,10 @@ function MainCtrl($rootScope, CurrentUserService, $state, $stateParams, $timeout
   // stop landing page flashing when logged in
   vm.hidden = true;
   vm.load = function() {
-    spinnerService.show('spinner');
+    // spinnerService.hide('spinner');
     vm.hidden = false;
+    if (!vm.user.about) vm.user.about = 'Nothing here yet.';
+    // console.log('load', vm.user);
   };
   // logout/in functions
   $rootScope.$on('loggedOut', () => {
@@ -37,6 +58,7 @@ function MainCtrl($rootScope, CurrentUserService, $state, $stateParams, $timeout
     vm.menuIsHidden = true;
     CurrentUserService.removeUser();
     $rootScope.user = null;
+    vm.user = null;
     $state.go('home');
   };
   // navbar menu
@@ -53,5 +75,16 @@ function MainCtrl($rootScope, CurrentUserService, $state, $stateParams, $timeout
   };
   vm.updateUser = function() {
     vm.showImageEdit = false;
+    vm.editedUser = {};
+    vm.editedUser.about = vm.user.about;
+    vm.editedUser.image = vm.user.image;
+    User
+      .update({ id: vm.user.username }, vm.editedUser)
+      .$promise
+      .then(() => {
+        console.log('updated');
+        // $state.go('usersShow', { id: vm.user.username });
+        vm.editedUser = {};
+      });
   };
 }

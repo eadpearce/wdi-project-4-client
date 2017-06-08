@@ -2,8 +2,18 @@ angular
   .module('collabApp')
   .controller('CommentsShowCtrl', CommentsShowCtrl);
 
-CommentsShowCtrl.$inject = ['spinnerService', '$stateParams', '$timeout', 'Comment'];
-function CommentsShowCtrl(spinnerService, $stateParams, $timeout, Comment) {
+CommentsShowCtrl.$inject = [
+  'spinnerService',
+  '$stateParams',
+  '$timeout',
+  'Comment'
+];
+function CommentsShowCtrl(
+  spinnerService,
+  $stateParams,
+  $timeout,
+  Comment
+) {
   const vm = this;
   // vm.fill = Fill.get({ id: $stateParams.id });
   vm.hidden = true;

@@ -2,8 +2,26 @@ angular
   .module('collabApp')
   .controller('UsersShowCtrl', UsersShowCtrl);
 
-UsersShowCtrl.$inject = ['User', '$stateParams', '$http', 'API', 'spinnerService', '$timeout', '$state', '$rootScope'];
-function UsersShowCtrl(User, $stateParams, $http, API, spinnerService, $timeout, $state, $rootScope) {
+UsersShowCtrl.$inject = [
+  'User',
+  '$stateParams',
+  '$http',
+  'API',
+  'spinnerService',
+  '$timeout',
+  '$state',
+  '$rootScope'
+];
+function UsersShowCtrl(
+  User,
+  $stateParams,
+  $http,
+  API,
+  spinnerService,
+  $timeout,
+  $state,
+  $rootScope
+) {
   const vm = this;
 
   vm.hidden = true;

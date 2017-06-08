@@ -1,22 +1,24 @@
-<div ng-hide="!main.hidden" class="pv5 tc w-100">
-  <spinner name="spinner" img-src="/images/icons/loading.gif"></spinner>
-</div>
+<!-- <div ng-show="main.hidden" class="pv5 tc w-100">
+  <spinner name="spinner" img-src="/images/icons/loading.gif" ></spinner>
+</div> -->
 
 <!-- WHEN LOGGED IN -->
-<div ng-if="currentUser.username && main.loaded" ng-class="main.showpage">
-  <div class="mt4 w-two-thirds fl">
+<div ng-show="currentUser.username && !main.hidden" ng-class="main.showpage">
+  <div class="mt4 w-two-thirds fl-ns">
     <h1 class="mt0">Hello, {{currentUser.username}}</h1>
-    <div class="h3 w3 cover" style="background:url({{currentUser.image}}) center;"></div>
-    <button ng-if="!main.showImageEdit" type="button" ng-class="main.button" ng-click="main.imageEdit()">Edit image</button>
-    <button ng-if="main.showImageEdit" type="button" ng-class="main.button" class="red" ng-click="main.imageEdit()">Cancel</button>
-    <div ng-show="main.showImageEdit" class="mt2">
-      <input type="text" ng-model="main.user.image" name="" value="">
-      <button type="button" ng-class="main.button" ng-click="main.updateUser()" name="button">Save</button>
+    <div class="fl-ns h4 w4 mv3 cover ba b--moon-gray" style="background:url({{currentUser.image}}) center;"></div>
+    <div class="fl-ns mv3 pl3-ns">
+      <button ng-if="!main.showImageEdit" type="button" ng-class="main.button" ng-click="main.imageEdit()">Edit image</button>
+      <button ng-if="main.showImageEdit" type="button" ng-class="main.button" class="red" ng-click="main.imageEdit()">Cancel</button>
+      <div ng-show="main.showImageEdit" class="mt2">
+        <input class="br-pill ba b--black ph2 pv1" type="text" ng-model="main.user.image" name="" value="">
+        <button type="button" ng-class="main.button" ng-click="main.updateUser()" name="button">Save</button>
+      </div>
     </div>
-    <h3>About</h3>
+    <h3 class="cb w-100">About</h3>
     <p>{{currentUser.about}}</p>
   </div>
-  <div class="tr mt4 w-third fl lh-copy">
+  <div class="tr-ns mt4 w-third-ns w-100 fl-ns lh-copy">
     <h3>User Control Panel</h3>
     <a ng-class="main.button" class="bg-washed-yellow slide mb2 db link hover-green very-dark-green" href="" ui-sref="promptsNew">
       New prompt</a>
@@ -30,7 +32,7 @@
 </div>
 
 <!-- WHEN NOT LOGGED IN -->
-<div ng-if="!currentUser.username && main.loaded">
+<div ng-show="!currentUser.username && !main.hidden">
   <section class="vh-100 dt nt5 ph2 ph4-ns">
     <div class="dtc v-mid-ns v-top pt5 pt0-ns">
       <h1 class="mb3 f-subheadline-ns f1">Welcome to colLAB!</h1>

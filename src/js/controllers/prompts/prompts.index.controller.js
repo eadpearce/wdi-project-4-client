@@ -2,8 +2,18 @@ angular
   .module('collabApp')
   .controller('PromptsIndexCtrl', PromptsIndexCtrl);
 
-PromptsIndexCtrl.$inject = ['Prompt', 'filterFilter', '$scope', 'spinnerService'];
-function PromptsIndexCtrl(Prompt, filterFilter, $scope, spinnerService) {
+PromptsIndexCtrl.$inject = [
+  'Prompt',
+  'filterFilter',
+  '$scope',
+  'spinnerService'
+];
+function PromptsIndexCtrl(
+  Prompt,
+  filterFilter,
+  $scope,
+  spinnerService
+) {
   const vm = this;
   // hide stuff until everything has loaded
   vm.hidden = true;

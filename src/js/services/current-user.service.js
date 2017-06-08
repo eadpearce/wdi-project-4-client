@@ -8,14 +8,11 @@ function CurrentUserService(TokenService, User, $rootScope, $http, API) {
 
   self.getUser = function() {
     const decoded = TokenService.decodeToken();
-    console.log('get user', decoded, Date.now())
     if (decoded) {
       $http
         .get(`${API}/users/${decoded.username}`)
         .then(user => {
           self.currentUser = user.data;
-        })
-        .finally(() => {
           $rootScope.$broadcast('loggedIn');
         })
         .catch(err => {
