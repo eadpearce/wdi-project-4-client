@@ -74,12 +74,14 @@ function MainCtrl(
     else vm.showImageEdit = false;
   };
   vm.aboutEdit = function() {
+    if (vm.user.about === 'Nothing here yet.') vm.user.about = '';
     if (!vm.showAboutEdit) vm.showAboutEdit = true;
     else vm.showAboutEdit = false;
   };
   vm.saved = false;
   vm.updateUser = function() {
     spinnerService.show('spinner');
+    if (!vm.user.about) vm.user.about = 'Nothing here yet.';
     vm.editedUser = {};
     vm.editedUser.about = vm.user.about;
     vm.editedUser.image = vm.user.image;

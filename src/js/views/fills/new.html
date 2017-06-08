@@ -31,6 +31,11 @@
     class="db br-pill ph2 w-100 br3"
     ng-model="fills.fill.tagged_as" name="tagged_as" value="">
 
+    <label class="db b f5 pv2" for="anon">Post anonymously: </label>
+    <input type="checkbox"
+    class="db w-100 br-pill ph2"
+    ng-model="fills.fill.anon" name="anon">
+
     <input class="db b ba b--black bg-white f5 mt3 pv2 ph3 br-pill" type="submit" name="" value="Submit">
   </form>
   <p ng-if="fills.error.status" class="red">Please check all fields and try again.</p>

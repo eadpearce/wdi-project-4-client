@@ -12,17 +12,18 @@
   <p><b>Tagged as: </b><a class="pr2" ng-class="main.link" ng-repeat="tag in prompts.prompt.tags" href="" ui-sref="promptsIndexTag({ tag: tag.id })">{{tag.name}}</a>
   </p>
 
-  <h4>Fills: </h4>
-  <p ng-if="!prompts.prompt.fills[0]">No fills yet. <a ui-sref="fillsNew({ prompt: prompts.prompt.id })" href="">Add one.</a></p>
-  <ul class="list pl0" ng-if="prompts.prompt.fills[0]">
+  <h4 class="mb2">Fills: </h4>
+  <p class="w-50 fl mv2" ng-if="!prompts.prompt.fills[0]">No fills yet.</p>
+  <a class="w-50 fr tr mv2" ng-class="main.link" ui-sref="fillsNew({ prompt: prompts.prompt.id })" href="">Add a fill</a>
+  <ul class="cb w-100 list pl0" ng-if="prompts.prompt.fills[0]">
     <li ng-repeat="fill in prompts.prompt.fills">
       <a href="" ng-class="main.link" ui-sref="fillsShow({ id: fill.id })">{{fill.title}}</a>
     </li>
   </ul>
 
-  <h4 class="mt2 mb3 fl w-50">Comments </h4>
+  <h4 class="cb mt2 mb3 fl w-50">Comments </h4>
   <div class="mt2 mb3 fr w-50 tr" ng-show="!prompts.showCommentForm">
-    <a class="link dark-green hover-green"
+    <a ng-class="main.link"
     ng-click="prompts.newComment()" href="">Add a comment</a>
   </div>
 
