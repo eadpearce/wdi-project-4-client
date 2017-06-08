@@ -4,24 +4,48 @@
   <spinner name="spinner" img-src="/images/icons/loading.gif" on-loaded="prompts.load()"></spinner>
 </div>
 
-<div ng-show="!prompts.hidden" ng-class="main.container">
-  <h1>{{prompts.prompt.title}}</h1>
-  <h3>By <a href="" ui-sref="usersShow({ id: prompts.prompt.user.username })">{{prompts.prompt.user.username}}</a></h3>
+<div ng-show="!prompts.hidden" ng-class="main.showpage">
+
+  <h1>Prompt: {{prompts.prompt.title}}</h1>
+  <h3>By <a href="" ng-class="main.link" ui-sref="usersShow({ id: prompts.prompt.user.username })">{{prompts.prompt.user.username}}</a></h3>
   <p>{{prompts.prompt.body}}</p>
-  <p><b>Tagged as: </b><a class="pr2" ng-repeat="tag in prompts.prompt.tags" href="" ui-sref="promptsIndexTag({ tag: tag.id })">{{tag.name}}</a>
+  <p><b>Tagged as: </b><a class="pr2" ng-class="main.link" ng-repeat="tag in prompts.prompt.tags" href="" ui-sref="promptsIndexTag({ tag: tag.id })">{{tag.name}}</a>
   </p>
 
   <h4>Fills: </h4>
   <p ng-if="!prompts.prompt.fills[0]">No fills yet. <a ui-sref="fillsNew({ prompt: prompts.prompt.id })" href="">Add one.</a></p>
   <ul class="list pl0" ng-if="prompts.prompt.fills[0]">
     <li ng-repeat="fill in prompts.prompt.fills">
-      <a href="" ui-sref="fillsShow({ id: fill.id })">{{fill.title}}</a>
+      <a href="" ng-class="main.link" ui-sref="fillsShow({ id: fill.id })">{{fill.title}}</a>
     </li>
   </ul>
 
-  <h4 class="db mv2 fl">Comments </h4>
-  <a class="db mv2 fr" ng-class="main.link" ui-sref="commentsNewPrompt({ prompt: prompts.prompt.id })" href="">Add a comment</a>
-  <div class="fl w-100" ng-if="!prompts.prompt.comments[0]">No comments yet.</div>
+  <h4 class="mt2 mb3 fl w-50">Comments </h4>
+  <div class="mt2 mb3 fr w-50 tr" ng-show="!prompts.showCommentForm">
+    <a class="link dark-green hover-green"
+    ng-click="prompts.newComment()" href="">Add a comment</a>
+  </div>
+
+  <div class="mt2 mb3 fr w-50 tr" ng-show="prompts.showCommentForm">
+    <a class="link red hover-hot-pink"
+    ng-click="prompts.newComment()" href="">Cancel</a>
+  </div>
+
+  <div ng-show="prompts.showCommentForm" class="comment-box cf w-100 mb3">
+    <h3 class="mt0 mb0">New Comment</h3>
+    <h4>In response to: {{ content.title }}</h4>
+    <form name="newCommentForm" class="" ng-submit="prompts.createComment()" method="post" novalidate>
+      <textarea rows="10" cols="60" type="text"
+      class="db w-100 br3"
+      ng-model="prompts.comment.body"
+      required
+      name="body"></textarea>
+      <input ng-class="main.button" class="mt3" type="submit" name="" value="Submit">
+    </form>
+    <p ng-if="prompts.error.status" class="red">Please check all fields and try again.</p>
+  </div>
+
+  <div class="fl w-100" ng-if="!prompts.prompt.comments[0] && !prompts.showCommentForm">No comments yet.</div>
   <comments ng-if="prompts.prompt.comments[0]" content="prompts.prompt.comments"></comments>
 
 </div>

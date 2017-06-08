@@ -6,7 +6,7 @@
       <h1 class="dib mv0 pv2">Prompts</h1>
     </div>
     <div class="dtc tr w-100 v-mid">
-      <div class="db dib-ns pr3-ns">Displaying {{prompts.pagination+1}} to
+      <div class="db pv2 pv0-ns dib-ns pr3-ns">Displaying {{prompts.pagination+1}} to
         <span ng-if="prompts.pagination+prompts.limit < prompts.all.length">{{prompts.pagination+prompts.limit}}</span>
         <span ng-if="prompts.pagination+prompts.limit >= prompts.all.length">{{prompts.all.length}}</span>
         of {{prompts.all.length}}</div>
@@ -16,7 +16,7 @@
       <button ng-class="main.button" class="pr2 dark-green hover-green pointer" ng-click="prompts.next()"
       ng-disabled="prompts.pagination + prompts.limit >= prompts.all.length">Next</button>
 
-      <button ng-class="main.button" class="dib-ns db ml3-ns" type="button" ng-click="prompts.searchOptions()" name="button">Search options</button>
+      <button ng-class="main.button" class="dib-ns db fr ml3-ns" type="button" ng-click="prompts.searchOptions()" name="button">Search options</button>
     </div>
   </div>
 

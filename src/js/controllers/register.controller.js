@@ -5,7 +5,6 @@ angular
 RegisterCtrl.$inject = ['User', 'CurrentUserService', '$state'];
 function RegisterCtrl(User, CurrentUserService, $state){
   const vm = this;
-
   vm.register = register;
   function register() {
     User

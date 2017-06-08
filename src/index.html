@@ -37,7 +37,7 @@
       <a href="" ng-click="main.showMenu()"
         class="db link pt2 dark-green hover-light-green" ng-show="loggedIn" ui-sref="promptsNew">new prompt</a>
       <a href="" ng-click="main.showMenu()"
-        class="db link pt2 dark-green hover-light-green" ng-show="loggedIn" ui-sref="usersShow({ id: user.username })">my profile</a>
+        class="db link pt2 dark-green hover-light-green" ng-show="loggedIn" ui-sref="usersShow({ id: currentUser.username })">my profile</a>
       <a href="" ng-click="main.showMenu()"
         class="db pt2 link dark-green hover-light-green" ui-sref="promptsIndex">all prompts</a>
       <a href="" ng-click="main.showMenu()"
@@ -56,9 +56,9 @@
       </div>
       <div class="dtc v-mid pr2 pr3-ns">
         <button class="db fr ttu tr tracked f6 ml3-ns h2" ng-class="main.button" type="button" ng-click="main.showMenu()" name="button">menu</button>
-          <div ng-if="!user.username" class="db fr ttu tr tracked f5 pr2 pv2 h2">Not logged in</div>
-          <div ng-if="user.username" class="db fr ttu tr tracked f5 pr2 pv2 h2">Hello
-            <a class="link dark-green hover-light-green" href="" ui-sref="usersShow({id: user.username})">{{user.username}}</a></div>
+          <div ng-if="!currentUser.username" class="db fr ttu tr tracked f5 pr2 pv2 h2">Not logged in</div>
+          <div ng-if="currentUser.username" class="db fr ttu tr tracked f5 pr2 pv2 h2">Hello
+            <a class="link dark-green hover-light-green" href="" ui-sref="usersShow({id: currentUser.username})">{{currentUser.username}}</a></div>
       </div>
     </nav>
   </header>

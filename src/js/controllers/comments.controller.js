@@ -1,7 +1,6 @@
 angular
   .module('collabApp')
-  .controller('CommentsShowCtrl', CommentsShowCtrl)
-  .controller('CommentsNewPromptCtrl', CommentsNewPromptCtrl);
+  .controller('CommentsShowCtrl', CommentsShowCtrl);
 
 CommentsShowCtrl.$inject = ['spinnerService', '$stateParams', '$timeout', 'Comment'];
 function CommentsShowCtrl(spinnerService, $stateParams, $timeout, Comment) {
@@ -24,35 +23,5 @@ function CommentsShowCtrl(spinnerService, $stateParams, $timeout, Comment) {
       console.log(err);
       vm.error = err;
     });
-  };
-}
-
-CommentsNewPromptCtrl.$inject = ['Prompt', 'Comment', '$state', '$stateParams'];
-function CommentsNewPromptCtrl(Prompt, Comment, $state, $stateParams) {
-  const vm = this;
-  Prompt
-    .get({id: $stateParams.prompt})
-    .$promise
-    .then(data => {
-      vm.parent = data;
-    })
-    .catch(err => {
-      console.log(err);
-      vm.error = err;
-    });
-  vm.comment = {};
-  vm.create = function() {
-    vm.comment.prompt_id = vm.parent.id;
-    Comment
-      .save(vm.comment)
-      .$promise
-      .then(comment => {
-        console.log(comment);
-        $state.go('promptsShow', { id: vm.comment.prompt_id });
-      })
-      .catch(err => {
-        console.log(err);
-        vm.error = err;
-      });
   };
 }

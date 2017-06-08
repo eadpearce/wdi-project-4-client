@@ -4,8 +4,9 @@ angular
 
 User.$inject = ['API', '$resource'];
 function User(API, $resource){
-  return $resource(`${API}/users/:id`, { id: '@_id'}, {
+  return $resource(`${API}/users/:id`, { id: '@id'}, {
     register: { method: 'POST', url: `${API}/register` },
-    login:    { method: 'POST', url: `${API}/login` }
+    login: { method: 'POST', url: `${API}/login` },
+    'update': { method: 'PATCH' }
   });
 }

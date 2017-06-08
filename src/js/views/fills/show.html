@@ -4,11 +4,11 @@
   <spinner name="spinner" img-src="/images/icons/loading.gif" on-loaded="fills.load()"></spinner>
 </div>
 
-<div ng-show="!fills.hidden" ng-class="main.container">
-  <h1>{{fills.fill.title}}</h1>
+<div ng-show="!fills.hidden" ng-class="main.showpage">
+  <h1>Fill: {{fills.fill.title}}</h1>
   <h3>By <a href="" ng-class="main.link" ui-sref="usersShow({ id: fills.fill.user.username })">{{fills.fill.user.username}}</a></h3>
   <p><b>Original prompt: </b><a href="" ng-class="main.link" ui-sref="promptsShow({ id: fills.fill.prompt.id })">{{fills.fill.prompt.title}}</a></p>
-  <p class="bg-white ph2 pv3 lh-copy br3 b--moon-gray ba">{{fills.fill.body}}</p>
+  <p ng-class="main.textarea">{{fills.fill.body}}</p>
   <p><b>Tagged as: </b><a class="pr2" ng-repeat="tag in fills.fill.tags" href="" ui-sref="promptsIndexTag({ tag: tag.id })">{{tag.name}}</a>
   </p>
 

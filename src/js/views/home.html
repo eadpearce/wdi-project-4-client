@@ -2,20 +2,21 @@
   <spinner name="spinner" img-src="/images/icons/loading.gif" on-loaded="main.load()"></spinner>
 </div>
 
-<div ng-if="user.username && main.loaded" class="ph2 ph4-ns mb0-ns">
-  <h1>Hello, {{user.username}}</h1>
-  <p class="lh-copy">
-    <a class="db f3 link hover-green very-dark-green" href="" ui-sref="usersShow({ id: user.username })">
+<!-- WHEN LOGGED IN -->
+<div ng-if="currentUser.username && main.loaded" ng-class="main.showpage">
+  <h1>Hello, {{currentUser.username}}</h1>
+    <a class="db f3 link hover-green very-dark-green" href="" ui-sref="usersShow({ id: currentUser.username })">
       My Profile</a>
     <a class="db f3 link hover-green very-dark-green" href="" ui-sref="promptsNew">
       Make a new prompt</a>
-    <a class="db f3 link hover-green very-dark-green" href="" ui-sref="promptsIndexUser({ user: user.username })">
+    <a class="db f3 link hover-green very-dark-green" href="" ui-sref="promptsIndexUser({ user: currentUser.username })">
       View my prompts</a>
-    <a class="db f3 link hover-green very-dark-green" href="" ui-sref="fillsIndexUser({ user: user.username })">
+    <a class="db f3 link hover-green very-dark-green" href="" ui-sref="fillsIndexUser({ user: currentUser.username })">
       View my fills</a>
-  </p>
 </div>
-<div ng-if="!user.username && main.loaded">
+
+<!-- WHEN NOT LOGGED IN -->
+<div ng-if="!currentUser.username && main.loaded">
   <section class="vh-100 dt nt5 ph2 ph4-ns">
     <div class="dtc v-mid-ns v-top pt5 pt0-ns">
       <h1 class="mb3 f-subheadline-ns f1">Welcome to colLAB!</h1>
