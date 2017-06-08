@@ -6,7 +6,7 @@
 <div ng-show="currentUser.username && !main.hidden" ng-class="main.showpage">
   <div class="mt4 w-two-thirds fl-ns">
     <h1 class="mt0">Hello, {{currentUser.username}}</h1>
-    <div class="fl-ns h4 w4 mv3 cover ba b--moon-gray" style="background:url({{currentUser.image}}) center;"></div>
+    <div class="fl-ns h4 w4 mv3 cover ba b--moon-gray" style="background:url({{currentUser.image}}) center; background-color: #aaa;"></div>
     <div class="fl-ns mv3 pl3-ns">
       <button ng-if="!main.showImageEdit" type="button" ng-class="main.button" ng-click="main.imageEdit()">Edit image</button>
       <button ng-if="main.showImageEdit" type="button" ng-class="main.button" class="red" ng-click="main.imageEdit()">Cancel</button>
@@ -15,9 +15,8 @@
         <button type="button" ng-class="main.button" ng-click="main.updateUser()" name="button">Save</button>
       </div>
     </div>
-    <h3 class="cb w-100">About</h3>
-    <p>{{currentUser.about}}</p>
   </div>
+
   <div class="tr-ns mt4 w-third-ns w-100 fl-ns lh-copy">
     <h3>User Control Panel</h3>
     <a ng-class="main.button" class="bg-washed-yellow slide mb2 db link hover-green very-dark-green" href="" ui-sref="promptsNew">
@@ -29,6 +28,22 @@
     <a ng-class="main.button" class="slide mb2 db link hover-green very-dark-green" href="" ui-sref="fillsIndexUser({ user: currentUser.username })">
       View my fills</a>
   </div>
+
+  <h3 class="cb w-100">About</h3>
+  <p>{{currentUser.about}}</p>
+  <div class="w-100">
+    <button ng-if="!main.showAboutEdit" ng-class="main.button" ng-click="main.aboutEdit()" type="button" name="button">Edit about</button>
+    <button ng-if="main.showAboutEdit" type="button" ng-class="main.button" class="red" ng-click="main.aboutEdit()">Cancel</button>
+
+    <spinner name="spinner" img-src="/images/icons/loading.gif" ></spinner>
+    <p class="green" ng-if="main.saved">Saved!</p>
+
+    <div ng-show="main.showAboutEdit" class="mt2">
+      <textarea ng-class="main.textarea" class="w-100" type="text" name="" ng-model="main.user.about"></textarea>
+      <button type="button" ng-class="main.button" ng-click="main.updateUser()" name="button">Save</button>
+    </div>
+  </div>
+
 </div>
 
 <!-- WHEN NOT LOGGED IN -->

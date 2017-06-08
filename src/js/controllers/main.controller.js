@@ -73,8 +73,13 @@ function MainCtrl(
     if (!vm.showImageEdit) vm.showImageEdit = true;
     else vm.showImageEdit = false;
   };
+  vm.aboutEdit = function() {
+    if (!vm.showAboutEdit) vm.showAboutEdit = true;
+    else vm.showAboutEdit = false;
+  };
+  vm.saved = false;
   vm.updateUser = function() {
-    vm.showImageEdit = false;
+    spinnerService.show('spinner');
     vm.editedUser = {};
     vm.editedUser.about = vm.user.about;
     vm.editedUser.image = vm.user.image;
@@ -82,8 +87,13 @@ function MainCtrl(
       .update({ id: vm.user.username }, vm.editedUser)
       .$promise
       .then(() => {
-        console.log('updated');
-        // $state.go('usersShow', { id: vm.user.username });
+        spinnerService.hide('spinner');
+        vm.showImageEdit = false;
+        vm.showAboutEdit = false;
+        vm.saved = true;
+        $timeout(() => {
+          vm.saved = false;
+        }, 1000);
         vm.editedUser = {};
       });
   };
