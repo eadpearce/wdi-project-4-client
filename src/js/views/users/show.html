@@ -5,8 +5,9 @@
 
 <div ng-show="!users.hidden" ng-class="main.showpage">
 
-  <h1>{{users.user.username}}'s profile</h1>
-  <h3 class="db fl w-50 mt0 mb0 h2">About:</h3>
+  <h1 class="mb0">{{users.user.username}}'s profile</h1>
+  <div class="fl-ns h4 w4 mv3 cover ba b--moon-gray" style="background:url({{users.user.image}}) center; background-color: #aaa;"></div>
+  <h3 class="db cb fl w-50 mt0 mb0 h2">About:</h3>
 
   <div class="mt0 mb0 fr w-50 tr h2" ng-show="!users.showEditForm && users.user.username === currentUser.username">
     <a class="link dark-green hover-green"
