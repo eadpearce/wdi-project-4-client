@@ -1,5 +1,10 @@
 <div class="fl cf w-100 bg-white mb3"
+  ng-class="{'mb6': $last}"
   ng-repeat="comment in content | orderBy: 'created_at': true">
+
   <p class="mt0 mb0 bg-dark-green white pa2">Posted by <a class="link light-green hover-white" href="" ui-sref="usersShow({ id: comment.user.username })">{{comment.user.username}}</a> at <a class="link light-green hover-white" href="" ui-sref="commentsShow({ id: comment.id })">{{comment.date_created}}</a></p>
-  <p class="pa2 mt0 mb0">{{comment.body}}</p>
+
+  <avatar class="fl" width="3" image="comment.user.image"></avatar>
+
+  <p class="fl pa2 mt0 mb0">{{comment.body}}</p>
 </div>

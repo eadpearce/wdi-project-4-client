@@ -24,7 +24,7 @@
   </div>
 
   <div ng-show="fills.showCommentForm" class="comment-box cf w-100 mb3">
-    <h3 class="mt0 mb0">New Comment</h3>
+    <h3 class="cb w-100 mt0 mb0">New Comment</h3>
     <h4>In response to: {{ content.title }}</h4>
     <form name="newCommentForm" class="" ng-submit="fills.createComment()" method="post" novalidate>
       <textarea rows="10" cols="60" type="text"
@@ -32,12 +32,16 @@
       ng-model="fills.comment.body"
       required
       name="body"></textarea>
+      <label class="db b f5 pv2" for="anon">Post anonymously: </label>
+      <input type="checkbox"
+      class="db w-100 br-pill ph2"
+      ng-model="fills.comment.anon" name="anon">
       <input ng-class="main.button" class="mt3" type="submit" name="" value="Submit">
     </form>
     <p ng-if="fills.error.status" class="red">Please check all fields and try again.</p>
   </div>
 
-  <div class="fl w-100" ng-if="!fills.fill.comments[0] && !fills.showCommentForm">No comments yet.</div>
+  <div class="fl w-100 mb6" ng-if="!fills.fill.comments[0] && !fills.showCommentForm">No comments yet.</div>
   <comments ng-if="fills.fill.comments[0]" content="fills.fill.comments"></comments>
 
 </div>

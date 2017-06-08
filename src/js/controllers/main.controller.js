@@ -26,7 +26,7 @@ function MainCtrl(
   const vm = this;
   // save the tachyons classes in one place
   vm.container = 'ph2 ph4-ns mb0-ns mt0-ns mt5 pt2';
-  vm.showpage  = 'w-75-l w-100 center ph2 ph4-ns mb0-ns mt0-ns mt5 pt2';
+  vm.showpage  = 'w-75-l w-100 center ph2 ph4-ns mb0-ns pb5 mt0-ns mt5 pt2';
   vm.loginform = 'w-third-l w-50-m w-100 ph2 ph0-ns center mv5 pt2 pt0-ns';
   vm.form      = 'w-75-l w-100 center ph2 ph4-ns mb0-ns mt0-ns mt5 pt2';
   vm.link      = 'link underline dark-green hover-green';

@@ -12,10 +12,10 @@
   <p><b>Tagged as: </b><a class="pr2" ng-class="main.link" ng-repeat="tag in prompts.prompt.tags" href="" ui-sref="promptsIndexTag({ tag: tag.id })">{{tag.name}}</a>
   </p>
 
-  <h4 class="mb2">Fills: </h4>
-  <p class="w-50 fl mv2" ng-if="!prompts.prompt.fills[0]">No fills yet.</p>
+  <h4 class="mv2 w-50 fl">Fills: </h4>
   <a class="w-50 fr tr mv2" ng-class="main.link" ui-sref="fillsNew({ prompt: prompts.prompt.id })" href="">Add a fill</a>
-  <ul class="cb w-100 list pl0" ng-if="prompts.prompt.fills[0]">
+  <p class="w-50 fl mv2" ng-if="!prompts.prompt.fills[0]">No fills yet.</p>
+  <ul class="fl cb w-50 list pl0" ng-if="prompts.prompt.fills[0]">
     <li ng-repeat="fill in prompts.prompt.fills">
       <a href="" ng-class="main.link" ui-sref="fillsShow({ id: fill.id })">{{fill.title}}</a>
     </li>
@@ -33,7 +33,7 @@
   </div>
 
   <div ng-show="prompts.showCommentForm" class="comment-box cf w-100 mb3">
-    <h3 class="mt0 mb0">New Comment</h3>
+    <h3 class="cb w-100 mt0 mb0">New Comment</h3>
     <h4>In response to: {{ content.title }}</h4>
     <form name="newCommentForm" class="" ng-submit="prompts.createComment()" method="post" novalidate>
       <textarea rows="10" cols="60" type="text"
@@ -41,6 +41,10 @@
       ng-model="prompts.comment.body"
       required
       name="body"></textarea>
+      <label class="db b f5 pv2" for="anon">Post anonymously: </label>
+      <input type="checkbox"
+      class="db w-100 br-pill ph2"
+      ng-model="prompts.comment.anon" name="anon">
       <input ng-class="main.button" class="mt3" type="submit" name="" value="Submit">
     </form>
     <p ng-if="prompts.error.status" class="red">Please check all fields and try again.</p>

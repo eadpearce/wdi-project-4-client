@@ -1,15 +1,16 @@
 angular
   .module('collabApp')
-  .directive('newcomment', newcomment);
+  .directive('avatar', avatar);
 
-newcomment.$inject = [];
-function newcomment() {
+avatar.$inject = [];
+function avatar() {
   const directive = {};
   directive.restrict = 'E';
   directive.replace = true; // replace the directive when called with the template
-  directive.templateUrl ='/js/views/comments/new.html';
+  directive.templateUrl ='/js/views/templates/avatar.html';
   directive.scope = {
-    content: '='
+    image: '=',
+    width: '@'
   };
   return directive;
 }
