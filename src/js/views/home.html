@@ -1,18 +1,32 @@
-<div ng-hide="main.loaded" class="pv5 tc w-100">
-  <spinner name="spinner" img-src="/images/icons/loading.gif" on-loaded="main.load()"></spinner>
+<div ng-hide="!main.hidden" class="pv5 tc w-100">
+  <spinner name="spinner" img-src="/images/icons/loading.gif"></spinner>
 </div>
 
 <!-- WHEN LOGGED IN -->
 <div ng-if="currentUser.username && main.loaded" ng-class="main.showpage">
-  <h1>Hello, {{currentUser.username}}</h1>
-    <a class="db f3 link hover-green very-dark-green" href="" ui-sref="usersShow({ id: currentUser.username })">
-      My Profile</a>
-    <a class="db f3 link hover-green very-dark-green" href="" ui-sref="promptsNew">
-      Make a new prompt</a>
-    <a class="db f3 link hover-green very-dark-green" href="" ui-sref="promptsIndexUser({ user: currentUser.username })">
+  <div class="mt4 w-two-thirds fl">
+    <h1 class="mt0">Hello, {{currentUser.username}}</h1>
+    <div class="h3 w3 cover" style="background:url({{currentUser.image}}) center;"></div>
+    <button ng-if="!main.showImageEdit" type="button" ng-class="main.button" ng-click="main.imageEdit()">Edit image</button>
+    <button ng-if="main.showImageEdit" type="button" ng-class="main.button" class="red" ng-click="main.imageEdit()">Cancel</button>
+    <div ng-show="main.showImageEdit" class="mt2">
+      <input type="text" ng-model="main.user.image" name="" value="">
+      <button type="button" ng-class="main.button" ng-click="main.updateUser()" name="button">Save</button>
+    </div>
+    <h3>About</h3>
+    <p>{{currentUser.about}}</p>
+  </div>
+  <div class="tr mt4 w-third fl lh-copy">
+    <h3>User Control Panel</h3>
+    <a ng-class="main.button" class="bg-washed-yellow slide mb2 db link hover-green very-dark-green" href="" ui-sref="promptsNew">
+      New prompt</a>
+      <a ng-class="main.button" class="slide mb2 db link hover-green very-dark-green" href="" ui-sref="usersShow({ id: currentUser.username })">
+        My Profile</a>
+    <a ng-class="main.button" class="slide mb2 db link hover-green very-dark-green" href="" ui-sref="promptsIndexUser({ user: currentUser.username })">
       View my prompts</a>
-    <a class="db f3 link hover-green very-dark-green" href="" ui-sref="fillsIndexUser({ user: currentUser.username })">
+    <a ng-class="main.button" class="slide mb2 db link hover-green very-dark-green" href="" ui-sref="fillsIndexUser({ user: currentUser.username })">
       View my fills</a>
+  </div>
 </div>
 
 <!-- WHEN NOT LOGGED IN -->

@@ -2,8 +2,8 @@ angular
 .module('collabApp')
 .controller('MainCtrl', MainCtrl);
 
-MainCtrl.$inject = ['$rootScope', 'CurrentUserService', '$state', '$stateParams', '$timeout', 'spinnerService'];
-function MainCtrl($rootScope, CurrentUserService, $state, $stateParams, $timeout, spinnerService) {
+MainCtrl.$inject = ['$rootScope', 'CurrentUserService', '$state', '$stateParams', '$timeout', '$http', 'API', 'spinnerService'];
+function MainCtrl($rootScope, CurrentUserService, $state, $stateParams, $timeout, $http, API, spinnerService) {
   const vm = this;
   // save the tachyons classes in one place
   vm.container = 'ph2 ph4-ns mb0-ns mt0-ns mt5 pt2';
@@ -14,25 +14,25 @@ function MainCtrl($rootScope, CurrentUserService, $state, $stateParams, $timeout
   vm.indexpage = 'mb0 mt5 mt0-ns bt b--moon-gray bg-white bb w-100 ph2 ph4-ns pv2';
   vm.button    = 'bg-white ba b--black br-pill ph2';
   vm.textarea  = 'bg-white ph2 pv3 lh-copy br3 b--moon-gray ba';
-
   // stop landing page flashing when logged in
-  vm.loaded = false;
+  vm.hidden = true;
   vm.load = function() {
-    if (vm.loaded === false)
-      $timeout(() => {
-        vm.loaded = true;
-        console.log(vm.loaded);
-      }, 200);
+    spinnerService.show('spinner');
+    vm.hidden = false;
   };
   // logout/in functions
   $rootScope.$on('loggedOut', () => {
     $rootScope.currentUser = null;
     $rootScope.loggedIn = false;
   });
+
   $rootScope.$on('loggedIn', () => {
+    vm.user = CurrentUserService.currentUser;
     $rootScope.currentUser = CurrentUserService.currentUser;
     $rootScope.loggedIn = true;
+    vm.load();
   });
+
   vm.logout = () => {
     vm.menuIsHidden = true;
     CurrentUserService.removeUser();
@@ -44,5 +44,14 @@ function MainCtrl($rootScope, CurrentUserService, $state, $stateParams, $timeout
   vm.showMenu = function showMenu() {
     if (vm.menuIsHidden) vm.menuIsHidden = false;
     else vm.menuIsHidden = true;
+  };
+  // edit user
+  vm.showImageEdit = false;
+  vm.imageEdit = function() {
+    if (!vm.showImageEdit) vm.showImageEdit = true;
+    else vm.showImageEdit = false;
+  };
+  vm.updateUser = function() {
+    vm.showImageEdit = false;
   };
 }

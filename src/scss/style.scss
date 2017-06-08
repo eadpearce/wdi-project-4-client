@@ -2,7 +2,7 @@
 @import 'helpers/tachyons';
 
 body {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Verdana', Arial, sans-serif;
 }
 
 // FORM VALIDATION
@@ -86,6 +86,8 @@ button:disabled:hover { color: #aaa }
   height: 5rem;
   opacity: 1;
 }
+.slide { transition: transform .5s ease; transform: translateX(0px) }
+.slide:hover { transition: transform .1s ease; transform: translateX(5px) }
 
 // ANIMATIONS
 @keyframes expandOut {
