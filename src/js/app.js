@@ -5,5 +5,6 @@ angular
     'ngResource',
     'angular-jwt',
     'ngAnimate',
-    'angularSpinners'
+    'angularSpinners',
+    'hc.marked'
   ]);
