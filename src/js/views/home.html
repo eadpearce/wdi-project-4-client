@@ -11,7 +11,7 @@
       <button ng-if="!main.showImageEdit" type="button" ng-class="main.button" ng-click="main.imageEdit()">Edit image</button>
       <button ng-if="main.showImageEdit" type="button" ng-class="main.button" class="red" ng-click="main.imageEdit()">Cancel</button>
       <div ng-show="main.showImageEdit" class="mt2">
-        <input class="br-pill ba b--black ph2 pv1" type="text" ng-model="main.user.image" name="" value="">
+        <input class="br-pill ba b--black ph2 pv1" type="text" ng-model="main.editedUser.image" name="" value="">
         <button type="button" ng-class="main.button" ng-click="main.updateUser()" name="button">Save</button>
       </div>
     </div>
@@ -30,7 +30,7 @@
   </div>
 
   <h3 class="cb w-100">About</h3>
-  <p>{{currentUser.about}}</p>
+  <p ng-hide="main.showEditForm" class="cb mt3" ng-class="main.textarea" marked="main.editedUser.about"></p>
   <div class="w-100">
     <button ng-if="!main.showAboutEdit" ng-class="main.button" ng-click="main.aboutEdit()" type="button" name="button">Edit about</button>
     <button ng-if="main.showAboutEdit" type="button" ng-class="main.button" class="red" ng-click="main.aboutEdit()">Cancel</button>
@@ -39,7 +39,7 @@
     <p class="green" ng-if="main.saved">Saved!</p>
 
     <div ng-show="main.showAboutEdit" class="mt2">
-      <textarea ng-class="main.textarea" class="w-100" type="text" name="" ng-model="main.user.about"></textarea>
+      <textarea ng-class="main.textarea" class="w-100" type="text" name="" ng-model="main.editedUser.about"></textarea>
       <button type="button" ng-class="main.button" ng-click="main.updateUser()" name="button">Save</button>
     </div>
   </div>

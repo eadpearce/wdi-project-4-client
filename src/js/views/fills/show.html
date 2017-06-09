@@ -6,15 +6,18 @@
 
 <div ng-show="!fills.hidden" ng-class="main.showpage">
   <h1>Fill: {{fills.fill.title}}</h1>
+
   <h3>By <a href="" ng-class="main.link" ui-sref="usersShow({ id: fills.fill.user.username })">{{fills.fill.user.username}}</a></h3>
+
   <p><b>Original prompt: </b><a href="" ng-class="main.link" ui-sref="promptsShow({ id: fills.fill.prompt.id })">{{fills.fill.prompt.title}}</a></p>
-  <p ng-class="main.textarea">{{fills.fill.body}}</p>
-  <p><b>Tagged as: </b><a class="pr2" ng-repeat="tag in fills.fill.tags" href="" ui-sref="promptsIndexTag({ tag: tag.id })">{{tag.name}}</a>
+  <p ng-class="main.textarea" marked="fills.fill.body"></p>
+
+  <p><b>Tagged as: </b><a class="pr2" ng-class="main.link" ng-repeat="tag in fills.fill.tags" href="" ui-sref="promptsIndexTag({ tag: tag.id })">{{tag.name}}</a>
   </p>
 
   <h4 class="mt2 mb3 fl w-50">Comments </h4>
   <div class="mt2 mb3 fr w-50 tr" ng-show="!fills.showCommentForm">
-    <a class="link dark-green hover-green"
+    <a ng-class="main.link"
     ng-click="fills.newComment()" href="">Add a comment</a>
   </div>
 
@@ -24,8 +27,7 @@
   </div>
 
   <div ng-show="fills.showCommentForm" class="comment-box cf w-100 mb3">
-    <h3 class="cb w-100 mt0 mb0">New Comment</h3>
-    <h4>In response to: {{ content.title }}</h4>
+    <h3 class="cb w-100 mt0">New Comment</h3>
     <form name="newCommentForm" class="" ng-submit="fills.createComment()" method="post" novalidate>
       <textarea rows="10" cols="60" type="text"
       class="db w-100 br3"

@@ -6,20 +6,42 @@
 
 <div ng-show="!prompts.hidden" ng-class="main.showpage">
 
-  <h1>Prompt: {{prompts.prompt.title}}</h1>
-  <h3>By <a href="" ng-class="main.link" ui-sref="usersShow({ id: prompts.prompt.user.username })">{{prompts.prompt.user.username}}</a></h3>
-  <p>{{prompts.prompt.body}}</p>
+  <h1 class="fl-ns mv3 w-75-ns">Prompt: <span ng-bind="prompts.prompt.title"></span></h1>
+
+  <div class="mv4 fr tr" ng-show="!prompts.showEditForm && main.user.username === prompts.prompt.user.username">
+  <a ng-class="main.link" ng-click="prompts.showEdit()" href="">Edit/delete</a>
+  </div>
+  <div class="mv4 fr tr" ng-show="prompts.showEditForm">
+    <a class="link underline red hover-hot-pink"
+    ng-click="prompts.showEdit()" href="">Cancel</a>
+  </div>
+
+  <h3 class="cb">By <a href="" ng-class="main.link" ui-sref="usersShow({ id: prompts.prompt.user.username })">{{prompts.prompt.user.username}}</a></h3>
+  <p ng-bind="prompts.prompt.body"></p>
   <p><b>Tagged as: </b><a class="pr2" ng-class="main.link" ng-repeat="tag in prompts.prompt.tags" href="" ui-sref="promptsIndexTag({ tag: tag.id })">{{tag.name}}</a>
   </p>
 
+  <div class="comment-box" ng-show="prompts.showEditForm">
+    <h4>Edit</h4>
+    <input type="text" class="mb2 w-100" ng-class="main.input" ng-model="prompts.editedPrompt.title">
+    <textarea class="w-100" ng-class="main.textarea" ng-model="prompts.editedPrompt.body"></textarea>
+    <input ng-class="main.button" class="mt3" ng-click="prompts.edit()" type="button" name="" value="Submit">
+
+    <input ng-show="!prompts.showDeleteConfirm" ng-class="main.button" class="mt3 bg-red white"
+      ng-click="prompts.deleteConfirm()" type="button" name="" value="Delete">
+    <span class="red" ng-show="prompts.showDeleteConfirm">Really delete this?</span>
+    <input ng-show="prompts.showDeleteConfirm" ng-class="main.button" class="mt3 bg-red white"
+      ng-click="prompts.delete()" type="button" name="" value="Yes delete it">
+  </div>
+
+  <spinner name="spinner" img-src="/images/icons/loading.gif" ></spinner>
+  <p class="green" ng-if="prompts.saved">Saved!</p>
+
   <h4 class="mv2 w-50 fl">Fills: </h4>
-  <a class="w-50 fr tr mv2" ng-class="main.link" ui-sref="fillsNew({ prompt: prompts.prompt.id })" href="">Add a fill</a>
-  <p class="w-50 fl mv2" ng-if="!prompts.prompt.fills[0]">No fills yet.</p>
-  <ul class="fl cb w-50 list pl0" ng-if="prompts.prompt.fills[0]">
-    <li ng-repeat="fill in prompts.prompt.fills">
-      <a href="" ng-class="main.link" ui-sref="fillsShow({ id: fill.id })">{{fill.title}}</a>
-    </li>
-  </ul>
+  <div class="w-50 fr tr mv2">
+    <a ng-class="main.link" ui-sref="fillsNew({ prompt: prompts.prompt.id })" href="">Add a fill</a>
+  </div>
+  <grid content="prompts.prompt.fills" type="fill" width="grid"></grid>
 
   <h4 class="cb mt2 mb3 fl w-50">Comments </h4>
   <div class="mt2 mb3 fr w-50 tr" ng-show="!prompts.showCommentForm">
@@ -33,8 +55,7 @@
   </div>
 
   <div ng-show="prompts.showCommentForm" class="comment-box cf w-100 mb3">
-    <h3 class="cb w-100 mt0 mb0">New Comment</h3>
-    <h4>In response to: {{ content.title }}</h4>
+    <h3 class="cb w-100 mt0">New Comment</h3>
     <form name="newCommentForm" class="" ng-submit="prompts.createComment()" method="post" novalidate>
       <textarea rows="10" cols="60" type="text"
       class="db w-100 br3"

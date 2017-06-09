@@ -4,7 +4,8 @@
 
   <p class="mt0 mb0 bg-dark-green white pa2">Posted by <a class="link light-green hover-white" href="" ui-sref="usersShow({ id: comment.user.username })">{{comment.user.username}}</a> at <a class="link light-green hover-white" href="" ui-sref="commentsShow({ id: comment.id })">{{comment.date_created}}</a></p>
 
-  <avatar class="fl" width="3" image="comment.user.image"></avatar>
-
-  <p class="fl pa2 mt0 mb0">{{comment.body}}</p>
+  <div class="fl mt0 mb0 h-100 w-100 bl bb br b--moon-gray">
+    <avatar class="fl mr2" width="3" image="comment.user.image"></avatar>
+    <div class="pv2 w-100 h-100">{{comment.body}}</div>
+  </div>
 </div>

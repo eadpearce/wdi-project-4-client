@@ -39,25 +39,4 @@ function UsersShowCtrl(
       }, 200);
     });
   };
-  // EDIT FORM
-  vm.showEditForm = false;
-  vm.editUser = function() {
-    if (!vm.showEditForm) vm.showEditForm = true;
-    else vm.showEditForm = false;
-  };
-  vm.update = function() {
-    if (vm.user.about === 'Nothing here yet') vm.user.about = '';
-    vm.showEditForm = false;
-    vm.editedUser = {};
-    vm.editedUser.about = vm.user.about;
-    console.log('VM.USER',vm.user.username);
-    console.log('LOGGED IN USER', $rootScope.currentUser.username);
-    User
-      .update({ id: vm.user.username }, vm.editedUser)
-      .$promise
-      .then(() => {
-        $state.go('usersShow', { id: vm.user.username });
-        vm.editedUser = {};
-      });
-  };
 }

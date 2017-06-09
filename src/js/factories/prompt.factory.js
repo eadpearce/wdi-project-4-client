@@ -6,6 +6,6 @@ Prompt.$inject = ['$resource', 'API'];
 function Prompt($resource, API) {
   return $resource(`${API}/prompts/:id`,
     { id: '@_id' },
-    { 'update': { method: 'PUT' }
+    { 'update': { method: 'PATCH' }
     });
 }
