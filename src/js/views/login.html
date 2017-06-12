@@ -1,9 +1,14 @@
 <div ng-class="main.loginform">
   <h1>Login</h1>
   <form ng-submit="login.login()">
-    <input class="w-100 db mb2 br-pill ba b--black ph2 pv1" required type="email" name="email" ng-model="login.user.email" placeholder="Email">
-    <input class="w-100 db mb2 br-pill ba b--black ph2 pv1" required type="password" name="password" ng-model="login.user.password" placeholder="Password">
-    <input class="w-100 db mb2 br-pill ba b--black bg-white ph2 pv1" required type="submit" value="Submit">
+
+    <label class="db f5 mb2" for="username">Email: </label>
+    <input class="w-100 db mb2 br-pill ba b--black ph2 pv1" required type="email" name="email" ng-model="login.user.email" placeholder="Please enter your email">
+
+    <label class="db f5 mb2" for="username">Password: </label>
+    <input class="w-100 db mb4 br-pill ba b--black ph2 pv1" required type="password" name="password" ng-model="login.user.password" placeholder="Your password">
+
+    <input class="w-100 db mb2 br-pill ba b--black bg-blue white ph2 pv1" required type="submit" value="Submit">
   </form>
 
 </div>

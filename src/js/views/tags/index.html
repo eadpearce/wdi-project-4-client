@@ -1,12 +1,47 @@
-<div ng-class="main.container">
-  <h1>All Tags</h1>
-  <a class="link hover-green dark-green pr2 underline"
-  ng-repeat="tag in tags.all" href=""
-  ng-class="{
-    'f4': tag.prompts.length < 5,
-    'f3': tag.prompts.length >= 5,
-    'f2': tag.prompts.length >= 20,
-    'f1': tag.prompts.length >= 50
-  }"
-  ui-sref="promptsIndexTag({ tag: tag.id })">{{tag.name}}</a>
+<error ng-if="tags.error.status" style="main.container" status="tags.error.status"></error>
+
+<div ng-hide="!tags.hidden" class="pv5 tc w-100">
+  <spinner name="spinner" img-src="/images/icons/loading.gif" on-loaded="tags.load()"></spinner>
+</div>
+
+<div ng-show="!tags.hidden" ng-class="main.container">
+
+  <h1>Tags</h1>
+
+  <label for="prompt">Show tags for prompts:
+    <input type="checkbox" name="prompt" ng-model="tags.prompt" value="true">
+  </label>
+  <label for="fill">Show tags for fills:
+    <input type="checkbox" name="fill" ng-model="tags.fill" value="true">
+  </label>
+
+  <h2 ng-if="tags.prompt && !tags.fill">Prompt Tags</h2>
+  <h2 ng-if="tags.fill && !tags.prompt">Fill Tags</h2>
+  <h2 ng-if="tags.fill && tags.prompt">Fill & Prompt Tags</h2>
+
+  <div class="" ng-if="tags.prompt">
+    <span ng-repeat="tag in tags.all" ng-if="tag.prompts.length > 0">
+    <a class="link hover-green dark-green underline" href=""
+      ng-class="{
+      'f4': tag.prompts.length < 5,
+      'f3': tag.prompts.length >= 5,
+      'f2': tag.prompts.length >= 20,
+      'f1': tag.prompts.length >= 50
+      }"
+      ui-sref="promptsIndexTag({ tag: tag.id })">{{tag.name}}</a><span ng-if="!$last">, </span></span>
+  </div>
+
+  <div class="" ng-if="tags.fill">
+    <span ng-repeat="tag in tags.all" ng-if="tag.fills.length > 0">
+    <a class="link hover-green dark-green underline"
+      href=""
+      ng-class="{
+        'f4': tag.fills.length < 5,
+        'f3': tag.fills.length >= 5,
+        'f2': tag.fills.length >= 20,
+        'f1': tag.fills.length >= 50
+      }"
+      ui-sref="fillsIndexTag({ tag: tag.id })">{{tag.name}}</a><span ng-if="!$last">, </span></span>
+  </div>
+
 </div>

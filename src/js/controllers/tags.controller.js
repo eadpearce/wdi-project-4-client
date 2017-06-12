@@ -9,5 +9,13 @@ function TagsIndexCtrl(
   Tag
 ) {
   const vm = this;
-  vm.all = Tag.query();
+  vm.fill = false;
+  vm.prompt = true;
+  vm.load = function() {
+    Tag.query().$promise
+      .then(tags => {
+        vm.all = tags;
+      });
+  };
+
 }

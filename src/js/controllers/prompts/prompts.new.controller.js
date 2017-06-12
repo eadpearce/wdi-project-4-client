@@ -13,9 +13,11 @@ function PromptsNewCtrl(Prompt, $state) {
       .$promise
       .then(prompt => {
         $state.go('promptsShow', { id: prompt.id });
+        console.log(vm.prompt);
       })
       .catch(err => {
         console.log(err);
+        if (err.status === 401) $state.go('login');
         vm.error = err;
       });
   }

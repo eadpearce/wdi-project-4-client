@@ -20,24 +20,38 @@
     </div>
   </div>
 
+  <!-- SEARCH OPTIONS -->
   <div ng-hide="prompts.searchIsHidden" class="cf search-box mt2 tr">
     <label class="db mb2" for="filterByFilled">Show only filled prompts:
-      <input type="checkbox" id="filterByFilled" ng-false-value="''" ng-model="prompts.isFilterByFilled"></label>
-      <label class="db mb2" for="filterByUnfilled">Show only unfilled prompts:
-        <input type="checkbox" id="filterByUnfilled" ng-false-value="''" ng-model="prompts.isFilterByUnfilled"></label>
-        <!-- <div class="dib mb2">
-          <label for="">Limit: <input class="w3 ba b--black br-pill ph2" type="number" step="5" name="limit" ng-model="prompts.limit" ng-disabled="prompts.showAll"></label>
-        </div> -->
-        <div class="dib mb2" >
-          <label class="w3" for="search">Search: <input class="ba b--black br-pill ph2" type="text" name="search" ng-model="prompts.q"></label>
-        </div>
-      </div>
+      <input type="checkbox" id="filterByFilled" ng-false-value="''" ng-model="prompts.isFilterByFilled">
+    </label>
+    <label class="db mb2" for="filterByUnfilled">Show only unfilled prompts:
+      <input type="checkbox" id="filterByUnfilled" ng-false-value="''" ng-model="prompts.isFilterByUnfilled">
+    </label>
+
+    <label class="dib f5 pv2" for="rating_tags">Rating: </label>
+    <select class="mb2 dib w4 br-pill ba ph2 b--black" name="rating_tags"
+      ng-model="prompts.rating"
+      ng-options="rating.value as rating.name for rating in prompts.ratings"
+      ng-change=""
+      placeholder="Rating"
+      required>
+      <option value="" disabled selected style="display: none;">Search by rating</option>
+    </select>
+    <!-- <div class="dib mb2">
+      <label for="">Limit: <input class="w3 ba b--black br-pill ph2" type="number" step="5" name="limit" ng-model="prompts.limit" ng-disabled="prompts.showAll"></label>
+    </div> -->
+    <div class="db mb2" >
+      <label class="w3" for="search">Search: <input class="ba b--black br-pill ph2" type="text" name="search" ng-model="prompts.q"></label>
     </div>
+  </div>
+
+</div>
 
 <div ng-hide="!prompts.hidden" class="pv5 tc w-100">
   <spinner name="spinner" img-src="/images/icons/loading.gif" on-loaded="prompts.load()"></spinner>
 </div>
 
 <div ng-show="!prompts.hidden">
-  <grid type="prompt" content="prompts.all" width="grid" search="prompts.q" filled="prompts.isFilterByFilled" unfilled="prompts.isFilterByUnfilled" limit="prompts.limit" pagination="prompts.pagination"></grid>
+  <grid type="prompt" rating="prompts.rating" content="prompts.all" width="grid" search="prompts.q" filled="prompts.isFilterByFilled" unfilled="prompts.isFilterByUnfilled" limit="prompts.limit" pagination="prompts.pagination"></grid>
 </div>

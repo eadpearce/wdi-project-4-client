@@ -11,7 +11,9 @@ MainCtrl.$inject = [
   '$http',
   'API',
   'spinnerService',
-  'User'];
+  'User',
+  'Comment'
+];
 function MainCtrl(
   $rootScope,
   CurrentUserService,
@@ -21,7 +23,8 @@ function MainCtrl(
   $http,
   API,
   spinnerService,
-  User
+  User,
+  Comment
 ) {
   const vm = this;
   // save the tachyons classes in one place
@@ -33,7 +36,8 @@ function MainCtrl(
   vm.link      = 'link underline dark-green hover-green';
   vm.indexpage = 'mb0 mt5 mt0-ns bt b--moon-gray bg-white bb w-100 ph2 ph4-ns pv2';
   vm.button    = 'bg-white ba b--black br-pill ph2';
-  vm.textarea  = 'bg-white ph3 pv3 lh-copy br3 b--moon-gray ba';
+  vm.textarea  = 'bg-white ph3 lh-copy br3 b--moon-gray ba';
+
   // stop landing page flashing when logged in
   vm.hidden = true;
   vm.load = function() {
@@ -46,6 +50,7 @@ function MainCtrl(
     // console.log('load', vm.user);
   };
   // logout/in functions
+  $rootScope.loggedIn = false;
   $rootScope.$on('loggedOut', () => {
     $rootScope.currentUser = null;
     $rootScope.loggedIn = false;
@@ -86,10 +91,12 @@ function MainCtrl(
       vm.showAboutEdit = false; vm.editedUser.about = vm.user.about;
     }
   };
-  vm.saved = false;
+
   vm.updateUser = function() {
     spinnerService.show('spinner');
     if (!vm.user.about) vm.user.about = 'Nothing here yet.';
+    vm.user.image = vm.editedUser.image;
+    vm.user.about = vm.editedUser.about;
     User
       .update({ id: vm.user.username }, vm.editedUser)
       .$promise

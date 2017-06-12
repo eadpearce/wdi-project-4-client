@@ -16,6 +16,7 @@ function grid() {
     search: '=',
     filled: '=',
     unfilled: '=',
+    rating: '=',
     limit: '=',
     user: '=',
     pagination: '='

@@ -19,19 +19,36 @@
     required
     name="body"></textarea>
 
+    <label class="db b f5 pv2" for="rating">Suggested rating: </label>
+      <label for="general">
+        <input class="mh2" type="radio" ng-model="prompts.prompt.rating" name="rating" id="general" value="general">General
+      </label>
+      <label for="teen">
+      <input class="mh2" type="radio" ng-model="prompts.prompt.rating" name="rating" id="teen" value="teen">Teen
+      </label>
+      <label for="mature">
+      <input class="mh2" type="radio" ng-model="prompts.prompt.rating" name="rating" id="mature" value="mature">Mature
+      </label>
+      <label for="explicit">
+      <input class="mh2" type="radio" ng-model="prompts.prompt.rating" name="rating" id="explicit" value="explicit">Explicit
+      </label>
+      <label for="none">
+      <input class="mh2" type="radio" ng-model="prompts.prompt.rating" name="rating" id="none" value="none">None
+      </label>
+
     <label class="db b f5 pv2" for="tagged_as">Tags: </label>
     <input type="text"
     class="db w-100 br-pill ph2"
     ng-model="prompts.prompt.tagged_as" name="tagged_as">
 
-    <label class="db b f5 pv2" for="anon">Post anonymously: </label>
+    <label class="dib b f5 pt2" for="anon">Post anonymously: </label>
     <input type="checkbox"
-    class="db w-100 br-pill ph2"
+    class="dib"
     ng-model="prompts.prompt.anon" name="anon">
 
+    <p ng-if="prompts.error.status" class="red">Please check all fields and try again.</p>
 
-    <input class="db b ba b--black bg-white f5 mt3 pv2 ph3 br-pill" type="submit" name="" value="Submit">
+    <input class="db b ba b--black bg-white f5 mt3 mb6 mb0-ns pv2 ph3 br-pill" type="submit" name="" value="Submit">
   </form>
-  <p ng-if="prompts.error.status" class="red">Please check all fields and try again.</p>
 
 </div>

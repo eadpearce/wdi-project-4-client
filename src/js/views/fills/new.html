@@ -26,18 +26,30 @@
       <span class="normal dark-green" ng-repeat="tag in fills.prompt.tags">{{tag.name}}<span ng-if="!$last">, </span></span>
     </p>
 
+    <label class="db b f5 pv2" for="rating_tags">Rating: </label>
+    <select class="h2 w5 br-pill ba ph2 b--black" name="rating_tags"
+      ng-model="fills.fill.rating"
+      ng-options="rating.value as rating.name for rating in fills.ratings"
+      ng-change=""
+      placeholder="Rating"
+      required>
+      <option value="" disabled selected style="display: none;">Please Select</option>
+    </select>
+
     <label class="db b f5 pv2" for="tagged_as">Tags: </label>
     <input type="text"
     class="db br-pill ph2 w-100 br3"
     ng-model="fills.fill.tagged_as" name="tagged_as" value="">
 
-    <label class="db b f5 pv2" for="anon">Post anonymously: </label>
+    <label class="dib b f5 pt2" for="anon">Post anonymously: </label>
     <input type="checkbox"
-    class="db w-100 br-pill ph2"
+    class="dib"
     ng-model="fills.fill.anon" name="anon">
 
-    <input class="db b ba b--black bg-white f5 mt3 pv2 ph3 br-pill" type="submit" name="" value="Submit">
+    <p ng-show="fills.error.status || fills.invalid" class="red">Please check all fields and try again.</p>
+    <p ng-show="fills.invalid" class="red">Rating is required.</p>
+
+    <input class="db b ba b--black bg-white f5 mt3 mb6 mb5-ns pv2 ph3 br-pill" type="submit" name="" value="Submit">
   </form>
-  <p ng-if="fills.error.status" class="red">Please check all fields and try again.</p>
 
 </div>

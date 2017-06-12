@@ -2,10 +2,26 @@
   ng-class="{'mb6': $last}"
   ng-repeat="comment in content | orderBy: 'created_at': true">
 
-  <p class="mt0 mb0 bg-dark-green white pa2">Posted by <a class="link light-green hover-white" href="" ui-sref="usersShow({ id: comment.user.username })">{{comment.user.username}}</a> at <a class="link light-green hover-white" href="" ui-sref="commentsShow({ id: comment.id })">{{comment.date_created}}</a></p>
+
+  <div class="fl mt0 mb0 white bg-dark-green pa2 w-100">
+    <span class="fl"><a class="link light-green hover-white" href="" ui-sref="usersShow({ id: comment.user.username })">{{comment.user.username}}</a> said on <a class="link light-green hover-white" href="" ui-sref="commentsShow({ id: comment.id })">{{comment.date_created}}</a>:</span>
+
+    <div class="w-25 bg-dark-green white fr tr" ng-show="main.showCommentEditForm">
+      <a class="link underline red hover-hot-pink"
+      ng-click="main.showCommentEdit()" href="">Cancel</a>
+    </div>
+
+  </div>
+
+
 
   <div class="fl mt0 mb0 h-100 w-100 bl bb br b--moon-gray">
-    <avatar class="fl mr2" width="3" image="comment.user.image"></avatar>
-    <div class="pv2 w-100 h-100">{{comment.body}}</div>
+    <a href="" ui-sref="usersShow({ id: comment.user.username })">
+    <avatar class="fl mr2" width="3" image="comment.user.image"></avatar></a>
+
+    <div class="w-100 h-100" marked="comment.body"></div>
+    <textarea ng-if="main.showCommentEditForm" rows="5" class="w-100 h-100" ng-model="main.editedComment.body"></textarea>
+    <button ng-if="main.showCommentEditForm" ng-click="main.editComment()" name="button">Submit</button>
+
   </div>
 </div>

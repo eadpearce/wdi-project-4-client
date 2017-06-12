@@ -17,11 +17,11 @@ function RegisterCtrl(
   function register() {
     User
       .register(vm.user).$promise
-      .then(data => {
-        // console.log(data);
+      .then(() => {
         CurrentUserService.getUser();
         $state.go('home');
-      }, err => {
+      }).catch(err => {
+        vm.error = err;
         console.log(err);
       });
   }

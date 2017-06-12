@@ -17,6 +17,13 @@ function PromptsIndexCtrl(
   const vm = this;
   // hide stuff until everything has loaded
   vm.hidden = true;
+  vm.ratings = [
+    { name: 'General', value: 'general' },
+    { name: 'Teen', value: 'teen'  },
+    { name: 'Mature', value: 'mature'  },
+    { name: 'Explicit', value: 'explicit' },
+    { name: 'Any', value: '' }
+  ];
   vm.load = function () {
     spinnerService.show('spinner');
     Prompt
@@ -34,6 +41,7 @@ function PromptsIndexCtrl(
   };
 
   // SEARCH OPTIONS
+  vm.rating = '';
   vm.limit = 10;
   vm.pagination = 0;
   // if (vm.limit + vm.pagination > vm.all.length) vm.maxpage = vm.all.length;

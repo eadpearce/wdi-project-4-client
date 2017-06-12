@@ -8,9 +8,7 @@ UsersShowCtrl.$inject = [
   '$http',
   'API',
   'spinnerService',
-  '$timeout',
-  '$state',
-  '$rootScope'
+  '$timeout'
 ];
 function UsersShowCtrl(
   User,
@@ -18,9 +16,7 @@ function UsersShowCtrl(
   $http,
   API,
   spinnerService,
-  $timeout,
-  $state,
-  $rootScope
+  $timeout
 ) {
   const vm = this;
 
@@ -29,14 +25,18 @@ function UsersShowCtrl(
     spinnerService.show('spinner');
     $http.get(`${API}/users/${$stateParams.id}`)
     .then(response => {
-      $timeout(() => {
-        vm.hidden = false;
-        spinnerService.hide('spinner');
-        vm.user = response.data;
-        if (!vm.user.about) {
-          vm.user.about = 'Nothing here yet';
-        }
-      }, 200);
+      if (!vm.user) console.log('nope');
+      console.log('user', response);
+      vm.hidden = false;
+      spinnerService.hide('spinner');
+      vm.user = response.data;
+      if (!vm.user.about) {
+        vm.user.about = 'Nothing here yet';
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      vm.error = err;
     });
   };
 }

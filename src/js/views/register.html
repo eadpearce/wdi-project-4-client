@@ -1,13 +1,23 @@
 
 <div ng-class="main.loginform">
   <h1>Register</h1>
-  <form ng-submit="register.register()">
-  <input class="w-100 db mb2 br-pill ba b--black ph2 pv1" type="text" name="username" ng-model="register.user.username" placeholder="Pick a username. Make it memorable!">
-  <input class="w-100 db mb2 br-pill ba b--black ph2 pv1" type="email" name="email" ng-model="register.user.email" placeholder="Your email">
-  <input class="w-100 db mb2 br-pill ba b--black ph2 pv1" type="password" name="password" ng-model="register.user.password" placeholder="Choose a strong password">
-  <input class="w-100 db mb2 br-pill ba b--black ph2 pv1" type="password" name="password_confirmation" ng-model="register.user.password_confirmation" placeholder="Confirm your password">
+  <form name="registerForm" ng-submit="register.register()" novalidate>
 
-  <input class="w-100 db mb2 br-pill ba b--black bg-white ph2 pv1" type="submit" value="Submit" />
+  <label class="db f5 mb2" for="username">Username: </label>
+  <input required class="w-100 db mb2 br-pill ba b--black ph2 pv1" type="text" name="username" ng-model="register.user.username" placeholder="Pick a username. Make it memorable!">
+
+  <label class="db f5 mb2" for="username">Email: </label>
+  <input required class="w-100 db mb2 br-pill ba b--black ph2 pv1" type="email" name="email" ng-model="register.user.email" placeholder="Your email">
+
+  <label class="db f5 mb2" for="username">Password: </label>
+  <input required class="w-100 db mb2 br-pill ba b--black ph2 pv1" type="password" name="password" ng-model="register.user.password" placeholder="Choose a strong password">
+
+  <label class="db f5 mb2" for="username">Password confirmation: </label>
+  <input required class="w-100 db mb4 br-pill ba b--black ph2 pv1" type="password" name="password_confirmation" ng-model="register.user.password_confirmation" placeholder="Confirm your password">
+
+  <p class="red" ng-if="register.error.status === 422">Please check all fields and try again.</p>
+
+  <input class="w-100 db mb2 br-pill ba b--black bg-white ph2 pv1 bg-blue white" type="submit" value="Sign up!" />
 </form>
 </div>
 <!-- <div class="w-25-ns w-50-m w-100 ph2 ph0-ns center mv5">

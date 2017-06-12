@@ -8,23 +8,62 @@
 
   <h1 class="fl-ns mv3 w-75-ns">Prompt: <span ng-bind="prompts.prompt.title"></span></h1>
 
-  <div class="mv4 fr tr" ng-show="!prompts.showEditForm && main.user.username === prompts.prompt.user.username">
+  <div class="mv4 fr-ns tr-ns" ng-show="!prompts.showEditForm && main.user.username === prompts.prompt.user.username">
   <a ng-class="main.link" ng-click="prompts.showEdit()" href="">Edit/delete</a>
   </div>
-  <div class="mv4 fr tr" ng-show="prompts.showEditForm">
+  <div class="mv4 fr-ns tr-ns" ng-show="prompts.showEditForm">
     <a class="link underline red hover-hot-pink"
     ng-click="prompts.showEdit()" href="">Cancel</a>
   </div>
 
   <h3 class="cb">By <a href="" ng-class="main.link" ui-sref="usersShow({ id: prompts.prompt.user.username })">{{prompts.prompt.user.username}}</a></h3>
-  <p ng-bind="prompts.prompt.body"></p>
-  <p><b>Tagged as: </b><a class="pr2" ng-class="main.link" ng-repeat="tag in prompts.prompt.tags" href="" ui-sref="promptsIndexTag({ tag: tag.id })">{{tag.name}}</a>
+
+
+  <p><b>Tagged as: </b>
+    <span ng-repeat="tag in prompts.prompt.tags">
+      <a href="" ng-class="main.link" ui-sref="promptsIndexTag({ tag: tag.id })">{{tag.name}}</a><span ng-if="!$last">, </span>
+    </span>
+  </p>
+
+  <p marked="prompts.prompt.body"></p>
+  <p><b>Rating:</b>
+    <span class="blue" ng-if="prompts.prompt.rating === 'general'">General</span>
+    <span class="green" ng-if="prompts.prompt.rating === 'teen'">Teen</span>
+    <span class="orange" ng-if="prompts.prompt.rating === 'mature'">Mature</span>
+    <span class="red" ng-if="prompts.prompt.rating === 'explicit'">Explicit</span>
+    <span class="red" ng-if="!prompts.prompt.rating">Not specified</span>
   </p>
 
   <div class="comment-box" ng-show="prompts.showEditForm">
     <h4>Edit</h4>
-    <input type="text" class="mb2 w-100" ng-class="main.input" ng-model="prompts.editedPrompt.title">
-    <textarea class="w-100" ng-class="main.textarea" ng-model="prompts.editedPrompt.body"></textarea>
+    <input type="text" class="ph3 mb2 w-100" ng-class="main.input" ng-model="prompts.editedPrompt.title">
+    <textarea class="w-100 overflow-scroll" rows="20" ng-class="main.textarea" ng-model="prompts.editedPrompt.body"></textarea>
+
+    <label class="db b f5 pv2" for="rating">Suggested rating: </label>
+    <label for="general">
+      <input class="mh2" type="radio"
+        ng-model="prompts.editedPrompt.rating" name="rating" id="general" value="general">General
+    </label>
+    <label for="teen">
+      <input class="mh2" type="radio"
+        ng-model="prompts.editedPrompt.rating" name="rating" id="teen" value="teen">Teen
+    </label>
+    <label for="mature">
+      <input class="mh2" type="radio"
+        ng-model="prompts.editedPrompt.rating" name="rating" id="mature" value="mature">Mature
+    </label>
+    <label for="explicit">
+      <input class="mh2" type="radio"
+        ng-model="prompts.editedPrompt.rating" name="rating" id="explicit" value="explicit">Explicit
+    </label>
+    <label for="none">
+      <input class="mh2" type="radio"
+        ng-model="prompts.editedPrompt.rating" name="rating" id="none" value="">None
+    </label>
+    <!-- <label class="b db mt2" for="tagged_as">Tags:
+      <input class="mt2" ng-class="main.input" type="text" name="tagged_as" ng-model="prompts.editedPrompt.tagged_as">
+    </label> -->
+    <br>
     <input ng-class="main.button" class="mt3" ng-click="prompts.edit()" type="button" name="" value="Submit">
 
     <input ng-show="!prompts.showDeleteConfirm" ng-class="main.button" class="mt3 bg-red white"
@@ -32,6 +71,8 @@
     <span class="red" ng-show="prompts.showDeleteConfirm">Really delete this?</span>
     <input ng-show="prompts.showDeleteConfirm" ng-class="main.button" class="mt3 bg-red white"
       ng-click="prompts.delete()" type="button" name="" value="Yes delete it">
+    <input ng-show="prompts.showDeleteConfirm" ng-class="main.button" class="mt3 bg-blue white"
+      ng-click="prompts.deleteConfirm()" type="button" name="" value="No don't delete">
   </div>
 
   <spinner name="spinner" img-src="/images/icons/loading.gif" ></spinner>

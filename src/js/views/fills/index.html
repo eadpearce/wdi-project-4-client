@@ -1,9 +1,51 @@
+<error ng-if="fills.error.status" style="main.container" status="fills.error.status"></error>
+
 <div ng-class="main.indexpage">
   <div class="dt">
     <div class="dtc v-mid">
       <h1 class="dib mv0 pv2">Fills</h1>
     </div>
+    <div class="dtc tr w-100 v-mid">
+      <div class="db pv2 pv0-ns dib-ns pr3-ns">Displaying {{fills.pagination+1}} to
+        <span ng-if="fills.pagination+fills.limit < fills.all.length">{{fills.pagination+fills.limit}}</span>
+        <span ng-if="fills.pagination+fills.limit >= fills.all.length">{{fills.all.length}}</span>
+        of {{fills.all.length}}</div>
+
+      <button ng-class="main.button" class="pr2 dark-green hover-green pointer" ng-click="fills.back()"
+      ng-disabled="fills.pagination === 0">Back</button>
+      <button ng-class="main.button" class="pr2 dark-green hover-green pointer" ng-click="fills.next()"
+      ng-disabled="fills.pagination + fills.limit >= fills.all.length">Next</button>
+
+      <button ng-class="main.button" class="dib-ns db fr ml3-ns" type="button" ng-click="fills.searchOptions()" name="button">Search options</button>
+    </div>
   </div>
+
+  <!-- SEARCH OPTIONS -->
+  <div ng-hide="fills.searchIsHidden" class="cf search-box mt2 tr">
+
+    <label class="dib f5 pv2" for="rating_tags">Rating: </label>
+    <select class="mb2 dib w4 br-pill ba ph2 b--black" name="rating_tags"
+      ng-model="fills.rating"
+      ng-options="rating.value as rating.name for rating in fills.ratings"
+      ng-change=""
+      placeholder="Rating"
+      required>
+      <option value="" disabled selected style="display: none;">Search by rating</option>
+    </select>
+    <!-- <div class="dib mb2">
+      <label for="">Limit: <input class="w3 ba b--black br-pill ph2" type="number" step="5" name="limit" ng-model="fills.limit" ng-disabled="fills.showAll"></label>
+    </div> -->
+    <div class="db mb2" >
+      <label class="w3" for="search">Search: <input class="ba b--black br-pill ph2" type="text" name="search" ng-model="fills.q"></label>
+    </div>
+  </div>
+
 </div>
 
-<grid type="fill" content="fills.all" width="grid"></grid>
+<div ng-hide="!fills.hidden" class="pv5 tc w-100">
+  <spinner name="spinner" img-src="/images/icons/loading.gif" on-loaded="fills.load()"></spinner>
+</div>
+
+<div ng-show="!fills.hidden">
+  <grid type="fill" rating="fills.rating" content="fills.all" width="grid" search="fills.q" filled="fills.isFilterByFilled" unfilled="fills.isFilterByUnfilled" limit="fills.limit" pagination="fills.pagination"></grid>
+</div>

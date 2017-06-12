@@ -1,7 +1,38 @@
-<div ng-hide="!comments.hidden" class="pv3 tc w-100">
+<error ng-if="comments.error.status" style="main.container" status="comments.error.status"></error>
+
+<div ng-hide="!comments.hidden || comments.error.status" ng-class="main.container" class="tc w-100">
   <spinner name="spinner" img-src="/images/icons/loading.gif" on-loaded="comments.load()"></spinner>
 </div>
-<div ng-show="!comments.hidden" ng-class="main.container">
-    <p>Posted by <a class="" href="" ui-sref="usersShow({ id: comments.comment.user.username })">{{comments.comment.user.username}}</a> at <a class="b" href="" ui-sref="commentsShow({ id: comments.comment.id })">{{comments.comment.date_created}}</a></p>
-    <p>{{comments.comment.body}}</p>
+
+<div ng-hide="comments.hidden" ng-class="main.showpage">
+  <h1>Comment on
+    <span ng-if="comments.comment.prompt.title">
+      <a ng-class="main.link" ui-sref="promptsShow({id: comments.comment.prompt.id })" href="">{{comments.comment.prompt.title}}</a></span>
+    <span ng-if="comments.comment.fill.title">
+      <a ng-class="main.link" ui-sref="fillsShow({id: comments.comment.fill.id })" href="">{{comments.comment.fill.title}}</a></span>
+  </h1>
+
+  <div class="fl mt0 mb0 white bg-dark-green pa2 w-100">
+    <span class="fl">Posted by <a class="link light-green hover-white" href="" ui-sref="usersShow({ id: comments.comment.user.username })">{{comments.comment.user.username}}</a> at <a class="link light-green hover-white" href="" ui-sref="commentsShow({ id: comments.comment.id })">{{comments.comment.date_created}}</a></span>
+
+    <div class="w-25 bg-dark-green white fr tr" ng-show="!comments.showCommentEditForm && main.user.username === comments.comment.user.username">
+      <a class="link light-green hover-white" ng-click="comments.showCommentEdit()" href="">Edit/delete</a>
+    </div>
+
+    <div class="w-25 bg-dark-green white fr tr" ng-show="comments.showCommentEditForm">
+      <a class="link underline red hover-hot-pink"
+      ng-click="comments.showCommentEdit()" href="">Cancel</a>
+    </div>
+  </div>
+
+  <div class="fl mt0 mb0 h-100 w-100 bl bb br b--moon-gray bg-white">
+    <avatar class="fl mr2" width="3" image="comments.comment.user.image"></avatar>
+    <div class="w-100 h-100" marked="comments.editedComment.body"></div>
+
+  </div>
+<div ng-show="comments.showCommentEditForm" >
+
+  <textarea name="name" rows="8" class="w-100 mt2" ng-class="main.textarea" ng-model="comments.editedComment.body"></textarea>
+  <button ng-click="comments.edit()" type="button" name="button">Submit</button>
+</div>
 </div>
