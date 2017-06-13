@@ -1,9 +1,7 @@
 // Import all of your scss files here
 @import 'helpers/tachyons';
 
-body {
-  font-family: 'Verdana', Arial, sans-serif;
-}
+body { font-family: 'Verdana', Arial, sans-serif }
 
 // FORM VALIDATION
 input.ng-valid { border: 1px solid #1bba23 }
@@ -57,17 +55,13 @@ button:disabled:hover { color: #aaa }
     border-top-left-radius: 15px;
   }
 }
-.menu.ng-hide {
-  animation: 0.1s expandOut linear;
-}
+.menu.ng-hide { animation: 0.1s expandOut linear }
 .menu.ng-hide-remove {
   animation: 0.1s expandIn linear;
   height: 5rem;
   opacity: 1;
 }
-.comment-box.ng-hide {
-  animation: 0.1s expandOutBig linear;
-}
+.comment-box.ng-hide { animation: 0.1s expandOutBig linear }
 .comment-box.ng-hide-remove {
   animation: 0.1s expandInBig linear;
   height: auto;
@@ -75,12 +69,8 @@ button:disabled:hover { color: #aaa }
 }
 
 // PROMPTS SEARCH BOX
-.search-box {
-  overflow: hidden;
-}
-.search-box.ng-hide {
-  animation: 0.1s expandOut linear;
-}
+.search-box { overflow: hidden }
+.search-box.ng-hide { animation: 0.1s expandOut linear }
 .search-box.ng-hide-remove {
   animation: 0.1s expandIn linear;
   height: 5rem;

@@ -13,8 +13,14 @@
   </h1>
 
   <div class="fl mt0 mb0 white bg-dark-green pa2 w-100">
-    <span class="fl">Posted by <a class="link light-green hover-white" href="" ui-sref="usersShow({ id: comments.comment.user.username })">{{comments.comment.user.username}}</a> at <a class="link light-green hover-white" href="" ui-sref="commentsShow({ id: comments.comment.id })">{{comments.comment.date_created}}</a></span>
 
+    <!-- IF USER EXISTS -->
+    <span ng-if="comments.comment.user.username" class="fl">Posted by <a class="link light-green hover-white" href="" ui-sref="usersShow({ id: comments.comment.user.username })">{{comments.comment.user.username}}</a> at <a class="link light-green hover-white" href="" ui-sref="commentsShow({ id: comments.comment.id })">{{comments.comment.date_created}}</a></span>
+
+    <!-- IF ANON -->
+    <span ng-if="!comments.comment.user" class="fl">Posted by Anonymous at <a class="link light-green hover-white" href="" ui-sref="commentsShow({ id: comments.comment.id })">{{comments.comment.date_created}}</a></span>
+
+    <!-- ABLE TO EDIT IF YOUR COMMENT -->
     <div class="w-25 bg-dark-green white fr tr" ng-show="!comments.showCommentEditForm && main.user.username === comments.comment.user.username">
       <a class="link light-green hover-white" ng-click="comments.showCommentEdit()" href="">Edit/delete</a>
     </div>
@@ -26,13 +32,21 @@
   </div>
 
   <div class="fl mt0 mb0 h-100 w-100 bl bb br b--moon-gray bg-white">
-    <avatar class="fl mr2" width="3" image="comments.comment.user.image"></avatar>
-    <div class="w-100 h-100" marked="comments.editedComment.body"></div>
+    <avatar ng-if="comments.comment.user.username" class="fl mr2" width="3" anon="true" image="comments.comment.user.image"></avatar>
 
+    <!-- ANON AVATAR -->
+    <div ng-if="!comments.comment.user.username"
+      class="fl-ns cover h3 w3"
+      style="background:url(/images/cage.jpeg) center; background-color: #aaa;">
+    </div>
+    
+    <div class="w-100 h-100" marked="comments.editedComment.body"></div>
   </div>
+
 <div ng-show="comments.showCommentEditForm" >
 
   <textarea name="name" rows="8" class="w-100 mt2" ng-class="main.textarea" ng-model="comments.editedComment.body"></textarea>
   <button ng-click="comments.edit()" type="button" name="button">Submit</button>
 </div>
+
 </div>

@@ -71,9 +71,12 @@
       <!-- DATE ETC -->
       <p class="ph2 mv1">{{item.date_created}}</p>
       <p class="ph2 mv1">
-        <span ng-if="page !== 'user'" class="">
+        <span ng-if="page !== 'user' && item.user.username" class="">
           Posted by: <a href="" class="link underline dark-green hover-green"
           ui-sref="usersShow({ id: item.user.username })">{{item.user.username}}</a>
+        </span>
+        <span ng-if="page !== 'user' && !item.user" class="">
+          Posted by: Anonymous
         </span>
       </p>
 

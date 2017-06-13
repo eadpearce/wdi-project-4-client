@@ -4,7 +4,7 @@
 
 
   <div class="fl mt0 mb0 white bg-dark-green pa2 w-100">
-    <span class="fl"><a class="link light-green hover-white" href="" ui-sref="usersShow({ id: comment.user.username })">{{comment.user.username}}</a> said on <a class="link light-green hover-white" href="" ui-sref="commentsShow({ id: comment.id })">{{comment.date_created}}</a>:</span>
+    <span class="fl"><span ng-if="!comment.user">Anonymous</span><a ng-if="comment.user.username" class="link light-green hover-white" href="" ui-sref="usersShow({ id: comment.user.username })">{{comment.user.username}}</a> said on <a class="link light-green hover-white" href="" ui-sref="commentsShow({ id: comment.id })">{{comment.date_created}}</a>:</span>
 
     <div class="w-25 bg-dark-green white fr tr" ng-show="main.showCommentEditForm">
       <a class="link underline red hover-hot-pink"
@@ -13,11 +13,15 @@
 
   </div>
 
-
-
   <div class="fl mt0 mb0 h-100 w-100 bl bb br b--moon-gray">
-    <a href="" ui-sref="usersShow({ id: comment.user.username })">
+
+    <a ng-if="comment.user.username" href="" ui-sref="usersShow({ id: comment.user.username })">
     <avatar class="fl mr2" width="3" image="comment.user.image"></avatar></a>
+
+    <div ng-if="!comment.user"
+      class="fl-ns cover h3 w3 mr2"
+      style="background:url(/images/cage.jpeg) center; background-color: #aaa;">
+    </div>
 
     <div class="w-100 h-100" marked="comment.body"></div>
     <textarea ng-if="main.showCommentEditForm" rows="5" class="w-100 h-100" ng-model="main.editedComment.body"></textarea>

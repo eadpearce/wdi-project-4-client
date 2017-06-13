@@ -5,7 +5,7 @@
 <!-- WHEN LOGGED IN -->
 <div ng-show="loggedIn" ng-class="main.showpage">
   <div class="mt4 w-two-thirds fl-ns">
-    <h1 class="mt0">Hello, {{currentUser.username}}</h1>
+    <h1 class="mt0">Hello, {{main.user.username}}</h1>
     <div class="fl-ns h4 w4 mv3 cover ba b--moon-gray" style="background:url({{currentUser.image}}) center; background-color: #aaa;"></div>
     <div class="fl-ns mv3 pl3-ns">
       <button ng-if="!main.showImageEdit" type="button" ng-class="main.button" ng-click="main.imageEdit()">Edit image</button>
@@ -50,7 +50,7 @@
 <div ng-hide="main.user.username">
   <section class="vh-100 dt nt5 ph2 ph4-ns">
     <div class="dtc v-mid-ns v-top pt5 pt0-ns">
-      <h1 class="mb3 f-subheadline-ns f1">Welcome to colLAB!</h1>
+      <h1 class="mb3 f-subheadline-ns f1">Welcome to colLAB! (alpha)</h1>
       <p class="mt0 f1-ns f2 dark-green">Stuck for ideas? <i>Too many</i> ideas? You're in the right place </p>
       <p class="mt0 f2-ns f3 dark-green">Scroll down to find out more...</p>
     </div>

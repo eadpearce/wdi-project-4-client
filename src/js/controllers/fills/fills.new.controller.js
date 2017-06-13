@@ -20,7 +20,7 @@ function FillsNewCtrl(Fill, Prompt, $state, $stateParams, spinnerService) {
     .then(data => {
       vm.hidden = false;
       vm.prompt = data;
-      console.log(vm.prompt.tags);
+      // console.log(vm.prompt.tags);
       spinnerService.hide('spinner');
     })
     .catch(err => {
@@ -33,8 +33,10 @@ function FillsNewCtrl(Fill, Prompt, $state, $stateParams, spinnerService) {
   vm.rating = null;
   vm.invalid = false;
   vm.create = function() {
-    console.log(vm.fill);
+    // console.log(vm.fill);
     if (vm.fill.rating) {
+      vm.fill.prompt_id = vm.prompt.id;
+      console.log(vm.fill);
       Fill
         .save(vm.fill)
         .$promise

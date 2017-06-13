@@ -16,7 +16,9 @@
     ng-click="prompts.showEdit()" href="">Cancel</a>
   </div>
 
-  <h3 class="cb">By <a href="" ng-class="main.link" ui-sref="usersShow({ id: prompts.prompt.user.username })">{{prompts.prompt.user.username}}</a></h3>
+  <h3 ng-if="prompts.prompt.user.username" class="cb">By <a href="" ng-class="main.link" ui-sref="usersShow({ id: prompts.prompt.user.username })">{{prompts.prompt.user.username}}</a></h3>
+
+  <h3 ng-if="!prompts.prompt.user" class="cb">By Anonymous</h3>
 
 
   <p><b>Tagged as: </b>

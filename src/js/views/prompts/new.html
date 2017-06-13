@@ -36,7 +36,7 @@
       <input class="mh2" type="radio" ng-model="prompts.prompt.rating" name="rating" id="none" value="none">None
       </label>
 
-    <label class="db b f5 pv2" for="tagged_as">Tags: </label>
+    <label class="db b f5 pv2" for="tagged_as">Comma-separated tags: </label>
     <input type="text"
     class="db w-100 br-pill ph2"
     ng-model="prompts.prompt.tagged_as" name="tagged_as">
@@ -46,7 +46,7 @@
     class="dib"
     ng-model="prompts.prompt.anon" name="anon">
 
-    <p ng-if="prompts.error.status" class="red">Please check all fields and try again.</p>
+    <p ng-if="prompts.error.status || prompts.invalid" class="red">Please check all fields and try again.</p>
 
     <input class="db b ba b--black bg-white f5 mt3 mb6 mb0-ns pv2 ph3 br-pill" type="submit" name="" value="Submit">
   </form>
