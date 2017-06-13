@@ -54,7 +54,7 @@
     "forever": "^0.15.3",
     "marked": "^0.3.6",
     "bower": "^1.8.0",
-    "gulp": "^3.9.1",
+    "gulp": "^3.9.1"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
