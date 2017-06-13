@@ -1,12 +1,12 @@
 {
-  "name": "angular-gulp-setup",
+  "name": "colLAB client",
   "version": "1.0.0",
-  "description": "A example stack with gulp and angular",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "postinstall": "bower install && gulp deploy"
   },
-  "author": "Alex Chin <alex@alexchin.co.uk>",
+  "author": "E A D Pearce",
   "license": "ISC",
   "gulp": {
     "srcDir": "src/",
@@ -87,5 +87,8 @@
     "jshint-stylish": "^2.2.1",
     "main-bower-files": "^2.13.1",
     "require-dir": "^0.3.1"
+  },
+  "engines": {
+    "node": ">=7.x"
   }
 }
