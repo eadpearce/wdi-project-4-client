@@ -1,9 +1,9 @@
 {
-  "name": "angular-gulp-setup",
-  "description": "A example stack with gulp and angular",
+  "name": "collab-client",
+  "description": "",
   "main": "index.js",
   "authors": [
-    "alexpchin <alex@alexchin.co.uk>"
+    "E A D Pearce"
   ],
   "license": "ISC",
   "homepage": "",
@@ -21,7 +21,6 @@
     "angular-jwt": "^0.1.9",
     "angular-animate": "^1.6.4",
     "angular-spinners": "^3.1.2",
-    "angular-md": "^1.0.0",
     "angular-marked": "^1.2.2"
   }
 }
