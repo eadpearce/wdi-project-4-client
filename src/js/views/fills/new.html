@@ -16,6 +16,7 @@
     name="title" value="">
 
     <label class="db b f5 pv2" for="body">Body: </label>
+    <p class="mt0 mb2">This section supports <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">markdown</a></p>
     <textarea rows="20" cols="60" type="text"
     class="db br3 w-100 br3"
     ng-model="fills.fill.body"
@@ -36,7 +37,7 @@
       <option value="" disabled selected style="display: none;">Please Select</option>
     </select>
 
-    <label class="db b f5 pv2" for="tagged_as">Tags: </label>
+    <label class="db b f5 pv2" for="tagged_as">Comma-separated tags: </label>
     <input type="text"
     class="db br-pill ph2 w-100 br3"
     ng-model="fills.fill.tagged_as" name="tagged_as" value="">
