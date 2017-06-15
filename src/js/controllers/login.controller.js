@@ -15,6 +15,7 @@ function LoginCtrl(User, CurrentUserService, $state) {
         $state.go('home');
       }, err => {
         console.log('ERROR: ',err);
+        vm.error = err;
       });
   };
 }

@@ -8,6 +8,7 @@
     <label class="db f5 mb2" for="username">Password: </label>
     <input class="w-100 db mb4 br-pill ba b--black ph2 pv1" required type="password" name="password" ng-model="login.user.password" placeholder="Your password">
 
+    <p ng-if="login.error.status === 401" class="red">Incorrect login details.</p>
     <input class="w-100 db mb2 br-pill ba b--black bg-blue white ph2 pv1" required type="submit" value="Submit">
   </form>
 
