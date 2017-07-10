@@ -224,3 +224,22 @@ end
 ```
 
 To make urls for users easier to remember, the username was used as the parameter rather than the user ID. This means to get the profile for the user with username 'klyn' for example, you would simply go to `/users/klyn` - a much more user-friendly url. 
+
+## Returning Nested Data 
+
+As the data models have relationships with many other models there is a lot of nested data that needs to be included in the returned JSON. 
+
+E.g. when getting a fill you would need to know: 
+
+* The fill's author 
+* The original prompt's author 
+* Comments on the fill and their authors 
+
+This code in the fills controller makes sure all this data is returned: 
+
+```
+# GET /fills/1
+def show
+  render json: @fill, include: ['user', 'prompt', 'comments.user', 'comments.user.id', 'comments.user.username']
+end
+```
