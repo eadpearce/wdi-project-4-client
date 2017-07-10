@@ -12,7 +12,11 @@ ColLAB is a site for writing and requesting fanfiction based on something in fan
 
 Build a site using Ruby on Rails and AngularJS with two or more data models with complex relationships. 
 
-## Data Relationships 
+## Server-side 
+
+The server-side app was built with Ruby on Rails using PostgreSQL for its database. Being a SQL database this allowed for models with complex relationships. The server-side code is in a separate repo [here](https://github.com/eadpearce/wdi-project-4-api). 
+
+### Data Relationships 
 
 ![data relation diagram](https://user-images.githubusercontent.com/25905279/28012845-069641a6-655f-11e7-9c41-85629ce5b9e4.png)
 
@@ -38,7 +42,68 @@ I wanted a way to search fills and prompts by tags so I made tags into a separat
 ```
 This bit of code adds different Tachyons classes that change the font size depending on the number of prompts with that tag. 
 
-## Searching Posts 
+### Custom Routes 
+
+Several custom back-end routes needed to be made in order to show fills belonging to a prompt, posts belonging to one user, posts belonging to a tag, etc. These were added to routes.rb: 
+
+```
+Rails.application.routes.draw do
+  scope :api do
+    resources :fills
+    resources :tags
+    resources :prompts
+    resources :prompts
+    resources :comments
+    resources :users, param: :username
+    get 'tags/:tag_id/prompts', to: 'prompts#index_by_tag'
+    get 'tags/:tag_id/fills', to: 'fills#index_by_tag'
+    get 'prompts/:prompt_id/fills', to: 'fills#index_by_prompt'
+    get 'prompts/:prompt_id/fills/:fill_id', to: 'fills#fill_for_prompt'
+    get 'users/:user_id/fills', to: 'fills#index_by_user'
+    get 'users/:user_id/prompts', to: 'prompts#index_by_user'
+    post 'register', to: 'authentications#register'
+    post 'login',    to: 'authentications#login'
+  end
+end
+
+```
+
+These custom routes then pointed to custom functions in their controllers. E.g. to get all prompts by a user you would go to `/api/users/username/prompts` which would run this function in the prompts controller: 
+
+```
+def index_by_user
+  # find the user by username
+  user = User.find_by(username: params[:user_id])
+  # find the prompts by user.id
+  @prompts = Prompt.where(user_id: user.id)
+  render json: @prompts, include: ['fills', 'user', 'comments']
+end
+```
+
+To make urls for users easier to remember, the username was used as the parameter rather than the user ID. This means to get the profile for the user with username 'klyn' for example, you would simply go to `/users/klyn` - a much more user-friendly url. 
+
+### Returning Nested Data 
+
+As the data models have relationships with many other models there is a lot of nested data that needs to be included in the returned JSON. 
+
+E.g. when getting a fill you would need to know: 
+
+* The fill's author and its tags
+* The original prompt, its author and tags
+* Comments on the fill and their authors 
+
+This code in the fills controller makes sure all this data is returned: 
+
+```
+# GET /fills/1
+def show
+  render json: @fill, include: ['user', 'prompt', 'comments.user', 'comments.user.id', 'comments.user.username']
+end
+```
+
+## Client-side 
+
+### Searching Posts 
 
 Prompt and fill search uses Angular filters to sort through results. 
 
@@ -135,9 +200,35 @@ Displaying {{prompts.pagination+1}} to
   of {{prompts.all.length}}
 ```
 
-## Responsive Design 
+## Styling 
 
-[Tachyons](http://tachyons.io/) was used to style the site because of its easy to understand responsive classes and ease of use since I've had a lot of time to practise with it on homeworks and other projects. 
+[Tachyons](http://tachyons.io/) was used to style the site because of its easy to understand responsive classes and ease of use since I've had a lot of time to practise with it on homeworks and other projects.
+
+The overall styling of the site needed to be very simple with a focus on readability and ease of use. The font used for the site is Verdana because it is easy to read and I like that it has a barred uppercase 'i' (`I`), reducing confusion with lowercase 'L'. The green colour scheme comes from the test tube in the logo. A washed out green is used for the background to be easy on the eyes but with the slanted div at the bottom adding just a bit more interest when the contents of the page don't take up the whole screen. 
+
+The layout for fill pages is as simple as possible, letting the content speak for itself: 
+
+![Fill page](https://user-images.githubusercontent.com/25905279/28021014-62f42ff2-657e-11e7-8307-06c524a2e7c6.png)
+
+For fills that are rated Mature or Explicit a warning is shown before the full work is displayed: 
+
+![Fill page](https://user-images.githubusercontent.com/25905279/28020990-41e0a160-657e-11e7-8fe6-cabf1088a72b.png)
+
+(Thanks to [neku](http://archiveofourown.org/users/vanitaslaughing/pseuds/vanitaslaughing) for providing this fic as sample data)
+
+Colour codes are used for prompts and fills depending on content rating (as shown in the screenshots below): 
+
+* Explicit: red
+* Mature: orange
+* Teen: green 
+* General: blue 
+* Not rated: grey
+
+This allows people to tell the rating of a work with just a cursory glance, making it easier to visually filter through search results. Alternatively you can filter by a specific rating in the search options. 
+
+
+
+### Responsive Layout 
 
 ![Different device layouts](https://user-images.githubusercontent.com/25905279/28016195-431e3c94-656b-11e7-93c2-6120d3eb5fb9.jpg)
 
@@ -163,7 +254,7 @@ When the width for the directive is set to 'grid' the classes added are `h5 db f
 * `w-50-m` makes the elements 50% width on medium screens
 * `w-100` makes elements 100% width on smallest screens
 
-## Saving Tachyons Classes as Variables 
+### Tachyons Classes as Variables 
 
 In order to save time, certain combinations of Tachyons classes that are used a lot in the site were saved as variables in the main controller like so: 
 
@@ -183,63 +274,4 @@ They could then be easily reused by adding an ng-class to the element like this:
 
 ```
 <div ng-class="main.indexpage">
-```
-
-## Custom Routes 
-
-Several custom back-end routes needed to be made in order to show fills belonging to a prompt, posts belonging to one user, posts belonging to a tag, etc. These were added to routes.rb: 
-
-```
-Rails.application.routes.draw do
-  scope :api do
-    resources :fills
-    resources :tags
-    resources :prompts
-    resources :prompts
-    resources :comments
-    resources :users, param: :username
-    get 'tags/:tag_id/prompts', to: 'prompts#index_by_tag'
-    get 'tags/:tag_id/fills', to: 'fills#index_by_tag'
-    get 'prompts/:prompt_id/fills', to: 'fills#index_by_prompt'
-    get 'prompts/:prompt_id/fills/:fill_id', to: 'fills#fill_for_prompt'
-    get 'users/:user_id/fills', to: 'fills#index_by_user'
-    get 'users/:user_id/prompts', to: 'prompts#index_by_user'
-    post 'register', to: 'authentications#register'
-    post 'login',    to: 'authentications#login'
-  end
-end
-
-```
-
-These custom routes then pointed to custom functions in their controllers. E.g. to get all prompts by a user you would go to `/api/users/username/prompts` which would run this function in the prompts controller: 
-
-```
-def index_by_user
-  # find the user by username
-  user = User.find_by(username: params[:user_id])
-  # find the prompts by user.id
-  @prompts = Prompt.where(user_id: user.id)
-  render json: @prompts, include: ['fills', 'user', 'comments']
-end
-```
-
-To make urls for users easier to remember, the username was used as the parameter rather than the user ID. This means to get the profile for the user with username 'klyn' for example, you would simply go to `/users/klyn` - a much more user-friendly url. 
-
-## Returning Nested Data 
-
-As the data models have relationships with many other models there is a lot of nested data that needs to be included in the returned JSON. 
-
-E.g. when getting a fill you would need to know: 
-
-* The fill's author 
-* The original prompt's author 
-* Comments on the fill and their authors 
-
-This code in the fills controller makes sure all this data is returned: 
-
-```
-# GET /fills/1
-def show
-  render json: @fill, include: ['user', 'prompt', 'comments.user', 'comments.user.id', 'comments.user.username']
-end
 ```
