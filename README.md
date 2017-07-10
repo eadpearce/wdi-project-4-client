@@ -275,3 +275,11 @@ They could then be easily reused by adding an ng-class to the element like this:
 ```
 <div ng-class="main.indexpage">
 ```
+
+## Future Updates 
+
+Some features that could be added in future: 
+
+* Friends list so you can see all updates from people you follow 
+* Add loading animation to login and register pages 
+* Threaded comments 
