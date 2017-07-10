@@ -211,7 +211,7 @@ end
 
 ```
 
-These custom routes then pointed to custom functions in their controllers. E.g. to get all prompts by a user you would go to `/api/username/prompts` which would run this function in the prompts controller: 
+These custom routes then pointed to custom functions in their controllers. E.g. to get all prompts by a user you would go to `/api/users/username/prompts` which would run this function in the prompts controller: 
 
 ```
 def index_by_user
