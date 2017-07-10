@@ -38,7 +38,7 @@ I wanted a way to search fills and prompts by tags so I made tags into a separat
 ```
 This bit of code adds different Tachyons classes that change the font size depending on the number of prompts with that tag. 
 
-## Search 
+## Searching Posts 
 
 Prompt and fill search uses Angular filters to sort through results. 
 
@@ -163,3 +163,64 @@ When the width for the directive is set to 'grid' the classes added are `h5 db f
 * `w-50-m` makes the elements 50% width on medium screens
 * `w-100` makes elements 100% width on smallest screens
 
+## Saving Tachyons Classes as Variables 
+
+In order to save time, certain combinations of Tachyons classes that are used a lot in the site were saved as variables in the main controller like so: 
+
+```
+vm.container = 'ph2 ph4-ns mb0-ns mt0-ns mt5 pt2';
+vm.showpage  = 'w-75-l w-100 center ph2 ph4-ns mb0-ns pb5 mt0-ns mt5 pt2';
+vm.loginform = 'w-third-l w-50-m w-100 ph2 ph0-ns center mv5 pt2 pt0-ns';
+vm.form      = 'w-75-l w-100 center ph2 ph4-ns mb0-ns mt0-ns mt5 pt2';
+vm.input     = 'db w-100 br-pill ph2 ba b--black';
+vm.link      = 'link underline dark-green hover-green';
+vm.indexpage = 'mb0 mt5 mt0-ns bt b--moon-gray bg-white bb w-100 ph2 ph4-ns pv2';
+vm.button    = 'bg-white ba b--black br-pill ph2';
+vm.textarea  = 'bg-white ph3 lh-copy br3 b--moon-gray ba';
+```
+
+They could then be easily reused by adding an ng-class to the element like this: 
+
+```
+<div ng-class="main.indexpage">
+```
+
+## Custom Routes 
+
+Several custom back-end routes needed to be made in order to show fills belonging to a prompt, posts belonging to one user, posts belonging to a tag, etc. These were added to routes.rb: 
+
+```
+Rails.application.routes.draw do
+  scope :api do
+    resources :fills
+    resources :tags
+    resources :prompts
+    resources :prompts
+    resources :comments
+    resources :users, param: :username
+    get 'tags/:tag_id/prompts', to: 'prompts#index_by_tag'
+    get 'tags/:tag_id/fills', to: 'fills#index_by_tag'
+    get 'prompts/:prompt_id/fills', to: 'fills#index_by_prompt'
+    get 'prompts/:prompt_id/fills/:fill_id', to: 'fills#fill_for_prompt'
+    get 'users/:user_id/fills', to: 'fills#index_by_user'
+    get 'users/:user_id/prompts', to: 'prompts#index_by_user'
+    post 'register', to: 'authentications#register'
+    post 'login',    to: 'authentications#login'
+  end
+end
+
+```
+
+These custom routes then pointed to custom functions in their controllers. E.g. to get all prompts by a user you would go to `/api/username/prompts` which would run this function in the prompts controller: 
+
+```
+def index_by_user
+  # find the user by username
+  user = User.find_by(username: params[:user_id])
+  # find the prompts by user.id
+  @prompts = Prompt.where(user_id: user.id)
+  render json: @prompts, include: ['fills', 'user', 'comments']
+end
+```
+
+To make urls for users easier to remember, the username was used as the parameter rather than the user ID. This means to get the profile for the user with username 'klyn' for example, you would simply go to `/users/klyn` - a much more user-friendly url. 
